@@ -1,0 +1,30 @@
+{
+	"dependencies": [],
+	"description": "Archipelago Multiworld support for MONOMOON",
+	"extra": {
+		"godot": {
+			"authors": [
+				"MayaXTG"
+			],
+			"compatible_game_version": [
+				"1.0.16"
+			],
+			"compatible_mod_loader_version": [
+				"7.0.0"
+			],
+			"config_schema": {
+
+			},
+			"description_rich": "",
+			"image": null,
+			"incompatibilities": [],
+			"load_before": [],
+			"optional_dependencies": [],
+			"tags": []
+		}
+	},
+	"name": "Archipelago",
+	"namespace": "MayaXTG",
+	"version_number": "0.0.1",
+	"website_url": "https://github.com/XuaTheGrate"
+}

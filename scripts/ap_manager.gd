@@ -84,24 +84,54 @@ var collectibles = [
 ]
 
 var collectible_by_name = {}
+# used to simulate rando
+var unplaced = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	for row in collectibles:
 		collectible_by_name[row[4]] = row
+		unplaced.append(row)
+	
+	# simulate rando
+	unplaced.shuffle()
 	get_tree().node_added.connect(_on_node_added)
 
-func _swap_for_ap(original: Collectable, ap_data) -> void:
+var index:int = 0
+func _swap_for_ap(original: Collectable, ap_data):
 	print("[AP] swapping out collectable ", original.name)
 	var ap := collectible_ap.instantiate()
 	ap.position = original.position
 	original.get_parent().add_child(ap)
 	original.queue_free()
-	
 
 func _on_node_added(node: Node):
+	if node.name == 'OutsideLevel':
+		node.ready.connect(_ap_shuffle, CONNECT_ONE_SHOT)
 	if node.name in collectible_by_name:
-		_swap_for_ap.call_deferred(node, collectible_by_name[node.name])
+		# test for when this location is an external AP item
+		#_swap_for_ap.call_deferred(node, collectible_by_name[node.name])
+		# test for when this location is an item from this game
+		_save_ap_location(node, collectible_by_name[node.name])
+
+var node_by_name = {}
+func _save_ap_location(node:Node, ap_data):
+	node_by_name[node.name] = node
+
+func _ap_shuffle():
+	# Save all global positions
+	var original_global_positions = {}
+	for name in node_by_name:
+		var node = node_by_name[name]
+		original_global_positions[name] = node.global_position
+	# Shuffle
+	for name in node_by_name:
+		var node = node_by_name[name]
+		var next_collectible = unplaced.pop_front()
+		node.global_position = original_global_positions[next_collectible[4]]
+		# NOTE: we'll need to sort out the telescopes spearately,
+		# and the clam item, and probably others
+	print("[AP] item shuffle complete")
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

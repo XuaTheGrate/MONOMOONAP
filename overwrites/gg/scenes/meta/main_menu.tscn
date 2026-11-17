@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://ctfx6xlhenhi1"]
+[gd_scene format=3 uid="uid://2k3hin3satj"]
 
 [ext_resource type="Theme" uid="uid://bujnxvanlxbrb" path="res://gg/themes/default_theme.tres" id="1_qtqk6"]
 [ext_resource type="Script" uid="uid://dej6gxu4kgnlj" path="res://mods-unpacked/MayaXTG-Archipelago/overwrites/gg/scripts/game/ui/meta/main_menu.gd" id="2_pgvel"]

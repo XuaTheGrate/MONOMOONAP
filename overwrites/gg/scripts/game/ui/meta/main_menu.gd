@@ -1,17 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @tool
 extends RootMenu
 
@@ -82,7 +68,7 @@ func _ready() -> void :
 	GameGlobals.is_in_game = false
 	get_tree().paused = false
 	version_label.text = ProjectSettings.get_setting_with_override("application/config/version")
-	ap_version_label.text = "0.0.1"
+	ap_version_label.text = ArchipelagoMod.VERSION
 	GG.logt(GG.LogTag.GameSetup, "Game Version", version_label.text)
 	RootMenu.grab_focus_prefer_hovered(main_menu_buttons, play_button)
 	GameGlobals.update_mouse_mode()

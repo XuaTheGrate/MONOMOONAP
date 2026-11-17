@@ -1,7 +1,8 @@
-[gd_scene format=3 uid="uid://tsts6jjrdr6c"]
+[gd_scene format=3 uid="uid://chnttxr7wilu2"]
 
 [ext_resource type="PackedScene" uid="uid://bhifbuxer58ds" path="res://gg/scenes/game/collectables/orb/collectable_item.tscn" id="1_2hcds"]
 [ext_resource type="Shader" uid="uid://yhlqd262cvkd" path="res://gg/shaders/dither.gdshader" id="2_dx4ld"]
+[ext_resource type="Script" uid="uid://bsrqh3fkpaatd" path="res://mods-unpacked/MayaXTG-Archipelago/scripts/collectable_ap.gd" id="2_olirh"]
 [ext_resource type="Texture2D" uid="uid://cod0jn6kkbx51" path="res://mods-unpacked/MayaXTG-Archipelago/assets/collectible_ap_normal.png" id="3_olirh"]
 [ext_resource type="Texture2D" uid="uid://c0lsqswsy46im" path="res://mods-unpacked/MayaXTG-Archipelago/assets/collectible_ap_unlit.png" id="4_6qy8e"]
 [ext_resource type="Texture2D" uid="uid://xrrkitc0pa74" path="res://mods-unpacked/MayaXTG-Archipelago/assets/collectible_ap.png" id="5_6yv8k"]
@@ -35,7 +36,13 @@ shader_parameter/hidden_player_alpha = 0.9
 shader_parameter/show_lit_when_eyes_lit = false
 
 [node name="CollectibleAP" unique_id=1678456492 instance=ExtResource("1_2hcds")]
+script = ExtResource("2_olirh")
+location_id = ""
+icon = ExtResource("5_6yv8k")
 
 [node name="Sprite" parent="Squasher" parent_id_path=PackedInt32Array(881018182) index="0" unique_id=1857260621]
 material = SubResource("ShaderMaterial_odtpc")
+texture = ExtResource("5_6yv8k")
+
+[node name="SelectedOutline" parent="Squasher/Sprite" index="0" unique_id=79338765]
 texture = ExtResource("5_6yv8k")

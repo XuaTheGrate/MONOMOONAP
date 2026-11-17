@@ -33,16 +33,7 @@ func _init() -> void:
 
 
 func install_script_extensions() -> void:
-	# ! any script extensions should go in this directory, and should follow the same directory structure as vanilla
-	extensions_dir_path = mod_dir_path.path_join("extensions")
-
-	# ? Brief description/reason behind this edit of vanilla code...
-	ModLoaderMod.install_script_extension(extensions_dir_path.path_join("main.gd"))
-	#ModLoaderMod.install_script_extension(ext_dir + "entities/units/player/player.gd") # ! Note that this file does not exist in this example mod
-
-	# ! Add extensions (longform version of the above)
-	#ModLoaderMod.install_script_extension("res://mods-unpacked/AuthorName-ModName/extensions/main.gd")
-	#ModLoaderMod.install_script_extension("res://mods-unpacked/AuthorName-ModName/extensions/entities/units/player/player.gd")
+	pass
 
 
 func install_script_hook_files() -> void:

@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://d2g8i1a5hvsfv"]
+[gd_scene format=4 uid="uid://lxiif3lm71fi"]
 
 [ext_resource type="Script" uid="uid://bnbnq02lr3sa8" path="res://gg/scripts/game/regions/region.gd" id="1_yma73"]
 [ext_resource type="PackedScene" uid="uid://4cpg52xpb0py" path="res://gg/scenes/game/audio/music_region.tscn" id="2_0ncad"]
@@ -70,7 +70,7 @@
 [ext_resource type="Material" uid="uid://b1tcppqcu40b0" path="res://gg/materials/paintings/forest_painting_mat.tres" id="68_qihqi"]
 [ext_resource type="Material" uid="uid://dr23pdryipmt7" path="res://gg/materials/lit_hint_mat.tres" id="69_0fhkm"]
 [ext_resource type="Texture2D" uid="uid://doks5rxjutyfb" path="res://gg/textures/game/paintings/canvas-melody-hint.png" id="70_di4pk"]
-[ext_resource type="Script" uid="uid://dpl6cnt8dsya4" path="res://gg/scripts/game/activatables/show_when_red_moon.gd" id="71_txx42"]
+[ext_resource type="Script" path="res://gg/scripts/game/activatables/show_when_red_moon.gd" id="71_txx42"]
 [ext_resource type="Texture2D" uid="uid://dypumwle2vlwa" path="res://gg/textures/game/paintings/catacombs-bw2-unlit.png" id="72_hqvlc"]
 [ext_resource type="Texture2D" uid="uid://b0ij2th7slbpc" path="res://gg/textures/game/paintings/catacombs-bw2.png" id="73_p7hn1"]
 [ext_resource type="Texture2D" uid="uid://db0eihg38yypn" path="res://gg/textures/game/paintings/city-bw-unlit.png" id="74_p5y12"]
@@ -97,7 +97,7 @@
 [ext_resource type="Texture2D" uid="uid://dvncc7rkilbh" path="res://gg/textures/game/environment/glade/fancy-pedestal-normals.png" id="95_62phs"]
 [ext_resource type="Texture2D" uid="uid://r1153os02431" path="res://gg/textures/game/environment/glade/fancy-pedestal-unlit.png" id="96_xs200"]
 [ext_resource type="Texture2D" uid="uid://clo86lwbadfqf" path="res://gg/textures/game/environment/glade/fancy-pedestal.png" id="97_ajmds"]
-[ext_resource type="PackedScene" uid="uid://tsts6jjrdr6c" path="res://mods-unpacked/MayaXTG-Archipelago/scenes/collectible_ap.tscn" id="98_yma73"]
+[ext_resource type="PackedScene" uid="uid://b4nm1rhsesncj" path="res://gg/scenes/game/collectables/collectable_map.tscn" id="98_xnrl7"]
 [ext_resource type="PackedScene" uid="uid://dslt557hkayjh" path="res://gg/scenes/game/collectables/collectable_conch.tscn" id="99_qt1lp"]
 [ext_resource type="PackedScene" uid="uid://bf2wiljnytq86" path="res://gg/scenes/game/collectables/collectable_instrument.tscn" id="100_8b0dw"]
 [ext_resource type="PackedScene" uid="uid://dm4d8h1l84qdr" path="res://gg/scenes/game/collectables/collectable_markers.tscn" id="101_aqy2u"]
@@ -319,7 +319,7 @@
 [ext_resource type="PackedScene" uid="uid://dvlbwdtotpm5a" path="res://gg/scenes/game/mechanisms/alternating_blocks/alternating_blocks_mech.tscn" id="317_pgkgb"]
 [ext_resource type="PackedScene" uid="uid://c4xjmcwyoa3vn" path="res://gg/scenes/game/mechanisms/breakable_tiles/mech_destroy_effect.tscn" id="318_r5dot"]
 [ext_resource type="PackedScene" uid="uid://chxaahffu0q5n" path="res://gg/scenes/game/environment/workshop/sliding_handle.tscn" id="319_2ssls"]
-[ext_resource type="Script" uid="uid://cvy7affvqa18e" path="res://gg/scripts/game/objects/mech_respawn_handle.gd" id="320_rgerr"]
+[ext_resource type="Script" path="res://gg/scripts/game/objects/mech_respawn_handle.gd" id="320_rgerr"]
 [ext_resource type="Texture2D" uid="uid://cblcvjor0f3m5" path="res://gg/textures/game/mechanisms/moon_crate/dispencer-frame-normals.png" id="321_k3pnk"]
 [ext_resource type="Texture2D" uid="uid://tfowb1yjakfs" path="res://gg/textures/game/mechanisms/moon_crate/dispencer-frame-unlit.png" id="322_3f0fo"]
 [ext_resource type="Texture2D" uid="uid://cjxajn3sbxmqa" path="res://gg/textures/game/mechanisms/moon_crate/dispencer-frame.png" id="323_0tbru"]
@@ -672,37 +672,37 @@ script = ExtResource("36_l08ry")
 array = Array[int]([5, 4, 3, 2, 1, 0, 9, 8, 7, 6, 4])
 metadata/_custom_type_script = "uid://cnuujnctxx2dn"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6to4f"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yma73"]
 resource_local_to_scene = true
 shader = ExtResource("49_111bm")
 shader_parameter/min_color_level = 2.425
 shader_parameter/black_lit_value = 1.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7t3xe"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0ncad"]
 resource_local_to_scene = true
 shader = ExtResource("49_111bm")
 shader_parameter/min_color_level = 2.425
 shader_parameter/black_lit_value = 1.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jyr54"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w8pxe"]
 resource_local_to_scene = true
 shader = ExtResource("49_111bm")
 shader_parameter/min_color_level = 2.425
 shader_parameter/black_lit_value = 1.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gsi70"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rx22t"]
 resource_local_to_scene = true
 shader = ExtResource("49_111bm")
 shader_parameter/min_color_level = 2.425
 shader_parameter/black_lit_value = 1.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_d5n38"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v2vdc"]
 resource_local_to_scene = true
 shader = ExtResource("49_111bm")
 shader_parameter/min_color_level = 2.425
 shader_parameter/black_lit_value = 1.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vx5sm"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bdegy"]
 resource_local_to_scene = true
 shader = ExtResource("58_60s6d")
 shader_parameter/unlit_texture = ExtResource("60_srn8g")
@@ -727,25 +727,25 @@ shader_parameter/hide_around_player = false
 shader_parameter/hidden_player_alpha = 0.9
 shader_parameter/show_lit_when_eyes_lit = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_emtx1"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yk58o"]
 resource_local_to_scene = true
 shader = ExtResource("49_111bm")
 shader_parameter/min_color_level = 2.425
 shader_parameter/black_lit_value = 1.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wtudp"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t4raw"]
 resource_local_to_scene = true
 shader = ExtResource("49_111bm")
 shader_parameter/min_color_level = 2.425
 shader_parameter/black_lit_value = 1.0
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_423jh"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_nhc4o"]
 viewport_path = NodePath("DrawingSubViewport")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_j4gl5"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1urkh"]
 resource_local_to_scene = true
 shader = ExtResource("49_111bm")
-shader_parameter/reveal_mask = SubResource("ViewportTexture_423jh")
+shader_parameter/reveal_mask = SubResource("ViewportTexture_nhc4o")
 shader_parameter/min_color_level = 2.425
 shader_parameter/black_lit_value = 2.0
 
@@ -1124,13 +1124,13 @@ shader_parameter/hide_around_player = false
 shader_parameter/hidden_player_alpha = 0.9
 shader_parameter/show_lit_when_eyes_lit = false
 
-[sub_resource type="Resource" id="Resource_n7bqn"]
+[sub_resource type="Resource" id="Resource_rtg3v"]
 script = ExtResource("125_8hnit")
 spring_constant = 120.0
 damping = 0.5
 max_speed = 16.0
 
-[sub_resource type="Resource" id="Resource_rhu83"]
+[sub_resource type="Resource" id="Resource_8k32r"]
 script = ExtResource("125_8hnit")
 spring_constant = 120.0
 damping = 0.5
@@ -1202,14 +1202,14 @@ script = ExtResource("24_up3sn")
 [sub_resource type="Resource" id="Resource_ukx1k"]
 script = ExtResource("24_up3sn")
 
-[sub_resource type="Curve2D" id="Curve2D_h0npo"]
+[sub_resource type="Curve2D" id="Curve2D_at115"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(-20.633312, -26.917923, 25, 15, 0, 0, -25, 15, 83.08, -107.12, 200, 0)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_uev5h"]
+[sub_resource type="Curve2D" id="Curve2D_7aqv5"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(-26.7684, -21.7629, 49.8, 20, 0, 0, -49.8, 20, -19.95, 41.62, 249, 0)
@@ -1253,7 +1253,7 @@ shader_parameter/hide_around_player = false
 shader_parameter/hidden_player_alpha = 0.9
 shader_parameter/show_lit_when_eyes_lit = false
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mcqu4"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aolk6"]
 resource_local_to_scene = true
 size = Vector2(24.999634, 110)
 
@@ -1439,43 +1439,43 @@ script = ExtResource("24_up3sn")
 [sub_resource type="Resource" id="Resource_3crul"]
 script = ExtResource("24_up3sn")
 
-[sub_resource type="Resource" id="Resource_esgcc"]
+[sub_resource type="Resource" id="Resource_0qdvm"]
 script = ExtResource("125_8hnit")
 spring_constant = 120.0
 damping = 0.5
 max_speed = 600.0
 
-[sub_resource type="Resource" id="Resource_nhay7"]
+[sub_resource type="Resource" id="Resource_n3cw4"]
 script = ExtResource("125_8hnit")
 spring_constant = 120.0
 damping = 0.5
 max_speed = 16.0
 
-[sub_resource type="Resource" id="Resource_u6hfh"]
+[sub_resource type="Resource" id="Resource_swf1x"]
 script = ExtResource("125_8hnit")
 spring_constant = 120.0
 damping = 0.5
 max_speed = 16.0
 
-[sub_resource type="Resource" id="Resource_vkwpd"]
+[sub_resource type="Resource" id="Resource_dpi5l"]
 script = ExtResource("125_8hnit")
 spring_constant = 120.0
 damping = 0.5
 max_speed = 16.0
 
-[sub_resource type="Resource" id="Resource_nxnwd"]
+[sub_resource type="Resource" id="Resource_3nhgt"]
 script = ExtResource("125_8hnit")
 spring_constant = 120.0
 damping = 0.5
 max_speed = 600.0
 
-[sub_resource type="Resource" id="Resource_p7gsi"]
+[sub_resource type="Resource" id="Resource_8l7ac"]
 script = ExtResource("125_8hnit")
 spring_constant = 120.0
 damping = 0.5
 max_speed = 16.0
 
-[sub_resource type="Resource" id="Resource_2m8qj"]
+[sub_resource type="Resource" id="Resource_m1dci"]
 script = ExtResource("125_8hnit")
 spring_constant = 120.0
 damping = 0.5
@@ -1730,90 +1730,90 @@ shader_parameter/hide_around_player = false
 shader_parameter/hidden_player_alpha = 0.9
 shader_parameter/show_lit_when_eyes_lit = false
 
-[sub_resource type="Resource" id="Resource_uo3cc"]
+[sub_resource type="Resource" id="Resource_xwlqh"]
 script = ExtResource("125_8hnit")
 spring_constant = 120.0
 damping = 0.5
 max_speed = 16.0
 
-[sub_resource type="Curve2D" id="Curve2D_8q6gi"]
+[sub_resource type="Curve2D" id="Curve2D_up3sn"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16.56, 0, 0, 0, 0, 0, 33.12, 0, 0, 0, 0, 0, 49.68, 0, 0, 0, 0, 0, 66.24, 0, 0, 0, 0, 0, 82.8, 0, 0, 0, 0, 0, 99.36, 0, 0, 0, 0, 0, 115.92, 0, 0, 0, 0, 0, 132.48, 0, 0, 0, 0, 0, 149.04, 0, 0, 0, 0, 0, 165.6, 0, 0, 0, 0, 0, 182.16, 0, 0, 0, 0, 0, 198.72, 0, 0, 0, 0, 0, 215.28, 0, 0, 0, 0, 0, 231.84, 0, 0, 0, 0, 0, 248.4, 0, 0, 0, 0, 0, 264.96, 0, 0, 0, 0, 0, 281.52, 0, 0, 0, 0, 0, 298.08, 0, 0, 0, 0, 0, 314.64, 0, 0, 0, 0, 0, 331.2, 0, 0, 0, 0, 0, 347.76, 0, 0, 0, 0, 0, 364.32, 0, 0, 0, 0, 0, 380.88, 0, 0, 0, 0, 0, 397.44, 0, 0, 0, 0, 0, 414, 0)
 }
 point_count = 26
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sm0b4"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nsx76"]
 resource_local_to_scene = true
 size = Vector2(414, 92)
 
-[sub_resource type="Resource" id="Resource_x7v3l"]
+[sub_resource type="Resource" id="Resource_qmdq8"]
 script = ExtResource("125_8hnit")
 spring_constant = 120.0
 damping = 0.5
 max_speed = 16.0
 
-[sub_resource type="Curve2D" id="Curve2D_ahnoi"]
+[sub_resource type="Curve2D" id="Curve2D_63gfj"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 32, 0, 0, 0, 0, 0, 48, 0, 0, 0, 0, 0, 64, 0, 0, 0, 0, 0, 80, 0, 0, 0, 0, 0, 96, 0, 0, 0, 0, 0, 112, 0, 0, 0, 0, 0, 128, 0, 0, 0, 0, 0, 144, 0, 0, 0, 0, 0, 160, 0, 0, 0, 0, 0, 176, 0, 0, 0, 0, 0, 192, 0, 0, 0, 0, 0, 208, 0, 0, 0, 0, 0, 224, 0, 0, 0, 0, 0, 240, 0, 0, 0, 0, 0, 256, 0, 0, 0, 0, 0, 272, 0, 0, 0, 0, 0, 288, 0, 0, 0, 0, 0, 304, 0, 0, 0, 0, 0, 320, 0)
 }
 point_count = 21
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hb42u"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8icpe"]
 resource_local_to_scene = true
 size = Vector2(320, 62)
 
-[sub_resource type="Resource" id="Resource_3mfre"]
+[sub_resource type="Resource" id="Resource_c5o1k"]
 script = ExtResource("125_8hnit")
 spring_constant = 120.0
 damping = 0.5
 max_speed = 16.0
 
-[sub_resource type="Resource" id="Resource_heler"]
+[sub_resource type="Resource" id="Resource_b2eda"]
 script = ExtResource("125_8hnit")
 spring_constant = 120.0
 damping = 0.5
 max_speed = 16.0
 
-[sub_resource type="Resource" id="Resource_f5x3f"]
+[sub_resource type="Resource" id="Resource_t3mek"]
 script = ExtResource("125_8hnit")
 spring_constant = 120.0
 damping = 0.5
 max_speed = 16.0
 
-[sub_resource type="Resource" id="Resource_7o186"]
+[sub_resource type="Resource" id="Resource_73xky"]
 script = ExtResource("125_8hnit")
 spring_constant = 120.0
 damping = 0.5
 max_speed = 16.0
 
-[sub_resource type="Resource" id="Resource_7hd2x"]
+[sub_resource type="Resource" id="Resource_vhmma"]
 script = ExtResource("125_8hnit")
 spring_constant = 120.0
 damping = 0.5
 max_speed = 16.0
 
-[sub_resource type="Resource" id="Resource_d3vnt"]
+[sub_resource type="Resource" id="Resource_jy8wn"]
 script = ExtResource("125_8hnit")
 spring_constant = 120.0
 damping = 0.5
 max_speed = 16.0
 
-[sub_resource type="Resource" id="Resource_dhl67"]
+[sub_resource type="Resource" id="Resource_168xa"]
 script = ExtResource("125_8hnit")
 spring_constant = 120.0
 damping = 0.5
 max_speed = 50.0
 
-[sub_resource type="Curve2D" id="Curve2D_4oob1"]
+[sub_resource type="Curve2D" id="Curve2D_l08ry"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16.8, 0, 0, 0, 0, 0, 33.6, 0, 0, 0, 0, 0, 50.4, 0, 0, 0, 0, 0, 67.2, 0, 0, 0, 0, 0, 84, 0, 0, 0, 0, 0, 100.8, 0, 0, 0, 0, 0, 117.6, 0, 0, 0, 0, 0, 134.4, 0, 0, 0, 0, 0, 151.2, 0, 0, 0, 0, 0, 168, 0)
 }
 point_count = 11
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2xoka"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qhu88"]
 resource_local_to_scene = true
 size = Vector2(168, 14)
 
@@ -1896,32 +1896,32 @@ shader_parameter/hide_around_player = false
 shader_parameter/hidden_player_alpha = 0.9
 shader_parameter/show_lit_when_eyes_lit = false
 
-[sub_resource type="Resource" id="Resource_jvt7o"]
+[sub_resource type="Resource" id="Resource_th7lg"]
 script = ExtResource("125_8hnit")
 spring_constant = 180.0
 damping = 0.5
 max_speed = 16.0
 
-[sub_resource type="Curve2D" id="Curve2D_433t6"]
+[sub_resource type="Curve2D" id="Curve2D_uv138"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 0, 0, 0, 0, 0, 34, 0, 0, 0, 0, 0, 51, 0, 0, 0, 0, 0, 68, 0, 0, 0, 0, 0, 85, 0, 0, 0, 0, 0, 102, 0, 0, 0, 0, 0, 119, 0, 0, 0, 0, 0, 136, 0, 0, 0, 0, 0, 153, 0, 0, 0, 0, 0, 170, 0, 0, 0, 0, 0, 187, 0, 0, 0, 0, 0, 204, 0, 0, 0, 0, 0, 221, 0, 0, 0, 0, 0, 238, 0, 0, 0, 0, 0, 255, 0)
 }
 point_count = 16
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8s0fw"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t074o"]
 resource_local_to_scene = true
 size = Vector2(255, 12)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wgdy1"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_00pyp"]
 resource_local_to_scene = true
 size = Vector2(20, 167)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_a0c0v"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wbkxs"]
 resource_local_to_scene = true
 size = Vector2(20, 103)
 
-[sub_resource type="Resource" id="Resource_oosom"]
+[sub_resource type="Resource" id="Resource_uhvhu"]
 resource_local_to_scene = true
 script = ExtResource("125_8hnit")
 spring_constant = 180.0
@@ -1929,7 +1929,7 @@ damping = 40.0
 max_speed = 40.0
 metadata/_custom_type_script = "uid://capgck78vhbu4"
 
-[sub_resource type="Resource" id="Resource_1f0sw"]
+[sub_resource type="Resource" id="Resource_2u4nl"]
 resource_local_to_scene = true
 script = ExtResource("125_8hnit")
 spring_constant = 180.0
@@ -1937,7 +1937,7 @@ damping = 40.0
 max_speed = 50.0
 metadata/_custom_type_script = "uid://capgck78vhbu4"
 
-[sub_resource type="Resource" id="Resource_8di4h"]
+[sub_resource type="Resource" id="Resource_g1t01"]
 resource_local_to_scene = true
 script = ExtResource("125_8hnit")
 spring_constant = 180.0
@@ -2075,13 +2075,13 @@ shader_parameter/hide_around_player = false
 shader_parameter/hidden_player_alpha = 0.9
 shader_parameter/show_lit_when_eyes_lit = false
 
-[sub_resource type="Resource" id="Resource_5asu8"]
+[sub_resource type="Resource" id="Resource_i8wm8"]
 script = ExtResource("125_8hnit")
 spring_constant = 120.0
 damping = 0.5
 max_speed = 16.0
 
-[sub_resource type="Curve2D" id="Curve2D_c0jt6"]
+[sub_resource type="Curve2D" id="Curve2D_gvk5g"]
 resource_local_to_scene = true
 bake_interval = 10.0
 _data = {
@@ -2089,7 +2089,7 @@ _data = {
 }
 point_count = 22
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gkspn"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5p5e5"]
 resource_local_to_scene = true
 size = Vector2(338, 72)
 
@@ -2105,12 +2105,12 @@ script = ExtResource("24_up3sn")
 [sub_resource type="Resource" id="Resource_bqfpp"]
 script = ExtResource("24_up3sn")
 
-[sub_resource type="Resource" id="Resource_hmg4x"]
+[sub_resource type="Resource" id="Resource_111bm"]
 script = ExtResource("125_8hnit")
 spring_constant = 120.0
 damping = 0.5
 
-[sub_resource type="Curve2D" id="Curve2D_k7rus"]
+[sub_resource type="Curve2D" id="Curve2D_t8uv8"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 32, 0, 0, 0, 0, 0, 48, 0, 0, 0, 0, 0, 64, 0, 0, 0, 0, 0, 80, 0, 0, 0, 0, 0, 96, 0, 0, 0, 0, 0, 112, 0, 0, 0, 0, 0, 128, 0, 0, 0, 0, 0, 144, 0, 0, 0, 0, 0, 160, 0, 0, 0, 0, 0, 176, 0, 0, 0, 0, 0, 192, 0, 0, 0, 0, 0, 208, 0, 0, 0, 0, 0, 224, 0, 0, 0, 0, 0, 240, 0, 0, 0, 0, 0, 256, 0, 0, 0, 0, 0, 272, 0, 0, 0, 0, 0, 288, 0, 0, 0, 0, 0, 304, 0, 0, 0, 0, 0, 320, 0, 0, 0, 0, 0, 336, 0, 0, 0, 0, 0, 352, 0, 0, 0, 0, 0, 368, 0, 0, 0, 0, 0, 384, 0, 0, 0, 0, 0, 400, 0, 0, 0, 0, 0, 416, 0, 0, 0, 0, 0, 432, 0, 0, 0, 0, 0, 448, 0, 0, 0, 0, 0, 464, 0, 0, 0, 0, 0, 480, 0, 0, 0, 0, 0, 496, 0, 0, 0, 0, 0, 512, 0, 0, 0, 0, 0, 528, 0, 0, 0, 0, 0, 544, 0, 0, 0, 0, 0, 560, 0, 0, 0, 0, 0, 576, 0, 0, 0, 0, 0, 592, 0, 0, 0, 0, 0, 608, 0, 0, 0, 0, 0, 624, 0, 0, 0, 0, 0, 640, 0, 0, 0, 0, 0, 656, 0, 0, 0, 0, 0, 672, 0, 0, 0, 0, 0, 688, 0, 0, 0, 0, 0, 704, 0, 0, 0, 0, 0, 720, 0, 0, 0, 0, 0, 736, 0, 0, 0, 0, 0, 752, 0, 0, 0, 0, 0, 768, 0, 0, 0, 0, 0, 784, 0, 0, 0, 0, 0, 800, 0, 0, 0, 0, 0, 816, 0, 0, 0, 0, 0, 832, 0, 0, 0, 0, 0, 848, 0, 0, 0, 0, 0, 864, 0, 0, 0, 0, 0, 880, 0, 0, 0, 0, 0, 896, 0, 0, 0, 0, 0, 912, 0, 0, 0, 0, 0, 928, 0, 0, 0, 0, 0, 944, 0, 0, 0, 0, 0, 960, 0, 0, 0, 0, 0, 976, 0, 0, 0, 0, 0, 992, 0, 0, 0, 0, 0, 1008, 0, 0, 0, 0, 0, 1024, 0, 0, 0, 0, 0, 1040, 0, 0, 0, 0, 0, 1056, 0, 0, 0, 0, 0, 1072, 0, 0, 0, 0, 0, 1088, 0, 0, 0, 0, 0, 1104, 0, 0, 0, 0, 0, 1120, 0, 0, 0, 0, 0, 1136, 0, 0, 0, 0, 0, 1152, 0, 0, 0, 0, 0, 1168, 0, 0, 0, 0, 0, 1184, 0, 0, 0, 0, 0, 1200, 0, 0, 0, 0, 0, 1216, 0, 0, 0, 0, 0, 1232, 0, 0, 0, 0, 0, 1248, 0, 0, 0, 0, 0, 1264, 0, 0, 0, 0, 0, 1280, 0, 0, 0, 0, 0, 1296, 0, 0, 0, 0, 0, 1312, 0, 0, 0, 0, 0, 1328, 0, 0, 0, 0, 0, 1344, 0, 0, 0, 0, 0, 1360, 0, 0, 0, 0, 0, 1376, 0, 0, 0, 0, 0, 1392, 0, 0, 0, 0, 0, 1408, 0, 0, 0, 0, 0, 1424, 0, 0, 0, 0, 0, 1440, 0, 0, 0, 0, 0, 1456, 0, 0, 0, 0, 0, 1472, 0, 0, 0, 0, 0, 1488, 0, 0, 0, 0, 0, 1504, 0, 0, 0, 0, 0, 1520, 0, 0, 0, 0, 0, 1536, 0, 0, 0, 0, 0, 1552, 0, 0, 0, 0, 0, 1568, 0, 0, 0, 0, 0, 1584, 0, 0, 0, 0, 0, 1600, 0, 0, 0, 0, 0, 1616, 0, 0, 0, 0, 0, 1632, 0, 0, 0, 0, 0, 1648, 0)
@@ -2449,13 +2449,13 @@ metadata/_custom_type_script = "uid://b5q3xorweju83"
 [sub_resource type="Resource" id="Resource_q2o5e"]
 script = ExtResource("24_up3sn")
 
-[sub_resource type="Resource" id="Resource_7aolg"]
+[sub_resource type="Resource" id="Resource_7syti"]
 script = ExtResource("125_8hnit")
 spring_constant = 120.0
 damping = 0.5
 max_speed = 50.0
 
-[sub_resource type="Curve2D" id="Curve2D_muckx"]
+[sub_resource type="Curve2D" id="Curve2D_1f0tk"]
 resource_local_to_scene = true
 bake_interval = 10.0
 _data = {
@@ -2463,7 +2463,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5fbrr"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xhfod"]
 resource_local_to_scene = true
 size = Vector2(100, 82.9)
 
@@ -2513,7 +2513,7 @@ script = ExtResource("24_up3sn")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g5si0"]
 size = Vector2(192, 28)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vigd0"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g55s5"]
 resource_local_to_scene = true
 size = Vector2(25, 78)
 
@@ -2649,28 +2649,28 @@ shader_parameter/hide_around_player = false
 shader_parameter/hidden_player_alpha = 0.9
 shader_parameter/show_lit_when_eyes_lit = false
 
-[sub_resource type="Resource" id="Resource_fkw8s"]
+[sub_resource type="Resource" id="Resource_5m4e5"]
 script = ExtResource("125_8hnit")
 spring_constant = 120.0
 damping = 0.5
 
-[sub_resource type="Curve2D" id="Curve2D_x0ng5"]
+[sub_resource type="Curve2D" id="Curve2D_ryti5"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16.109589, 0, 0, 0, 0, 0, 32.219177, 0, 0, 0, 0, 0, 48.328766, 0, 0, 0, 0, 0, 64.438354, 0, 0, 0, 0, 0, 80.54794, 0, 0, 0, 0, 0, 96.65753, 0, 0, 0, 0, 0, 112.76712, 0, 0, 0, 0, 0, 128.87671, 0, 0, 0, 0, 0, 144.9863, 0, 0, 0, 0, 0, 161.09589, 0, 0, 0, 0, 0, 177.20547, 0, 0, 0, 0, 0, 193.31506, 0, 0, 0, 0, 0, 209.42465, 0, 0, 0, 0, 0, 225.53424, 0, 0, 0, 0, 0, 241.64383, 0, 0, 0, 0, 0, 257.75342, 0, 0, 0, 0, 0, 273.863, 0, 0, 0, 0, 0, 289.9726, 0, 0, 0, 0, 0, 306.08218, 0, 0, 0, 0, 0, 322.19177, 0, 0, 0, 0, 0, 338.30136, 0, 0, 0, 0, 0, 354.41095, 0, 0, 0, 0, 0, 370.52054, 0, 0, 0, 0, 0, 386.63013, 0, 0, 0, 0, 0, 402.73972, 0, 0, 0, 0, 0, 418.8493, 0, 0, 0, 0, 0, 434.9589, 0, 0, 0, 0, 0, 451.06848, 0, 0, 0, 0, 0, 467.17807, 0, 0, 0, 0, 0, 483.28766, 0, 0, 0, 0, 0, 499.39725, 0, 0, 0, 0, 0, 515.50684, 0, 0, 0, 0, 0, 531.61646, 0, 0, 0, 0, 0, 547.726, 0, 0, 0, 0, 0, 563.83563, 0, 0, 0, 0, 0, 579.9452, 0, 0, 0, 0, 0, 596.0548, 0, 0, 0, 0, 0, 612.16437, 0, 0, 0, 0, 0, 628.274, 0, 0, 0, 0, 0, 644.38354, 0, 0, 0, 0, 0, 660.49316, 0, 0, 0, 0, 0, 676.6027, 0, 0, 0, 0, 0, 692.71234, 0, 0, 0, 0, 0, 708.8219, 0, 0, 0, 0, 0, 724.9315, 0, 0, 0, 0, 0, 741.0411, 0, 0, 0, 0, 0, 757.1507, 0, 0, 0, 0, 0, 773.26025, 0, 0, 0, 0, 0, 789.3699, 0, 0, 0, 0, 0, 805.47943, 0, 0, 0, 0, 0, 821.58905, 0, 0, 0, 0, 0, 837.6986, 0, 0, 0, 0, 0, 853.8082, 0, 0, 0, 0, 0, 869.9178, 0, 0, 0, 0, 0, 886.0274, 0, 0, 0, 0, 0, 902.13696, 0, 0, 0, 0, 0, 918.2466, 0, 0, 0, 0, 0, 934.35614, 0, 0, 0, 0, 0, 950.46576, 0, 0, 0, 0, 0, 966.5753, 0, 0, 0, 0, 0, 982.68494, 0, 0, 0, 0, 0, 998.7945, 0, 0, 0, 0, 0, 1014.9041, 0, 0, 0, 0, 0, 1031.0137, 0, 0, 0, 0, 0, 1047.1233, 0, 0, 0, 0, 0, 1063.2329, 0, 0, 0, 0, 0, 1079.3424, 0, 0, 0, 0, 0, 1095.452, 0, 0, 0, 0, 0, 1111.5616, 0, 0, 0, 0, 0, 1127.6713, 0, 0, 0, 0, 0, 1143.7808, 0, 0, 0, 0, 0, 1159.8904, 0, 0, 0, 0, 0, 1176, 0)
 }
 point_count = 74
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bb8kj"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tuxef"]
 resource_local_to_scene = true
 size = Vector2(1176, 24)
 
-[sub_resource type="Resource" id="Resource_egexe"]
+[sub_resource type="Resource" id="Resource_60s6d"]
 script = ExtResource("125_8hnit")
 spring_constant = 120.0
 damping = 0.5
 
-[sub_resource type="Curve2D" id="Curve2D_7bdn4"]
+[sub_resource type="Curve2D" id="Curve2D_7fge1"]
 resource_local_to_scene = true
 bake_interval = 15.0
 _data = {
@@ -2678,16 +2678,16 @@ _data = {
 }
 point_count = 41
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1q4p2"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_srn8g"]
 resource_local_to_scene = true
 size = Vector2(640, 24)
 
-[sub_resource type="Resource" id="Resource_lwv13"]
+[sub_resource type="Resource" id="Resource_ult3y"]
 script = ExtResource("125_8hnit")
 spring_constant = 120.0
 damping = 0.5
 
-[sub_resource type="Curve2D" id="Curve2D_cswjq"]
+[sub_resource type="Curve2D" id="Curve2D_sv0fp"]
 resource_local_to_scene = true
 bake_interval = 15.0
 _data = {
@@ -2695,35 +2695,17 @@ _data = {
 }
 point_count = 41
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jk0sc"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m3cjv"]
 resource_local_to_scene = true
 size = Vector2(640, 24)
 
-[sub_resource type="Resource" id="Resource_gntpl"]
-script = ExtResource("125_8hnit")
-spring_constant = 120.0
-damping = 0.5
-max_speed = 16.0
-
-[sub_resource type="Curve2D" id="Curve2D_8x41j"]
-resource_local_to_scene = true
-bake_interval = 15.0
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 32, 0, 0, 0, 0, 0, 48, 0, 0, 0, 0, 0, 64, 0, 0, 0, 0, 0, 80, 0, 0, 0, 0, 0, 96, 0, 0, 0, 0, 0, 112, 0, 0, 0, 0, 0, 128, 0, 0, 0, 0, 0, 144, 0, 0, 0, 0, 0, 160, 0, 0, 0, 0, 0, 176, 0, 0, 0, 0, 0, 192, 0, 0, 0, 0, 0, 208, 0, 0, 0, 0, 0, 224, 0, 0, 0, 0, 0, 240, 0, 0, 0, 0, 0, 256, 0, 0, 0, 0, 0, 272, 0, 0, 0, 0, 0, 288, 0, 0, 0, 0, 0, 304, 0, 0, 0, 0, 0, 320, 0, 0, 0, 0, 0, 336, 0, 0, 0, 0, 0, 352, 0, 0, 0, 0, 0, 368, 0, 0, 0, 0, 0, 384, 0, 0, 0, 0, 0, 400, 0, 0, 0, 0, 0, 416, 0, 0, 0, 0, 0, 432, 0, 0, 0, 0, 0, 448, 0, 0, 0, 0, 0, 464, 0, 0, 0, 0, 0, 480, 0, 0, 0, 0, 0, 496, 0, 0, 0, 0, 0, 512, 0, 0, 0, 0, 0, 528, 0, 0, 0, 0, 0, 544, 0, 0, 0, 0, 0, 560, 0, 0, 0, 0, 0, 576, 0, 0, 0, 0, 0, 592, 0, 0, 0, 0, 0, 608, 0, 0, 0, 0, 0, 624, 0, 0, 0, 0, 0, 640, 0)
-}
-point_count = 41
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4xqn6"]
-resource_local_to_scene = true
-size = Vector2(640, 24)
-
-[sub_resource type="Resource" id="Resource_e10rf"]
+[sub_resource type="Resource" id="Resource_jjuyc"]
 script = ExtResource("125_8hnit")
 spring_constant = 120.0
 damping = 0.5
 max_speed = 16.0
 
-[sub_resource type="Curve2D" id="Curve2D_bxkvn"]
+[sub_resource type="Curve2D" id="Curve2D_mk28i"]
 resource_local_to_scene = true
 bake_interval = 15.0
 _data = {
@@ -2731,16 +2713,34 @@ _data = {
 }
 point_count = 41
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ine5"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f1x0i"]
 resource_local_to_scene = true
 size = Vector2(640, 24)
 
-[sub_resource type="Resource" id="Resource_cog5n"]
+[sub_resource type="Resource" id="Resource_ie0t8"]
+script = ExtResource("125_8hnit")
+spring_constant = 120.0
+damping = 0.5
+max_speed = 16.0
+
+[sub_resource type="Curve2D" id="Curve2D_qihqi"]
+resource_local_to_scene = true
+bake_interval = 15.0
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 32, 0, 0, 0, 0, 0, 48, 0, 0, 0, 0, 0, 64, 0, 0, 0, 0, 0, 80, 0, 0, 0, 0, 0, 96, 0, 0, 0, 0, 0, 112, 0, 0, 0, 0, 0, 128, 0, 0, 0, 0, 0, 144, 0, 0, 0, 0, 0, 160, 0, 0, 0, 0, 0, 176, 0, 0, 0, 0, 0, 192, 0, 0, 0, 0, 0, 208, 0, 0, 0, 0, 0, 224, 0, 0, 0, 0, 0, 240, 0, 0, 0, 0, 0, 256, 0, 0, 0, 0, 0, 272, 0, 0, 0, 0, 0, 288, 0, 0, 0, 0, 0, 304, 0, 0, 0, 0, 0, 320, 0, 0, 0, 0, 0, 336, 0, 0, 0, 0, 0, 352, 0, 0, 0, 0, 0, 368, 0, 0, 0, 0, 0, 384, 0, 0, 0, 0, 0, 400, 0, 0, 0, 0, 0, 416, 0, 0, 0, 0, 0, 432, 0, 0, 0, 0, 0, 448, 0, 0, 0, 0, 0, 464, 0, 0, 0, 0, 0, 480, 0, 0, 0, 0, 0, 496, 0, 0, 0, 0, 0, 512, 0, 0, 0, 0, 0, 528, 0, 0, 0, 0, 0, 544, 0, 0, 0, 0, 0, 560, 0, 0, 0, 0, 0, 576, 0, 0, 0, 0, 0, 592, 0, 0, 0, 0, 0, 608, 0, 0, 0, 0, 0, 624, 0, 0, 0, 0, 0, 640, 0)
+}
+point_count = 41
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0fhkm"]
+resource_local_to_scene = true
+size = Vector2(640, 24)
+
+[sub_resource type="Resource" id="Resource_di4pk"]
 script = ExtResource("125_8hnit")
 damping = 0.5
 max_speed = 16.0
 
-[sub_resource type="Resource" id="Resource_lkf7l"]
+[sub_resource type="Resource" id="Resource_txx42"]
 script = ExtResource("125_8hnit")
 damping = 0.5
 max_speed = 16.0
@@ -2754,13 +2754,13 @@ script = ExtResource("24_up3sn")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ri5g4"]
 size = Vector2(24, 24)
 
-[sub_resource type="Resource" id="Resource_8jnlv"]
+[sub_resource type="Resource" id="Resource_hqvlc"]
 script = ExtResource("125_8hnit")
 spring_constant = 120.0
 damping = 0.5
 max_speed = 16.0
 
-[sub_resource type="Curve2D" id="Curve2D_6vrgk"]
+[sub_resource type="Curve2D" id="Curve2D_p7hn1"]
 resource_local_to_scene = true
 bake_interval = 15.0
 _data = {
@@ -2768,7 +2768,7 @@ _data = {
 }
 point_count = 21
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4th6d"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p5y12"]
 resource_local_to_scene = true
 size = Vector2(322, 56)
 
@@ -2954,7 +2954,7 @@ script = ExtResource("24_up3sn")
 [sub_resource type="Resource" id="Resource_u6jat"]
 script = ExtResource("24_up3sn")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7tm75"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i2vmn"]
 resource_local_to_scene = true
 size = Vector2(25, 78)
 
@@ -4611,7 +4611,7 @@ z_index = -1
 position = Vector2(8688, -480)
 
 [node name="Sketch" parent="Paintings/PortalCanvasForest" index="3" unique_id=568708357]
-material = SubResource("ShaderMaterial_6to4f")
+material = SubResource("ShaderMaterial_yma73")
 
 [node name="PortalCanvasCatacombs" parent="Paintings" unique_id=616377616 instance=ExtResource("48_5p5e5")]
 position = Vector2(8000, 2048)
@@ -4623,7 +4623,7 @@ material = ExtResource("50_t8uv8")
 texture = ExtResource("51_7syti")
 
 [node name="Sketch" parent="Paintings/PortalCanvasCatacombs" index="3" unique_id=568708357]
-material = SubResource("ShaderMaterial_7t3xe")
+material = SubResource("ShaderMaterial_0ncad")
 
 [node name="PortalCanvasTown" parent="Paintings" unique_id=404969012 instance=ExtResource("48_5p5e5")]
 position = Vector2(11204, 867)
@@ -4635,7 +4635,7 @@ material = ExtResource("52_1f0tk")
 texture = ExtResource("53_xhfod")
 
 [node name="Sketch" parent="Paintings/PortalCanvasTown" index="3" unique_id=568708357]
-material = SubResource("ShaderMaterial_jyr54")
+material = SubResource("ShaderMaterial_w8pxe")
 
 [node name="PortalCanvasSwamp" parent="Paintings" unique_id=575686484 instance=ExtResource("48_5p5e5")]
 position = Vector2(960, 2368)
@@ -4646,7 +4646,7 @@ material = ExtResource("54_g55s5")
 texture = ExtResource("55_5m4e5")
 
 [node name="Sketch" parent="Paintings/PortalCanvasSwamp" index="3" unique_id=568708357]
-material = SubResource("ShaderMaterial_gsi70")
+material = SubResource("ShaderMaterial_rx22t")
 
 [node name="PortalCanvasCoast" parent="Paintings" unique_id=1721249897 instance=ExtResource("48_5p5e5")]
 position = Vector2(-4640, 3104)
@@ -4657,7 +4657,7 @@ material = ExtResource("56_ryti5")
 texture = ExtResource("57_tuxef")
 
 [node name="Sketch" parent="Paintings/PortalCanvasCoast" index="3" unique_id=568708357]
-material = SubResource("ShaderMaterial_d5n38")
+material = SubResource("ShaderMaterial_v2vdc")
 
 [node name="PortalCanvaLab" parent="Paintings" unique_id=1621169481 instance=ExtResource("48_5p5e5")]
 position = Vector2(5560, 640)
@@ -4666,11 +4666,11 @@ id = 7
 [node name="Painting" parent="Paintings/PortalCanvaLab" index="2" unique_id=1390642373]
 light_mask = 4
 visibility_layer = 4
-material = SubResource("ShaderMaterial_vx5sm")
+material = SubResource("ShaderMaterial_bdegy")
 texture = ExtResource("61_ult3y")
 
 [node name="Sketch" parent="Paintings/PortalCanvaLab" index="3" unique_id=568708357]
-material = SubResource("ShaderMaterial_emtx1")
+material = SubResource("ShaderMaterial_yk58o")
 
 [node name="PortalCanvasTundra" parent="Paintings" unique_id=663652831 instance=ExtResource("48_5p5e5")]
 position = Vector2(-2368, -64)
@@ -4683,7 +4683,7 @@ material = ExtResource("62_sv0fp")
 texture = ExtResource("63_m3cjv")
 
 [node name="Sketch" parent="Paintings/PortalCanvasTundra" index="3" unique_id=568708357]
-material = SubResource("ShaderMaterial_wtudp")
+material = SubResource("ShaderMaterial_t4raw")
 
 [node name="PortalCanvasCliffs" parent="Paintings" unique_id=1746320450 instance=ExtResource("48_5p5e5")]
 position = Vector2(-4816, -1120)
@@ -4696,7 +4696,7 @@ material = ExtResource("64_jjuyc")
 texture = ExtResource("65_mk28i")
 
 [node name="Sketch" parent="Paintings/PortalCanvasCliffs" index="3" unique_id=568708357]
-material = SubResource("ShaderMaterial_j4gl5")
+material = SubResource("ShaderMaterial_1urkh")
 
 [node name="PortalPaintingForest" parent="Paintings" unique_id=397581608 instance=ExtResource("66_f1x0i")]
 position = Vector2(4752, -5024)
@@ -4976,8 +4976,8 @@ material = SubResource("ShaderMaterial_2vm17")
 position = Vector2(2240, -229)
 texture = ExtResource("97_ajmds")
 
-[node name="CollectibleAP" parent="Items" unique_id=1678456492 instance=ExtResource("98_yma73")]
-position = Vector2(2238, -198)
+[node name="CollectableMap" parent="Items" unique_id=268194867 instance=ExtResource("98_xnrl7")]
+position = Vector2(2240, -197)
 
 [node name="CollectableConch" parent="Items" unique_id=356111683 instance=ExtResource("99_qt1lp")]
 position = Vector2(7360, 4072)
@@ -5434,7 +5434,7 @@ color = Color(0.10459379, 0.26781827, 0.29871535, 1)
 [node name="BodyOfWater4" parent="Areas/GladeArea/GladeWater" unique_id=1807029968 instance=ExtResource("124_kufn4")]
 position = Vector2(-464, 261)
 border_thickness = 2.0
-spring_values = SubResource("Resource_n7bqn")
+spring_values = SubResource("Resource_rtg3v")
 max_wave_end_height = 600.0
 width = 356.0
 height = 74.0
@@ -5442,7 +5442,7 @@ height = 74.0
 [node name="BodyOfWater" parent="Areas/GladeArea/GladeWater" unique_id=1918565655 instance=ExtResource("124_kufn4")]
 position = Vector2(5296, -92)
 border_thickness = 2.0
-spring_values = SubResource("Resource_rhu83")
+spring_values = SubResource("Resource_8k32r")
 width = 268.0
 height = 82.0
 
@@ -5836,7 +5836,7 @@ points = PackedVector2Array(0, 0, -221.64502, 1.4050293)
 points = PackedVector2Array(0, 0, -221.64502, 1.4050293)
 
 [node name="Path2D" parent="Areas/GladeArea/GladeMechanisms/DraggableHangingPlatform2" index="2" unique_id=543222354]
-curve = SubResource("Curve2D_h0npo")
+curve = SubResource("Curve2D_at115")
 
 [node name="DraggableHangingPlatform3" parent="Areas/GladeArea/GladeMechanisms" unique_id=1483363440 instance=ExtResource("135_2a54q")]
 z_index = 0
@@ -5862,7 +5862,7 @@ points = PackedVector2Array(0, 0, -276, 9)
 points = PackedVector2Array(0, 0, -276, 9)
 
 [node name="Path2D" parent="Areas/GladeArea/GladeMechanisms/DraggableHangingPlatform3" index="2" unique_id=543222354]
-curve = SubResource("Curve2D_uev5h")
+curve = SubResource("Curve2D_7aqv5")
 
 [node name="CastleTopArea" type="Node2D" parent="Areas/GladeArea/GladeMechanisms" unique_id=1845447680]
 
@@ -6105,7 +6105,7 @@ offset_bottom = 118.0
 
 [node name="CollisionShape2D" parent="Areas/GladeArea/LockedGladeDoors/LockedDoorGardenBubblePlatform/BaseTop/RailsMask/AnimatableBody2D" parent_id_path=PackedInt32Array(1363656069, 929080659) index="0" unique_id=1751103844]
 position = Vector2(13.500122, 55)
-shape = SubResource("RectangleShape2D_mcqu4")
+shape = SubResource("RectangleShape2D_aolk6")
 
 [node name="Door" parent="Areas/GladeArea/LockedGladeDoors/LockedDoorGardenBubblePlatform/BaseTop/RailsMask/AnimatableBody2D" parent_id_path=PackedInt32Array(1363656069, 929080659) index="1" unique_id=1175073045]
 offset_bottom = 109.0
@@ -7255,7 +7255,7 @@ tile_map_data = PackedByteArray("AADzAbL/AAAAAAAAAADzAbP/AAAAAAEAAADzAbT/AAAAAAE
 [node name="BodyOfWater4" parent="Areas/ForestArea/ForestWater" unique_id=34988321 instance=ExtResource("124_kufn4")]
 position = Vector2(11640, -824)
 border_thickness = 2.0
-spring_values = SubResource("Resource_esgcc")
+spring_values = SubResource("Resource_0qdvm")
 max_wave_end_height = 600.0
 enable_when_viewed_by_conch = true
 width = 520.0
@@ -7264,7 +7264,7 @@ height = 110.0
 [node name="BodyOfWater5" parent="Areas/ForestArea/ForestWater" unique_id=895763454 instance=ExtResource("124_kufn4")]
 position = Vector2(10423, -435)
 border_thickness = 2.0
-spring_values = SubResource("Resource_nhay7")
+spring_values = SubResource("Resource_n3cw4")
 max_wave_end_height = 600.0
 width = 420.0
 height = 76.0
@@ -7272,7 +7272,7 @@ height = 76.0
 [node name="BodyOfWater6" parent="Areas/ForestArea/ForestWater" unique_id=1641737025 instance=ExtResource("124_kufn4")]
 position = Vector2(10496, -1536)
 border_thickness = 2.0
-spring_values = SubResource("Resource_u6hfh")
+spring_values = SubResource("Resource_swf1x")
 max_wave_end_height = 600.0
 width = 600.0
 height = 172.0
@@ -7281,7 +7281,7 @@ room_range = Vector2i(1, 1)
 [node name="BodyOfWater7" parent="Areas/ForestArea/ForestWater" unique_id=911023491 instance=ExtResource("124_kufn4")]
 position = Vector2(11860, -1570)
 border_thickness = 2.0
-spring_values = SubResource("Resource_vkwpd")
+spring_values = SubResource("Resource_dpi5l")
 max_wave_end_height = 600.0
 width = 280.0
 height = 120.0
@@ -7289,7 +7289,7 @@ height = 120.0
 [node name="BodyOfWater9" parent="Areas/ForestArea/ForestWater" unique_id=1291638587 instance=ExtResource("124_kufn4")]
 position = Vector2(10808, -1864)
 border_thickness = 2.0
-spring_values = SubResource("Resource_nxnwd")
+spring_values = SubResource("Resource_3nhgt")
 max_wave_end_height = 600.0
 width = 250.0
 height = 96.0
@@ -7298,7 +7298,7 @@ room_range = Vector2i(1, 0)
 [node name="BodyOfWater10" parent="Areas/ForestArea/ForestWater" unique_id=1004713997 instance=ExtResource("124_kufn4")]
 position = Vector2(10480, -1216)
 border_thickness = 2.0
-spring_values = SubResource("Resource_p7gsi")
+spring_values = SubResource("Resource_8l7ac")
 max_wave_end_height = 600.0
 width = 300.0
 height = 90.0
@@ -7306,7 +7306,7 @@ height = 90.0
 [node name="BodyOfWater" parent="Areas/ForestArea/ForestWater" unique_id=1298012538 instance=ExtResource("124_kufn4")]
 position = Vector2(9360, -832)
 border_thickness = 2.0
-spring_values = SubResource("Resource_2m8qj")
+spring_values = SubResource("Resource_m1dci")
 width = 355.105
 room_range = Vector2i(1, 0)
 
@@ -9461,7 +9461,7 @@ metadata/_custom_type_script = "uid://6t45k2qcje8e"
 position = Vector2(114, 2407)
 color_in_map = Color(0, 0.55, 0.52250004, 1)
 border_thickness = 2.0
-spring_values = SubResource("Resource_uo3cc")
+spring_values = SubResource("Resource_xwlqh")
 max_wave_start_height = 40.0
 max_wave_end_height = 1000.0
 width = 414.0
@@ -9475,17 +9475,17 @@ polygon = PackedVector2Array(0, 0, 2.5875, 0, 5.239687, 0, 8.28, 0, 11.3203125, 
 uv = PackedVector2Array(0, 32, 0.21333334, 32, 0.42666668, 32, 0.64, 32, 0.85333335, 32, 1.0666667, 32, 1.28, 32, 1.4933333, 32, 1.7066667, 32, 1.92, 32, 2.1333334, 32, 2.3466666, 32, 2.56, 32, 2.7733333, 32, 2.9866667, 32, 3.2, 32, 3.4133334, 32, 3.6266668, 32, 3.84, 32, 4.0533333, 32, 4.266667, 32, 4.48, 32, 4.693333, 32, 4.9066668, 32, 5.12, 32, 5.3333335, 32, 5.5466666, 32, 5.76, 32, 5.9733334, 32, 6.1866665, 32, 6.4, 32, 6.613333, 32, 6.826667, 32, 7.04, 32, 7.2533336, 32, 7.4666667, 32, 7.68, 32, 7.8933334, 32, 8.106667, 32, 8.32, 32, 8.533334, 32, 8.746667, 32, 8.96, 32, 9.173333, 32, 9.386666, 32, 9.6, 32, 9.8133335, 32, 10.026667, 32, 10.24, 32, 10.453333, 32, 10.666667, 32, 10.88, 32, 11.093333, 32, 11.306666, 32, 11.52, 32, 11.733334, 32, 11.946667, 32, 12.16, 32, 12.373333, 32, 12.586667, 32, 12.8, 32, 13.013333, 32, 13.226666, 32, 13.44, 32, 13.653334, 32, 13.866667, 32, 14.08, 32, 14.293333, 32, 14.506667, 32, 14.72, 32, 14.933333, 32, 15.146667, 32, 15.36, 32, 15.573334, 32, 15.786667, 32, 16, 32, 16.213333, 32, 16.426666, 32, 16.64, 32, 16.853333, 32, 17.066668, 32, 17.28, 32, 17.493334, 32, 17.706667, 32, 17.92, 32, 18.133333, 32, 18.346666, 32, 18.56, 32, 18.773333, 32, 18.986666, 32, 19.2, 32, 19.413334, 32, 19.626667, 32, 19.84, 32, 20.053333, 32, 20.266666, 32, 20.48, 32, 20.693333, 32, 20.906666, 32, 21.12, 32, 21.333334, 32, 21.546667, 32, 21.76, 32, 21.973333, 32, 22.186666, 32, 22.4, 32, 22.613333, 32, 22.826666, 32, 23.04, 32, 23.253334, 32, 23.466667, 32, 23.68, 32, 23.893333, 32, 24.106667, 32, 24.32, 32, 24.533333, 32, 24.746666, 32, 24.96, 32, 25.173334, 32, 25.386667, 32, 25.6, 32, 25.813334, 32, 26.026667, 32, 26.24, 32, 26.453333, 32, 26.666666, 32, 26.88, 32, 27.093334, 32, 27.306667, 32, 27.52, 32, 27.733334, 32, 27.946667, 32, 28.16, 32, 28.373333, 32, 28.586666, 32, 28.8, 32, 29.013334, 32, 29.226667, 32, 29.44, 32, 29.653334, 32, 29.866667, 32, 30.08, 32, 30.293333, 32, 30.506666, 32, 30.72, 32, 30.933332, 32, 31.146667, 32, 31.36, 32, 31.573334, 32, 31.786667, 32, 32, 32, 32, 0, 0, 0)
 
 [node name="SmoothPath" parent="Areas/SwampArea/SwampWater/BodyOfWater6" index="2" unique_id=1763585768]
-curve = SubResource("Curve2D_8q6gi")
+curve = SubResource("Curve2D_up3sn")
 color = Color(0.682855, 0.749477, 0.380994, 1)
 
 [node name="WaterCollider" parent="Areas/SwampArea/SwampWater/BodyOfWater6" index="3" unique_id=594835146]
 position = Vector2(207, 54)
-shape = SubResource("RectangleShape2D_sm0b4")
+shape = SubResource("RectangleShape2D_nsx76")
 
 [node name="BodyOfWater7" parent="Areas/SwampArea/SwampWater" unique_id=975547349 instance=ExtResource("124_kufn4")]
 position = Vector2(-2528, 2384)
 border_thickness = 2.0
-spring_values = SubResource("Resource_x7v3l")
+spring_values = SubResource("Resource_qmdq8")
 max_wave_start_height = 40.0
 max_wave_end_height = 1000.0
 width = 320.0
@@ -9498,12 +9498,12 @@ polygon = PackedVector2Array(0, 0, 2.5, 0, 5.0625, 0, 8, 0, 10.9375, 0, 13.5, 0,
 uv = PackedVector2Array(0, 32, 0.26666668, 32, 0.53333336, 32, 0.8, 32, 1.0666667, 32, 1.3333334, 32, 1.6, 32, 1.8666667, 32, 2.1333334, 32, 2.4, 32, 2.6666667, 32, 2.9333334, 32, 3.2, 32, 3.4666667, 32, 3.7333333, 32, 4, 32, 4.266667, 32, 4.5333333, 32, 4.8, 32, 5.0666666, 32, 5.3333335, 32, 5.6, 32, 5.866667, 32, 6.133333, 32, 6.4, 32, 6.6666665, 32, 6.9333334, 32, 7.2, 32, 7.4666667, 32, 7.733333, 32, 8, 32, 8.266666, 32, 8.533334, 32, 8.8, 32, 9.066667, 32, 9.333333, 32, 9.6, 32, 9.866667, 32, 10.133333, 32, 10.4, 32, 10.666667, 32, 10.933333, 32, 11.2, 32, 11.466666, 32, 11.733334, 32, 12, 32, 12.266666, 32, 12.533334, 32, 12.8, 32, 13.066667, 32, 13.333333, 32, 13.6, 32, 13.866667, 32, 14.133333, 32, 14.4, 32, 14.666667, 32, 14.933333, 32, 15.2, 32, 15.466666, 32, 15.733334, 32, 16, 32, 16.266666, 32, 16.533333, 32, 16.8, 32, 17.066668, 32, 17.333334, 32, 17.6, 32, 17.866667, 32, 18.133333, 32, 18.4, 32, 18.666666, 32, 18.933332, 32, 19.2, 32, 19.466667, 32, 19.733334, 32, 20, 32, 20.266666, 32, 20.533333, 32, 20.8, 32, 21.066668, 32, 21.333334, 32, 21.6, 32, 21.866667, 32, 22.133333, 32, 22.4, 32, 22.666666, 32, 22.933332, 32, 23.2, 32, 23.466667, 32, 23.733334, 32, 24, 32, 24.266666, 32, 24.533333, 32, 24.8, 32, 25.066668, 32, 25.333334, 32, 25.6, 32, 25.866667, 32, 26.133333, 32, 26.4, 32, 26.666666, 32, 26.933332, 32, 27.2, 32, 27.466667, 32, 27.733334, 32, 28, 32, 28.266666, 32, 28.533333, 32, 28.8, 32, 29.066668, 32, 29.333334, 32, 29.6, 32, 29.866667, 32, 30.133333, 32, 30.4, 32, 30.666666, 32, 30.933332, 32, 31.2, 32, 31.466667, 32, 31.733334, 32, 32, 32, 32, 0, 0, 0)
 
 [node name="SmoothPath" parent="Areas/SwampArea/SwampWater/BodyOfWater7" index="2" unique_id=1763585768]
-curve = SubResource("Curve2D_ahnoi")
+curve = SubResource("Curve2D_63gfj")
 color = Color(0.682855, 0.749477, 0.380994, 1)
 
 [node name="WaterCollider" parent="Areas/SwampArea/SwampWater/BodyOfWater7" index="3" unique_id=594835146]
 position = Vector2(160, 39)
-shape = SubResource("RectangleShape2D_hb42u")
+shape = SubResource("RectangleShape2D_8icpe")
 
 [node name="LilyPad" parent="Areas/SwampArea/SwampWater" unique_id=1372772409 node_paths=PackedStringArray("water") instance=ExtResource("251_jdwyd")]
 position = Vector2(-840, 2400)
@@ -9539,14 +9539,14 @@ water = NodePath("../BodyOfWater3")
 [node name="BodyOfWater" parent="Areas/SwampArea/SwampWater" unique_id=1988631830 instance=ExtResource("253_p3k1k")]
 position = Vector2(-1182, 2400)
 border_thickness = 2.0
-spring_values = SubResource("Resource_3mfre")
+spring_values = SubResource("Resource_c5o1k")
 width = 430.0
 height = 66.0
 
 [node name="BodyOfWater2" parent="Areas/SwampArea/SwampWater" unique_id=2011772363 instance=ExtResource("253_p3k1k")]
 position = Vector2(-336, 2776)
 border_thickness = 2.0
-spring_values = SubResource("Resource_heler")
+spring_values = SubResource("Resource_b2eda")
 width = 232.0
 height = 90.0
 room_range = Vector2i(0, 1)
@@ -9554,27 +9554,27 @@ room_range = Vector2i(0, 1)
 [node name="BodyOfWater3" parent="Areas/SwampArea/SwampWater" unique_id=778021314 instance=ExtResource("253_p3k1k")]
 position = Vector2(-3640, 2344)
 border_thickness = 2.0
-spring_values = SubResource("Resource_f5x3f")
+spring_values = SubResource("Resource_t3mek")
 width = 432.0
 
 [node name="BodyOfWater4" parent="Areas/SwampArea/SwampWater" unique_id=1960978807 instance=ExtResource("253_p3k1k")]
 position = Vector2(-3128, 1691)
 border_thickness = 2.0
-spring_values = SubResource("Resource_7o186")
+spring_values = SubResource("Resource_73xky")
 width = 364.0
 height = 50.0
 
 [node name="BodyOfWater5" parent="Areas/SwampArea/SwampWater" unique_id=451738993 instance=ExtResource("253_p3k1k")]
 position = Vector2(-1624, 2744)
 border_thickness = 2.0
-spring_values = SubResource("Resource_7hd2x")
+spring_values = SubResource("Resource_vhmma")
 width = 272.0
 height = 70.0
 
 [node name="BodyOfWater9" parent="Areas/SwampArea/SwampWater" unique_id=686377589 instance=ExtResource("253_p3k1k")]
 position = Vector2(-3096, 1288)
 border_thickness = 2.0
-spring_values = SubResource("Resource_d3vnt")
+spring_values = SubResource("Resource_jy8wn")
 width = 338.0
 height = 104.0
 
@@ -9582,7 +9582,7 @@ height = 104.0
 position = Vector2(1562, 2356)
 shallow_water = true
 border_thickness = 2.0
-spring_values = SubResource("Resource_dhl67")
+spring_values = SubResource("Resource_168xa")
 max_wave_end_height = 600.0
 width = 168.0
 height = 22.0
@@ -9593,12 +9593,12 @@ polygon = PackedVector2Array(0, 0, 2.625, 0, 5.315625, 0, 8.4, 0, 11.484375, 0, 
 uv = PackedVector2Array(0, 32, 0.53333336, 32, 1.0666667, 32, 1.6, 32, 2.1333334, 32, 2.6666667, 32, 3.2, 32, 3.7333333, 32, 4.266667, 32, 4.8, 32, 5.3333335, 32, 5.866667, 32, 6.4, 32, 6.9333334, 32, 7.4666667, 32, 8, 32, 8.533334, 32, 9.066667, 32, 9.6, 32, 10.133333, 32, 10.666667, 32, 11.2, 32, 11.733334, 32, 12.266666, 32, 12.8, 32, 13.333333, 32, 13.866667, 32, 14.4, 32, 14.933333, 32, 15.466666, 32, 16, 32, 16.533333, 32, 17.066668, 32, 17.6, 32, 18.133333, 32, 18.666666, 32, 19.2, 32, 19.733334, 32, 20.266666, 32, 20.8, 32, 21.333334, 32, 21.866667, 32, 22.4, 32, 22.933332, 32, 23.466667, 32, 24, 32, 24.533333, 32, 25.066668, 32, 25.6, 32, 26.133333, 32, 26.666666, 32, 27.2, 32, 27.733334, 32, 28.266666, 32, 28.8, 32, 29.333334, 32, 29.866667, 32, 30.4, 32, 30.933332, 32, 31.466667, 32, 32, 32, 32, 0, 0, 0)
 
 [node name="SmoothPath" parent="Areas/SwampArea/SwampWater/BodyOfWater10" index="2" unique_id=1763585768]
-curve = SubResource("Curve2D_4oob1")
+curve = SubResource("Curve2D_l08ry")
 
 [node name="WaterCollider" parent="Areas/SwampArea/SwampWater/BodyOfWater10" index="3" unique_id=594835146]
 process_mode = 4
 position = Vector2(84, 15)
-shape = SubResource("RectangleShape2D_2xoka")
+shape = SubResource("RectangleShape2D_qhu88")
 
 [node name="FrogsSwamp" type="Node2D" parent="Areas/SwampArea" unique_id=990269072]
 
@@ -10396,7 +10396,7 @@ metadata/_custom_type_script = "uid://6t45k2qcje8e"
 position = Vector2(2032, 1597)
 shallow_water = true
 border_thickness = 2.0
-spring_values = SubResource("Resource_jvt7o")
+spring_values = SubResource("Resource_th7lg")
 width = 255.0
 height = 20.0
 
@@ -10406,12 +10406,12 @@ polygon = PackedVector2Array(0, 0, 2.65625, 0, 5.3789063, 0, 8.5, 0, 11.621094, 
 uv = PackedVector2Array(0, 32, 0.35555556, 32, 0.7111111, 32, 1.0666667, 32, 1.4222223, 32, 1.7777778, 32, 2.1333334, 32, 2.488889, 32, 2.8444445, 32, 3.2, 32, 3.5555556, 32, 3.911111, 32, 4.266667, 32, 4.6222224, 32, 4.977778, 32, 5.3333335, 32, 5.688889, 32, 6.0444446, 32, 6.4, 32, 6.7555556, 32, 7.111111, 32, 7.4666667, 32, 7.822222, 32, 8.177778, 32, 8.533334, 32, 8.888889, 32, 9.244445, 32, 9.6, 32, 9.955556, 32, 10.311111, 32, 10.666667, 32, 11.0222225, 32, 11.377778, 32, 11.733334, 32, 12.088889, 32, 12.444445, 32, 12.8, 32, 13.155556, 32, 13.511111, 32, 13.866667, 32, 14.222222, 32, 14.577778, 32, 14.933333, 32, 15.288889, 32, 15.644444, 32, 16, 32, 16.355556, 32, 16.711111, 32, 17.066668, 32, 17.422222, 32, 17.777779, 32, 18.133333, 32, 18.48889, 32, 18.844444, 32, 19.2, 32, 19.555555, 32, 19.911112, 32, 20.266666, 32, 20.622223, 32, 20.977777, 32, 21.333334, 32, 21.688889, 32, 22.044445, 32, 22.4, 32, 22.755556, 32, 23.11111, 32, 23.466667, 32, 23.822222, 32, 24.177778, 32, 24.533333, 32, 24.88889, 32, 25.244444, 32, 25.6, 32, 25.955555, 32, 26.311111, 32, 26.666666, 32, 27.022223, 32, 27.377777, 32, 27.733334, 32, 28.088888, 32, 28.444445, 32, 28.8, 32, 29.155556, 32, 29.51111, 32, 29.866667, 32, 30.222221, 32, 30.577778, 32, 30.933332, 32, 31.288889, 32, 31.644444, 32, 32, 32, 32, 0, 0, 0)
 
 [node name="SmoothPath" parent="Areas/WaterworksArea/WaterworksWater/BodyOfWater" index="2" unique_id=1763585768]
-curve = SubResource("Curve2D_433t6")
+curve = SubResource("Curve2D_uv138")
 
 [node name="WaterCollider" parent="Areas/WaterworksArea/WaterworksWater/BodyOfWater" index="3" unique_id=594835146]
 process_mode = 4
 position = Vector2(127.5, 14)
-shape = SubResource("RectangleShape2D_8s0fw")
+shape = SubResource("RectangleShape2D_t074o")
 
 [node name="WaterworksMechanisms" type="Node2D" parent="Areas/WaterworksArea" unique_id=2034421688]
 
@@ -10491,7 +10491,7 @@ offset_bottom = 142.006
 
 [node name="CollisionShape2D" parent="Areas/WaterworksArea/WaterworksMechanisms/WaterworksDoor/BaseTop/Rails/AnimatableBody2D" parent_id_path=PackedInt32Array(324424133, 2034873225) index="0" unique_id=1104144428]
 position = Vector2(12, 83.5)
-shape = SubResource("RectangleShape2D_wgdy1")
+shape = SubResource("RectangleShape2D_00pyp")
 
 [node name="Door" parent="Areas/WaterworksArea/WaterworksMechanisms/WaterworksDoor/BaseTop/Rails/AnimatableBody2D" parent_id_path=PackedInt32Array(324424133, 2034873225) index="1" unique_id=710881279]
 offset_bottom = 167.0
@@ -10512,7 +10512,7 @@ offset_bottom = 78.006
 
 [node name="CollisionShape2D" parent="Areas/WaterworksArea/WaterworksMechanisms/WaterworksDoor6/BaseTop/Rails/AnimatableBody2D" parent_id_path=PackedInt32Array(752585009, 2034873225) index="0" unique_id=1104144428]
 position = Vector2(12, 51.5)
-shape = SubResource("RectangleShape2D_a0c0v")
+shape = SubResource("RectangleShape2D_wbkxs")
 
 [node name="Door" parent="Areas/WaterworksArea/WaterworksMechanisms/WaterworksDoor6/BaseTop/Rails/AnimatableBody2D" parent_id_path=PackedInt32Array(752585009, 2034873225) index="1" unique_id=710881279]
 offset_bottom = 103.0
@@ -10645,7 +10645,7 @@ test_frame_lock_collision = true
 tick_pitch_change = 0.01
 
 [node name="MovingPlatform" parent="Areas/WaterworksArea/WaterworksMechanisms/LiftPipe" index="0" unique_id=417538570]
-spring = SubResource("Resource_oosom")
+spring = SubResource("Resource_uhvhu")
 end_position = Vector2(0, 256)
 
 [node name="NinePatchRect" parent="Areas/WaterworksArea/WaterworksMechanisms/LiftPipe/MovingPlatform" index="1" unique_id=676320404]
@@ -10745,7 +10745,7 @@ region = 10
 test_frame_lock_collision = true
 
 [node name="MovingPlatform" parent="Areas/WaterworksArea/WaterworksMechanisms/LiftPipe2" index="0" unique_id=417538570]
-spring = SubResource("Resource_1f0sw")
+spring = SubResource("Resource_2u4nl")
 end_position = Vector2(0, 90)
 
 [node name="NinePatchRect" parent="Areas/WaterworksArea/WaterworksMechanisms/LiftPipe2/MovingPlatform" index="1" unique_id=676320404]
@@ -10790,7 +10790,7 @@ test_frame_lock_collision = true
 
 [node name="MovingPlatform" parent="Areas/WaterworksArea/WaterworksMechanisms/LiftPipeWorkshopWaterworksRun" index="0" unique_id=417538570]
 position = Vector2(16, 160)
-spring = SubResource("Resource_8di4h")
+spring = SubResource("Resource_g1t01")
 speed_towards_start = 36.0
 speed_towards_end = 40.0
 end_position = Vector2(0, 544)
@@ -11449,7 +11449,7 @@ position = Vector2(6704, 3616)
 [node name="BodyOfWater11" parent="Areas/AbyssArea" unique_id=1621655521 instance=ExtResource("253_p3k1k")]
 position = Vector2(3968, 3776)
 border_thickness = 2.0
-spring_values = SubResource("Resource_5asu8")
+spring_values = SubResource("Resource_i8wm8")
 width = 338.0
 splash_primary_color = Color(0.04549177, 0.0012812241, 0.081485115, 1)
 splash_secondary_color = Color(0.18933398, 0.0074994327, 0.16340944, 1)
@@ -11460,12 +11460,12 @@ polygon = PackedVector2Array(0, 0, 8.047619, 0, 16.095238, 0, 24.142857, 0, 32.1
 uv = PackedVector2Array(0, 32, 0.7619048, 32, 1.5238096, 32, 2.2857144, 32, 3.047619, 32, 3.8095238, 32, 4.571429, 32, 5.3333335, 32, 6.095238, 32, 6.857143, 32, 7.6190476, 32, 8.380953, 32, 9.142858, 32, 9.904762, 32, 10.666667, 32, 11.428572, 32, 12.190476, 32, 12.952381, 32, 13.714286, 32, 14.476191, 32, 15.238095, 32, 16, 32, 16.761906, 32, 17.52381, 32, 18.285715, 32, 19.047619, 32, 19.809525, 32, 20.571428, 32, 21.333334, 32, 22.095238, 32, 22.857143, 32, 23.619047, 32, 24.380953, 32, 25.142857, 32, 25.904762, 32, 26.666666, 32, 27.428572, 32, 28.190475, 32, 28.952381, 32, 29.714285, 32, 30.47619, 32, 31.238094, 32, 32, 32, 32, 0, 0, 0)
 
 [node name="SmoothPath" parent="Areas/AbyssArea/BodyOfWater11" index="2" unique_id=1763585768]
-curve = SubResource("Curve2D_c0jt6")
+curve = SubResource("Curve2D_gvk5g")
 color = Color(0.18933398, 0.0074994327, 0.16340944, 1)
 
 [node name="WaterCollider" parent="Areas/AbyssArea/BodyOfWater11" index="3" unique_id=594835146]
 position = Vector2(169, 44)
-shape = SubResource("RectangleShape2D_gkspn")
+shape = SubResource("RectangleShape2D_5p5e5")
 
 [node name="Lift" parent="Areas/AbyssArea" unique_id=2128515713 instance=ExtResource("129_vx1rw")]
 position = Vector2(5183, 3901)
@@ -11689,7 +11689,7 @@ mechanics = 2
 [node name="BodyOfWaterConchArea" parent="Areas/AbyssArea" unique_id=1648974474 instance=ExtResource("124_kufn4")]
 position = Vector2(6672, 4120)
 border_thickness = 2.0
-spring_values = SubResource("Resource_hmg4x")
+spring_values = SubResource("Resource_111bm")
 max_wave_end_height = 600.0
 enable_when_viewed_by_conch = true
 width = 1648.0
@@ -11705,7 +11705,7 @@ polygon = PackedVector2Array(0, 0, 2.5, 0, 5.0625, 0, 8, 0, 10.9375, 0, 13.5, 0,
 uv = PackedVector2Array(0, 32, 0.051779937, 32, 0.103559874, 32, 0.1553398, 32, 0.20711975, 32, 0.2588997, 32, 0.3106796, 32, 0.36245954, 32, 0.4142395, 32, 0.46601942, 32, 0.5177994, 32, 0.5695793, 32, 0.6213592, 32, 0.67313915, 32, 0.7249191, 32, 0.776699, 32, 0.828479, 32, 0.8802589, 32, 0.93203884, 32, 0.98381877, 32, 1.0355988, 32, 1.0873786, 32, 1.1391586, 32, 1.1909385, 32, 1.2427185, 32, 1.2944983, 32, 1.3462783, 32, 1.3980583, 32, 1.4498382, 32, 1.5016181, 32, 1.553398, 32, 1.605178, 32, 1.656958, 32, 1.7087379, 32, 1.7605178, 32, 1.8122977, 32, 1.8640777, 32, 1.9158576, 32, 1.9676375, 32, 2.0194175, 32, 2.0711975, 32, 2.1229773, 32, 2.1747572, 32, 2.2265372, 32, 2.2783172, 32, 2.3300972, 32, 2.381877, 32, 2.433657, 32, 2.485437, 32, 2.537217, 32, 2.5889966, 32, 2.6407766, 32, 2.6925566, 32, 2.7443366, 32, 2.7961166, 32, 2.8478963, 32, 2.8996763, 32, 2.9514563, 32, 3.0032363, 32, 3.0550163, 32, 3.106796, 32, 3.158576, 32, 3.210356, 32, 3.262136, 32, 3.313916, 32, 3.3656957, 32, 3.4174757, 32, 3.4692557, 32, 3.5210357, 32, 3.5728154, 32, 3.6245954, 32, 3.6763754, 32, 3.7281554, 32, 3.7799354, 32, 3.831715, 32, 3.883495, 32, 3.935275, 32, 3.987055, 32, 4.038835, 32, 4.090615, 32, 4.142395, 32, 4.194175, 32, 4.2459545, 32, 4.2977347, 32, 4.3495145, 32, 4.4012947, 32, 4.4530745, 32, 4.504854, 32, 4.5566344, 32, 4.608414, 32, 4.6601944, 32, 4.711974, 32, 4.763754, 32, 4.815534, 32, 4.867314, 32, 4.919094, 32, 4.970874, 32, 5.0226536, 32, 5.074434, 32, 5.1262136, 32, 5.1779933, 32, 5.2297735, 32, 5.2815533, 32, 5.3333335, 32, 5.3851132, 32, 5.436893, 32, 5.488673, 32, 5.540453, 32, 5.592233, 32, 5.644013, 32, 5.6957927, 32, 5.747573, 32, 5.7993526, 32, 5.851133, 32, 5.9029126, 32, 5.9546924, 32, 6.0064726, 32, 6.0582523, 32, 6.1100326, 32, 6.1618123, 32, 6.213592, 32, 6.2653723, 32, 6.317152, 32, 6.3689322, 32, 6.420712, 32, 6.4724917, 32, 6.524272, 32, 6.5760517, 32, 6.627832, 32, 6.6796117, 32, 6.7313914, 32, 6.7831717, 32, 6.8349514, 32, 6.8867316, 32, 6.9385114, 32, 6.990291, 32, 7.0420713, 32, 7.093851, 32, 7.145631, 32, 7.197411, 32, 7.249191, 32, 7.300971, 32, 7.352751, 32, 7.4045305, 32, 7.4563107, 32, 7.5080905, 32, 7.5598707, 32, 7.6116505, 32, 7.66343, 32, 7.7152104, 32, 7.76699, 32, 7.8187704, 32, 7.87055, 32, 7.92233, 32, 7.97411, 32, 8.02589, 32, 8.07767, 32, 8.12945, 32, 8.18123, 32, 8.233009, 32, 8.28479, 32, 8.33657, 32, 8.38835, 32, 8.440129, 32, 8.491909, 32, 8.54369, 32, 8.595469, 32, 8.647249, 32, 8.699029, 32, 8.750809, 32, 8.802589, 32, 8.854369, 32, 8.906149, 32, 8.957929, 32, 9.009708, 32, 9.061489, 32, 9.113269, 32, 9.165049, 32, 9.216828, 32, 9.268608, 32, 9.320389, 32, 9.372169, 32, 9.423948, 32, 9.475728, 32, 9.527508, 32, 9.5792885, 32, 9.631068, 32, 9.682848, 32, 9.734628, 32, 9.786407, 32, 9.838188, 32, 9.889968, 32, 9.941748, 32, 9.993527, 32, 10.045307, 32, 10.097087, 32, 10.148868, 32, 10.200647, 32, 10.252427, 32, 10.304207, 32, 10.355987, 32, 10.407767, 32, 10.459547, 32, 10.511327, 32, 10.563107, 32, 10.614886, 32, 10.666667, 32, 10.718447, 32, 10.7702265, 32, 10.822006, 32, 10.873786, 32, 10.925567, 32, 10.977346, 32, 11.029126, 32, 11.080906, 32, 11.132686, 32, 11.184466, 32, 11.236246, 32, 11.288026, 32, 11.339806, 32, 11.391585, 32, 11.443366, 32, 11.495146, 32, 11.546926, 32, 11.598705, 32, 11.650485, 32, 11.702266, 32, 11.7540455, 32, 11.805825, 32, 11.857605, 32, 11.909385, 32, 11.961165, 32, 12.012945, 32, 12.064725, 32, 12.116505, 32, 12.168284, 32, 12.220065, 32, 12.271845, 32, 12.323625, 32, 12.375404, 32, 12.427184, 32, 12.478965, 32, 12.530745, 32, 12.582524, 32, 12.634304, 32, 12.686084, 32, 12.7378645, 32, 12.789644, 32, 12.841424, 32, 12.893204, 32, 12.9449835, 32, 12.996764, 32, 13.048544, 32, 13.100324, 32, 13.152103, 32, 13.203883, 32, 13.255664, 32, 13.307444, 32, 13.359223, 32, 13.411003, 32, 13.462783, 32, 13.514564, 32, 13.566343, 32, 13.618123, 32, 13.669903, 32, 13.721683, 32, 13.773463, 32, 13.825243, 32, 13.877023, 32, 13.9288025, 32, 13.980582, 32, 14.032362, 32, 14.084143, 32, 14.135922, 32, 14.187702, 32, 14.239482, 32, 14.291262, 32, 14.343042, 32, 14.394822, 32, 14.446602, 32, 14.498382, 32, 14.550161, 32, 14.601942, 32, 14.653722, 32, 14.705502, 32, 14.757281, 32, 14.809061, 32, 14.860842, 32, 14.9126215, 32, 14.964401, 32, 15.016181, 32, 15.067961, 32, 15.119741, 32, 15.171521, 32, 15.223301, 32, 15.275081, 32, 15.32686, 32, 15.378641, 32, 15.430421, 32, 15.482201, 32, 15.53398, 32, 15.58576, 32, 15.637541, 32, 15.689321, 32, 15.7411, 32, 15.79288, 32, 15.84466, 32, 15.8964405, 32, 15.94822, 32, 16, 32, 16.05178, 32, 16.10356, 32, 16.15534, 32, 16.207119, 32, 16.2589, 32, 16.31068, 32, 16.36246, 32, 16.41424, 32, 16.466019, 32, 16.5178, 32, 16.56958, 32, 16.621359, 32, 16.67314, 32, 16.724918, 32, 16.7767, 32, 16.82848, 32, 16.880259, 32, 16.93204, 32, 16.983818, 32, 17.035599, 32, 17.08738, 32, 17.139158, 32, 17.190939, 32, 17.242718, 32, 17.294498, 32, 17.34628, 32, 17.398058, 32, 17.449839, 32, 17.501617, 32, 17.553398, 32, 17.605179, 32, 17.656958, 32, 17.708738, 32, 17.760517, 32, 17.812298, 32, 17.864079, 32, 17.915857, 32, 17.967638, 32, 18.019417, 32, 18.071198, 32, 18.122978, 32, 18.174757, 32, 18.226538, 32, 18.278316, 32, 18.330097, 32, 18.381878, 32, 18.433657, 32, 18.485437, 32, 18.537216, 32, 18.588997, 32, 18.640778, 32, 18.692556, 32, 18.744337, 32, 18.796116, 32, 18.847897, 32, 18.899677, 32, 18.951456, 32, 19.003237, 32, 19.055016, 32, 19.106796, 32, 19.158577, 32, 19.210356, 32, 19.262136, 32, 19.313915, 32, 19.365696, 32, 19.417477, 32, 19.469255, 32, 19.521036, 32, 19.572815, 32, 19.624596, 32, 19.676376, 32, 19.728155, 32, 19.779936, 32, 19.831715, 32, 19.883495, 32, 19.935276, 32, 19.987055, 32, 20.038836, 32, 20.090614, 32, 20.142395, 32, 20.194174, 32, 20.245955, 32, 20.297735, 32, 20.349514, 32, 20.401295, 32, 20.453074, 32, 20.504854, 32, 20.556635, 32, 20.608414, 32, 20.660194, 32, 20.711973, 32, 20.763754, 32, 20.815535, 32, 20.867313, 32, 20.919094, 32, 20.970873, 32, 21.022654, 32, 21.074434, 32, 21.126213, 32, 21.177994, 32, 21.229773, 32, 21.281553, 32, 21.333334, 32, 21.385113, 32, 21.436893, 32, 21.488672, 32, 21.540453, 32, 21.592234, 32, 21.644012, 32, 21.695793, 32, 21.747572, 32, 21.799353, 32, 21.851133, 32, 21.902912, 32, 21.954693, 32, 22.006472, 32, 22.058252, 32, 22.110033, 32, 22.161812, 32, 22.213593, 32, 22.265371, 32, 22.317152, 32, 22.368933, 32, 22.420712, 32, 22.472492, 32, 22.524271, 32, 22.576052, 32, 22.627832, 32, 22.679611, 32, 22.731392, 32, 22.78317, 32, 22.834951, 32, 22.886732, 32, 22.93851, 32, 22.990292, 32, 23.04207, 32, 23.093851, 32, 23.145632, 32, 23.19741, 32, 23.249191, 32, 23.30097, 32, 23.35275, 32, 23.404531, 32, 23.45631, 32, 23.508091, 32, 23.55987, 32, 23.61165, 32, 23.663431, 32, 23.71521, 32, 23.76699, 32, 23.81877, 32, 23.87055, 32, 23.92233, 32, 23.97411, 32, 24.02589, 32, 24.07767, 32, 24.12945, 32, 24.18123, 32, 24.23301, 32, 24.28479, 32, 24.336569, 32, 24.38835, 32, 24.44013, 32, 24.491909, 32, 24.54369, 32, 24.595469, 32, 24.64725, 32, 24.69903, 32, 24.750809, 32, 24.80259, 32, 24.854368, 32, 24.906149, 32, 24.95793, 32, 25.009708, 32, 25.06149, 32, 25.113268, 32, 25.165049, 32, 25.21683, 32, 25.268608, 32, 25.320389, 32, 25.372168, 32, 25.423948, 32, 25.475729, 32, 25.527508, 32, 25.579288, 32, 25.631067, 32, 25.682848, 32, 25.734629, 32, 25.786407, 32, 25.838188, 32, 25.889967, 32, 25.941748, 32, 25.993528, 32, 26.045307, 32, 26.097088, 32, 26.148867, 32, 26.200647, 32, 26.252428, 32, 26.304207, 32, 26.355988, 32, 26.407766, 32, 26.459547, 32, 26.511328, 32, 26.563107, 32, 26.614887, 32, 26.666666, 32, 26.718447, 32, 26.770227, 32, 26.822006, 32, 26.873787, 32, 26.925566, 32, 26.977346, 32, 27.029127, 32, 27.080906, 32, 27.132687, 32, 27.184465, 32, 27.236246, 32, 27.288027, 32, 27.339806, 32, 27.391586, 32, 27.443365, 32, 27.495146, 32, 27.546926, 32, 27.598705, 32, 27.650486, 32, 27.702265, 32, 27.754045, 32, 27.805826, 32, 27.857605, 32, 27.909386, 32, 27.961164, 32, 28.012945, 32, 28.064724, 32, 28.116505, 32, 28.168285, 32, 28.220064, 32, 28.271845, 32, 28.323624, 32, 28.375404, 32, 28.427185, 32, 28.478964, 32, 28.530745, 32, 28.582523, 32, 28.634304, 32, 28.686085, 32, 28.737864, 32, 28.789644, 32, 28.841423, 32, 28.893204, 32, 28.944984, 32, 28.996763, 32, 29.048544, 32, 29.100323, 32, 29.152103, 32, 29.203884, 32, 29.255663, 32, 29.307444, 32, 29.359222, 32, 29.411003, 32, 29.462784, 32, 29.514563, 32, 29.566343, 32, 29.618122, 32, 29.669903, 32, 29.721684, 32, 29.773462, 32, 29.825243, 32, 29.877022, 32, 29.928802, 32, 29.980583, 32, 30.032362, 32, 30.084143, 32, 30.135921, 32, 30.187702, 32, 30.239483, 32, 30.291262, 32, 30.343042, 32, 30.394821, 32, 30.446602, 32, 30.498383, 32, 30.550161, 32, 30.601942, 32, 30.65372, 32, 30.705502, 32, 30.757282, 32, 30.809061, 32, 30.860842, 32, 30.91262, 32, 30.964401, 32, 31.016182, 32, 31.06796, 32, 31.119741, 32, 31.17152, 32, 31.2233, 32, 31.275082, 32, 31.32686, 32, 31.378641, 32, 31.43042, 32, 31.4822, 32, 31.533981, 32, 31.58576, 32, 31.63754, 32, 31.68932, 32, 31.7411, 32, 31.792881, 32, 31.84466, 32, 31.89644, 32, 31.94822, 32, 32, 32, 32, 0, 0, 0)
 
 [node name="SmoothPath" parent="Areas/AbyssArea/BodyOfWaterConchArea" index="2" unique_id=1763585768]
-curve = SubResource("Curve2D_k7rus")
+curve = SubResource("Curve2D_t8uv8")
 
 [node name="WaterCollider" parent="Areas/AbyssArea/BodyOfWaterConchArea" index="3" unique_id=594835146]
 position = Vector2(824, 84)
@@ -13210,7 +13210,7 @@ modulate = Color(1, 0.491008, 0.374448, 1)
 
 [node name="BodyOfWater" parent="Areas/LabArea/WorkshopMechanisms/WaterTank2" index="1" unique_id=1956272998]
 border_thickness = 2.0
-spring_values = SubResource("Resource_7aolg")
+spring_values = SubResource("Resource_7syti")
 
 [node name="WaterPolygon" parent="Areas/LabArea/WorkshopMechanisms/WaterTank2/BodyOfWater" index="1" unique_id=585166600]
 color = Color(0.36131, 0.450042, 0.727198, 1)
@@ -13218,11 +13218,11 @@ polygon = PackedVector2Array(0, 0, 8.333333, 0, 16.666666, 0, 24.999998, 0, 33.3
 uv = PackedVector2Array(0, 32, 2.6666667, 32, 5.3333335, 32, 8, 32, 10.666667, 32, 13.333333, 32, 16, 32, 18.666666, 32, 21.333334, 32, 24, 32, 26.666666, 32, 29.333334, 32, 32, 32, 32, 0, 0, 0)
 
 [node name="SmoothPath" parent="Areas/LabArea/WorkshopMechanisms/WaterTank2/BodyOfWater" index="2" unique_id=1763585768]
-curve = SubResource("Curve2D_muckx")
+curve = SubResource("Curve2D_1f0tk")
 
 [node name="WaterCollider" parent="Areas/LabArea/WorkshopMechanisms/WaterTank2/BodyOfWater" index="3" unique_id=594835146]
 position = Vector2(50, 49.45)
-shape = SubResource("RectangleShape2D_5fbrr")
+shape = SubResource("RectangleShape2D_xhfod")
 
 [node name="Frame" parent="Areas/LabArea/WorkshopMechanisms/WaterTank2" index="3" unique_id=1872227409]
 self_modulate = Color(1, 0.490196, 0.372549, 1)
@@ -13406,7 +13406,7 @@ offset_bottom = 86.0
 
 [node name="CollisionShape2D" parent="Areas/LabArea/LockedWorkshopDoors/LockedDoorWorkshopWestUpper/BaseTop/RailsMask/AnimatableBody2D" parent_id_path=PackedInt32Array(1215799363, 929080659) index="0" unique_id=1751103844]
 position = Vector2(13.5, 39)
-shape = SubResource("RectangleShape2D_vigd0")
+shape = SubResource("RectangleShape2D_g55s5")
 
 [node name="Door" parent="Areas/LabArea/LockedWorkshopDoors/LockedDoorWorkshopWestUpper/BaseTop/RailsMask/AnimatableBody2D" parent_id_path=PackedInt32Array(1215799363, 929080659) index="1" unique_id=1175073045]
 self_modulate = Color(0.611765, 0.2, 0.0980392, 1)
@@ -13738,7 +13738,7 @@ additional_rooms = Array[Vector2i]([Vector2i(7, 1), Vector2i(0, 3)])
 position = Vector2(-6400, 3136)
 color_in_map = Color(0.08065317, 0.3897684, 0.99999994, 1)
 border_thickness = 2.0
-spring_values = SubResource("Resource_fkw8s")
+spring_values = SubResource("Resource_5m4e5")
 max_wave_end_height = 600.0
 width = 1176.0
 height = 32.0
@@ -13752,11 +13752,11 @@ polygon = PackedVector2Array(0, 0, 2.5171232, 0, 5.0971746, 0, 8.054794, 0, 11.0
 uv = PackedVector2Array(0, 32, 0.07305936, 32, 0.14611872, 32, 0.21917808, 32, 0.29223743, 32, 0.3652968, 32, 0.43835616, 32, 0.51141554, 32, 0.58447486, 32, 0.65753424, 32, 0.7305936, 32, 0.80365294, 32, 0.8767123, 32, 0.9497717, 32, 1.0228311, 32, 1.0958904, 32, 1.1689497, 32, 1.2420092, 32, 1.3150685, 32, 1.3881278, 32, 1.4611872, 32, 1.5342466, 32, 1.6073059, 32, 1.6803653, 32, 1.7534246, 32, 1.826484, 32, 1.8995434, 32, 1.9726027, 32, 2.0456622, 32, 2.1187215, 32, 2.1917808, 32, 2.2648401, 32, 2.3378994, 32, 2.410959, 32, 2.4840183, 32, 2.5570776, 32, 2.630137, 32, 2.7031963, 32, 2.7762556, 32, 2.8493152, 32, 2.9223745, 32, 2.9954338, 32, 3.0684931, 32, 3.1415524, 32, 3.2146118, 32, 3.2876713, 32, 3.3607306, 32, 3.43379, 32, 3.5068493, 32, 3.5799086, 32, 3.652968, 32, 3.7260275, 32, 3.7990868, 32, 3.8721461, 32, 3.9452055, 32, 4.018265, 32, 4.0913243, 32, 4.1643834, 32, 4.237443, 32, 4.310502, 32, 4.3835616, 32, 4.456621, 32, 4.5296803, 32, 4.60274, 32, 4.675799, 32, 4.7488585, 32, 4.821918, 32, 4.894977, 32, 4.9680367, 32, 5.0410957, 32, 5.1141553, 32, 5.1872144, 32, 5.260274, 32, 5.3333335, 32, 5.4063926, 32, 5.479452, 32, 5.552511, 32, 5.625571, 32, 5.6986303, 32, 5.7716894, 32, 5.844749, 32, 5.917808, 32, 5.9908676, 32, 6.063927, 32, 6.1369863, 32, 6.210046, 32, 6.283105, 32, 6.3561645, 32, 6.4292235, 32, 6.502283, 32, 6.5753427, 32, 6.6484017, 32, 6.7214613, 32, 6.7945204, 32, 6.86758, 32, 6.9406395, 32, 7.0136986, 32, 7.086758, 32, 7.159817, 32, 7.232877, 32, 7.305936, 32, 7.3789954, 32, 7.452055, 32, 7.525114, 32, 7.5981736, 32, 7.6712327, 32, 7.7442923, 32, 7.817352, 32, 7.890411, 32, 7.9634705, 32, 8.03653, 32, 8.109589, 32, 8.182649, 32, 8.255708, 32, 8.328767, 32, 8.401827, 32, 8.474886, 32, 8.547945, 32, 8.621004, 32, 8.694064, 32, 8.767123, 32, 8.840182, 32, 8.913242, 32, 8.986301, 32, 9.0593605, 32, 9.132421, 32, 9.20548, 32, 9.278539, 32, 9.351598, 32, 9.424658, 32, 9.497717, 32, 9.570776, 32, 9.643836, 32, 9.716895, 32, 9.789954, 32, 9.863013, 32, 9.936073, 32, 10.009132, 32, 10.082191, 32, 10.1552515, 32, 10.228311, 32, 10.30137, 32, 10.374429, 32, 10.447489, 32, 10.520548, 32, 10.593607, 32, 10.666667, 32, 10.739726, 32, 10.812785, 32, 10.885845, 32, 10.958904, 32, 11.031963, 32, 11.105022, 32, 11.178082, 32, 11.251142, 32, 11.324201, 32, 11.397261, 32, 11.47032, 32, 11.543379, 32, 11.616438, 32, 11.689498, 32, 11.762557, 32, 11.835616, 32, 11.908676, 32, 11.981735, 32, 12.054794, 32, 12.127854, 32, 12.200913, 32, 12.2739725, 32, 12.347032, 32, 12.420092, 32, 12.493151, 32, 12.56621, 32, 12.63927, 32, 12.712329, 32, 12.785388, 32, 12.858447, 32, 12.931507, 32, 13.004566, 32, 13.077625, 32, 13.150685, 32, 13.223744, 32, 13.296803, 32, 13.369863, 32, 13.442923, 32, 13.515982, 32, 13.589041, 32, 13.662101, 32, 13.73516, 32, 13.808219, 32, 13.881279, 32, 13.954338, 32, 14.027397, 32, 14.100456, 32, 14.173516, 32, 14.246575, 32, 14.319634, 32, 14.392694, 32, 14.465754, 32, 14.538813, 32, 14.611872, 32, 14.684932, 32, 14.757991, 32, 14.83105, 32, 14.90411, 32, 14.977169, 32, 15.050228, 32, 15.123287, 32, 15.196347, 32, 15.269406, 32, 15.342465, 32, 15.415525, 32, 15.4885845, 32, 15.561644, 32, 15.634704, 32, 15.707763, 32, 15.780822, 32, 15.853881, 32, 15.926941, 32, 16, 32, 16.07306, 32, 16.146118, 32, 16.219177, 32, 16.292238, 32, 16.365297, 32, 16.438356, 32, 16.511415, 32, 16.584475, 32, 16.657534, 32, 16.730593, 32, 16.803654, 32, 16.876713, 32, 16.949772, 32, 17.022831, 32, 17.09589, 32, 17.16895, 32, 17.242008, 32, 17.31507, 32, 17.388128, 32, 17.461187, 32, 17.534246, 32, 17.607306, 32, 17.680365, 32, 17.753426, 32, 17.826485, 32, 17.899544, 32, 17.972603, 32, 18.045662, 32, 18.118721, 32, 18.19178, 32, 18.264841, 32, 18.3379, 32, 18.41096, 32, 18.484018, 32, 18.557077, 32, 18.630136, 32, 18.703196, 32, 18.776257, 32, 18.849316, 32, 18.922375, 32, 18.995434, 32, 19.068493, 32, 19.141552, 32, 19.214611, 32, 19.287672, 32, 19.360731, 32, 19.43379, 32, 19.50685, 32, 19.579908, 32, 19.652967, 32, 19.726027, 32, 19.799088, 32, 19.872147, 32, 19.945206, 32, 20.018265, 32, 20.091324, 32, 20.164383, 32, 20.237442, 32, 20.310503, 32, 20.383562, 32, 20.456621, 32, 20.52968, 32, 20.60274, 32, 20.675798, 32, 20.748857, 32, 20.821918, 32, 20.894978, 32, 20.968037, 32, 21.041096, 32, 21.114155, 32, 21.187214, 32, 21.260275, 32, 21.333334, 32, 21.406393, 32, 21.479452, 32, 21.552511, 32, 21.62557, 32, 21.69863, 32, 21.77169, 32, 21.84475, 32, 21.917809, 32, 21.990868, 32, 22.063927, 32, 22.136986, 32, 22.210045, 32, 22.283106, 32, 22.356165, 32, 22.429224, 32, 22.502283, 32, 22.575342, 32, 22.648401, 32, 22.72146, 32, 22.794521, 32, 22.86758, 32, 22.94064, 32, 23.013699, 32, 23.086758, 32, 23.159817, 32, 23.232876, 32, 23.305937, 32, 23.378996, 32, 23.452055, 32, 23.525114, 32, 23.598173, 32, 23.671232, 32, 23.744291, 32, 23.817352, 32, 23.890411, 32, 23.96347, 32, 24.03653, 32, 24.109589, 32, 24.182648, 32, 24.255709, 32, 24.328768, 32, 24.401827, 32, 24.474886, 32, 24.547945, 32, 24.621004, 32, 24.694063, 32, 24.767124, 32, 24.840183, 32, 24.913242, 32, 24.986301, 32, 25.05936, 32, 25.13242, 32, 25.205479, 32, 25.27854, 32, 25.351599, 32, 25.424658, 32, 25.497717, 32, 25.570776, 32, 25.643835, 32, 25.716894, 32, 25.789955, 32, 25.863014, 32, 25.936073, 32, 26.009132, 32, 26.082191, 32, 26.15525, 32, 26.22831, 32, 26.30137, 32, 26.37443, 32, 26.447489, 32, 26.520548, 32, 26.593607, 32, 26.666666, 32, 26.739725, 32, 26.812786, 32, 26.885845, 32, 26.958904, 32, 27.031963, 32, 27.105022, 32, 27.178082, 32, 27.251143, 32, 27.324202, 32, 27.39726, 32, 27.47032, 32, 27.543379, 32, 27.616438, 32, 27.689497, 32, 27.762558, 32, 27.835617, 32, 27.908676, 32, 27.981735, 32, 28.054794, 32, 28.127853, 32, 28.200912, 32, 28.273973, 32, 28.347033, 32, 28.420092, 32, 28.49315, 32, 28.56621, 32, 28.639269, 32, 28.712328, 32, 28.785389, 32, 28.858448, 32, 28.931507, 32, 29.004566, 32, 29.077625, 32, 29.150684, 32, 29.223743, 32, 29.296804, 32, 29.369864, 32, 29.442923, 32, 29.515982, 32, 29.58904, 32, 29.6621, 32, 29.735159, 32, 29.80822, 32, 29.881279, 32, 29.954338, 32, 30.027397, 32, 30.100456, 32, 30.173515, 32, 30.246574, 32, 30.319635, 32, 30.392694, 32, 30.465754, 32, 30.538813, 32, 30.611872, 32, 30.68493, 32, 30.757992, 32, 30.83105, 32, 30.90411, 32, 30.977169, 32, 31.050228, 32, 31.123287, 32, 31.196346, 32, 31.269407, 32, 31.342466, 32, 31.415525, 32, 31.488585, 32, 31.561644, 32, 31.634703, 32, 31.707762, 32, 31.780823, 32, 31.853882, 32, 31.92694, 32, 32, 32, 32, 0, 0, 0)
 
 [node name="SmoothPath" parent="Areas/CoastArea/CoastWater/BodyOfWaterDragon" index="2" unique_id=1763585768]
-curve = SubResource("Curve2D_x0ng5")
+curve = SubResource("Curve2D_ryti5")
 
 [node name="WaterCollider" parent="Areas/CoastArea/CoastWater/BodyOfWaterDragon" index="3" unique_id=594835146]
 position = Vector2(588, 20)
-shape = SubResource("RectangleShape2D_bb8kj")
+shape = SubResource("RectangleShape2D_tuxef")
 
 [node name="OceanPlayerCollider" type="StaticBody2D" parent="Areas/CoastArea/CoastWater/BodyOfWaterDragon" unique_id=776077505]
 position = Vector2(0, 40)
@@ -13770,7 +13770,7 @@ shape = SubResource("SegmentShape2D_7esic")
 position = Vector2(-4480, 3136)
 color_in_map = Color(0.08065317, 0.3897684, 0.99999994, 1)
 border_thickness = 2.0
-spring_values = SubResource("Resource_egexe")
+spring_values = SubResource("Resource_60s6d")
 max_wave_end_height = 600.0
 width = 640.0
 height = 32.0
@@ -13783,11 +13783,11 @@ polygon = PackedVector2Array(0, 0, 8, 0, 16, 0, 24, 0, 32, 0, 40, 0, 48, 0, 56, 
 uv = PackedVector2Array(0, 32, 0.4, 32, 0.8, 32, 1.2, 32, 1.6, 32, 2, 32, 2.4, 32, 2.8, 32, 3.2, 32, 3.6, 32, 4, 32, 4.4, 32, 4.8, 32, 5.2, 32, 5.6, 32, 6, 32, 6.4, 32, 6.8, 32, 7.2, 32, 7.6, 32, 8, 32, 8.4, 32, 8.8, 32, 9.2, 32, 9.6, 32, 10, 32, 10.4, 32, 10.8, 32, 11.2, 32, 11.6, 32, 12, 32, 12.4, 32, 12.8, 32, 13.2, 32, 13.6, 32, 14, 32, 14.4, 32, 14.8, 32, 15.2, 32, 15.6, 32, 16, 32, 16.4, 32, 16.8, 32, 17.2, 32, 17.6, 32, 18, 32, 18.4, 32, 18.8, 32, 19.2, 32, 19.6, 32, 20, 32, 20.4, 32, 20.8, 32, 21.2, 32, 21.6, 32, 22, 32, 22.4, 32, 22.8, 32, 23.2, 32, 23.6, 32, 24, 32, 24.4, 32, 24.8, 32, 25.2, 32, 25.6, 32, 26, 32, 26.4, 32, 26.8, 32, 27.2, 32, 27.6, 32, 28, 32, 28.4, 32, 28.8, 32, 29.2, 32, 29.6, 32, 30, 32, 30.4, 32, 30.8, 32, 31.2, 32, 31.6, 32, 32, 32, 32, 0, 0, 0)
 
 [node name="SmoothPath" parent="Areas/CoastArea/CoastWater/BodyOfWater5" index="2" unique_id=1763585768]
-curve = SubResource("Curve2D_7bdn4")
+curve = SubResource("Curve2D_7fge1")
 
 [node name="WaterCollider" parent="Areas/CoastArea/CoastWater/BodyOfWater5" index="3" unique_id=594835146]
 position = Vector2(320, 20)
-shape = SubResource("RectangleShape2D_1q4p2")
+shape = SubResource("RectangleShape2D_srn8g")
 
 [node name="OceanPlayerCollider" type="StaticBody2D" parent="Areas/CoastArea/CoastWater/BodyOfWater5" unique_id=7639932]
 position = Vector2(272, 40)
@@ -13801,7 +13801,7 @@ shape = SubResource("SegmentShape2D_7esic")
 position = Vector2(-1920, 3840)
 color_in_map = Color(0.08065317, 0.3897684, 0.99999994, 1)
 border_thickness = 2.0
-spring_values = SubResource("Resource_lwv13")
+spring_values = SubResource("Resource_ult3y")
 max_wave_end_height = 600.0
 width = 640.0
 height = 32.0
@@ -13814,11 +13814,11 @@ polygon = PackedVector2Array(0, 0, 8, 0, 16, 0, 24, 0, 32, 0, 40, 0, 48, 0, 56, 
 uv = PackedVector2Array(0, 32, 0.4, 32, 0.8, 32, 1.2, 32, 1.6, 32, 2, 32, 2.4, 32, 2.8, 32, 3.2, 32, 3.6, 32, 4, 32, 4.4, 32, 4.8, 32, 5.2, 32, 5.6, 32, 6, 32, 6.4, 32, 6.8, 32, 7.2, 32, 7.6, 32, 8, 32, 8.4, 32, 8.8, 32, 9.2, 32, 9.6, 32, 10, 32, 10.4, 32, 10.8, 32, 11.2, 32, 11.6, 32, 12, 32, 12.4, 32, 12.8, 32, 13.2, 32, 13.6, 32, 14, 32, 14.4, 32, 14.8, 32, 15.2, 32, 15.6, 32, 16, 32, 16.4, 32, 16.8, 32, 17.2, 32, 17.6, 32, 18, 32, 18.4, 32, 18.8, 32, 19.2, 32, 19.6, 32, 20, 32, 20.4, 32, 20.8, 32, 21.2, 32, 21.6, 32, 22, 32, 22.4, 32, 22.8, 32, 23.2, 32, 23.6, 32, 24, 32, 24.4, 32, 24.8, 32, 25.2, 32, 25.6, 32, 26, 32, 26.4, 32, 26.8, 32, 27.2, 32, 27.6, 32, 28, 32, 28.4, 32, 28.8, 32, 29.2, 32, 29.6, 32, 30, 32, 30.4, 32, 30.8, 32, 31.2, 32, 31.6, 32, 32, 32, 32, 0, 0, 0)
 
 [node name="SmoothPath" parent="Areas/CoastArea/CoastWater/BodyOfWater8" index="2" unique_id=1763585768]
-curve = SubResource("Curve2D_cswjq")
+curve = SubResource("Curve2D_sv0fp")
 
 [node name="WaterCollider" parent="Areas/CoastArea/CoastWater/BodyOfWater8" index="3" unique_id=594835146]
 position = Vector2(320, 20)
-shape = SubResource("RectangleShape2D_jk0sc")
+shape = SubResource("RectangleShape2D_m3cjv")
 
 [node name="OceanPlayerCollider" type="StaticBody2D" parent="Areas/CoastArea/CoastWater/BodyOfWater8" unique_id=244788084]
 position = Vector2(272, 40)
@@ -13833,7 +13833,7 @@ shape = SubResource("SegmentShape2D_7esic")
 position = Vector2(-3840, 3488)
 color_in_map = Color(0.08065317, 0.3897684, 0.99999994, 1)
 border_thickness = 2.0
-spring_values = SubResource("Resource_gntpl")
+spring_values = SubResource("Resource_jjuyc")
 max_wave_end_height = 600.0
 width = 640.0
 height = 32.0
@@ -13846,11 +13846,11 @@ polygon = PackedVector2Array(0, 0, 8, 0, 16, 0, 24, 0, 32, 0, 40, 0, 48, 0, 56, 
 uv = PackedVector2Array(0, 32, 0.4, 32, 0.8, 32, 1.2, 32, 1.6, 32, 2, 32, 2.4, 32, 2.8, 32, 3.2, 32, 3.6, 32, 4, 32, 4.4, 32, 4.8, 32, 5.2, 32, 5.6, 32, 6, 32, 6.4, 32, 6.8, 32, 7.2, 32, 7.6, 32, 8, 32, 8.4, 32, 8.8, 32, 9.2, 32, 9.6, 32, 10, 32, 10.4, 32, 10.8, 32, 11.2, 32, 11.6, 32, 12, 32, 12.4, 32, 12.8, 32, 13.2, 32, 13.6, 32, 14, 32, 14.4, 32, 14.8, 32, 15.2, 32, 15.6, 32, 16, 32, 16.4, 32, 16.8, 32, 17.2, 32, 17.6, 32, 18, 32, 18.4, 32, 18.8, 32, 19.2, 32, 19.6, 32, 20, 32, 20.4, 32, 20.8, 32, 21.2, 32, 21.6, 32, 22, 32, 22.4, 32, 22.8, 32, 23.2, 32, 23.6, 32, 24, 32, 24.4, 32, 24.8, 32, 25.2, 32, 25.6, 32, 26, 32, 26.4, 32, 26.8, 32, 27.2, 32, 27.6, 32, 28, 32, 28.4, 32, 28.8, 32, 29.2, 32, 29.6, 32, 30, 32, 30.4, 32, 30.8, 32, 31.2, 32, 31.6, 32, 32, 32, 32, 0, 0, 0)
 
 [node name="SmoothPath" parent="Areas/CoastArea/CoastWater/BodyOfWater9" index="2" unique_id=1763585768]
-curve = SubResource("Curve2D_8x41j")
+curve = SubResource("Curve2D_mk28i")
 
 [node name="WaterCollider" parent="Areas/CoastArea/CoastWater/BodyOfWater9" index="3" unique_id=594835146]
 position = Vector2(320, 20)
-shape = SubResource("RectangleShape2D_4xqn6")
+shape = SubResource("RectangleShape2D_f1x0i")
 
 [node name="OceanPlayerCollider" type="StaticBody2D" parent="Areas/CoastArea/CoastWater/BodyOfWater9" unique_id=1481113155]
 position = Vector2(456, 40)
@@ -13865,7 +13865,7 @@ shape = SubResource("SegmentShape2D_7esic")
 position = Vector2(-3200, 3136)
 color_in_map = Color(0.08065317, 0.3897684, 0.99999994, 1)
 border_thickness = 2.0
-spring_values = SubResource("Resource_e10rf")
+spring_values = SubResource("Resource_ie0t8")
 max_wave_end_height = 600.0
 width = 640.0
 height = 32.0
@@ -13878,11 +13878,11 @@ polygon = PackedVector2Array(0, 0, 8, 0, 16, 0, 24, 0, 32, 0, 40, 0, 48, 0, 56, 
 uv = PackedVector2Array(0, 32, 0.4, 32, 0.8, 32, 1.2, 32, 1.6, 32, 2, 32, 2.4, 32, 2.8, 32, 3.2, 32, 3.6, 32, 4, 32, 4.4, 32, 4.8, 32, 5.2, 32, 5.6, 32, 6, 32, 6.4, 32, 6.8, 32, 7.2, 32, 7.6, 32, 8, 32, 8.4, 32, 8.8, 32, 9.2, 32, 9.6, 32, 10, 32, 10.4, 32, 10.8, 32, 11.2, 32, 11.6, 32, 12, 32, 12.4, 32, 12.8, 32, 13.2, 32, 13.6, 32, 14, 32, 14.4, 32, 14.8, 32, 15.2, 32, 15.6, 32, 16, 32, 16.4, 32, 16.8, 32, 17.2, 32, 17.6, 32, 18, 32, 18.4, 32, 18.8, 32, 19.2, 32, 19.6, 32, 20, 32, 20.4, 32, 20.8, 32, 21.2, 32, 21.6, 32, 22, 32, 22.4, 32, 22.8, 32, 23.2, 32, 23.6, 32, 24, 32, 24.4, 32, 24.8, 32, 25.2, 32, 25.6, 32, 26, 32, 26.4, 32, 26.8, 32, 27.2, 32, 27.6, 32, 28, 32, 28.4, 32, 28.8, 32, 29.2, 32, 29.6, 32, 30, 32, 30.4, 32, 30.8, 32, 31.2, 32, 31.6, 32, 32, 32, 32, 0, 0, 0)
 
 [node name="SmoothPath" parent="Areas/CoastArea/CoastWater/BodyOfWater7" index="2" unique_id=1763585768]
-curve = SubResource("Curve2D_bxkvn")
+curve = SubResource("Curve2D_qihqi")
 
 [node name="WaterCollider" parent="Areas/CoastArea/CoastWater/BodyOfWater7" index="3" unique_id=594835146]
 position = Vector2(320, 20)
-shape = SubResource("RectangleShape2D_1ine5")
+shape = SubResource("RectangleShape2D_0fhkm")
 
 [node name="StillWater" parent="Areas/CoastArea/CoastWater" unique_id=663887795 instance=ExtResource("417_wxr7j")]
 position = Vector2(-5120, 3136)
@@ -13919,7 +13919,7 @@ color_in_map = Color(0.08065317, 0.3897684, 0.99999994, 1)
 position = Vector2(-5336, 1632)
 color_in_map = Color(0.08065317, 0.3897684, 0.99999994, 1)
 border_thickness = 2.0
-spring_values = SubResource("Resource_cog5n")
+spring_values = SubResource("Resource_di4pk")
 width = 800.0
 height = 128.0
 room_range = Vector2i(1, 0)
@@ -13928,7 +13928,7 @@ room_range = Vector2i(1, 0)
 position = Vector2(-4120, 1672)
 color_in_map = Color(0.08065317, 0.3897684, 0.99999994, 1)
 border_thickness = 2.0
-spring_values = SubResource("Resource_lkf7l")
+spring_values = SubResource("Resource_txx42")
 width = 262.0
 room_range = Vector2i(1, 0)
 
@@ -14281,7 +14281,7 @@ max_height = 42
 position = Vector2(-440, 3344)
 color_in_map = Color(0.005589713, 0.5355079, 0.6104242, 1)
 border_thickness = 2.0
-spring_values = SubResource("Resource_8jnlv")
+spring_values = SubResource("Resource_hqvlc")
 max_wave_end_height = 600.0
 width = 322.0
 height = 64.0
@@ -14297,11 +14297,11 @@ polygon = PackedVector2Array(0, 0, 8.05, 0, 16.1, 0, 24.15, 0, 32.2, 0, 40.25, 0
 uv = PackedVector2Array(0, 32, 0.8, 32, 1.6, 32, 2.4, 32, 3.2, 32, 4, 32, 4.8, 32, 5.6, 32, 6.4, 32, 7.2, 32, 8, 32, 8.8, 32, 9.6, 32, 10.4, 32, 11.2, 32, 12, 32, 12.8, 32, 13.6, 32, 14.4, 32, 15.2, 32, 16, 32, 16.8, 32, 17.6, 32, 18.4, 32, 19.2, 32, 20, 32, 20.8, 32, 21.6, 32, 22.4, 32, 23.2, 32, 24, 32, 24.8, 32, 25.6, 32, 26.4, 32, 27.2, 32, 28, 32, 28.8, 32, 29.6, 32, 30.4, 32, 31.2, 32, 32, 32, 32, 0, 0, 0)
 
 [node name="SmoothPath" parent="Areas/SeaCaveArea/BodyOfWater10" index="2" unique_id=1763585768]
-curve = SubResource("Curve2D_6vrgk")
+curve = SubResource("Curve2D_p7hn1")
 
 [node name="WaterCollider" parent="Areas/SeaCaveArea/BodyOfWater10" index="3" unique_id=594835146]
 position = Vector2(161, 36)
-shape = SubResource("RectangleShape2D_4th6d")
+shape = SubResource("RectangleShape2D_p5y12")
 
 [node name="BreakableDirt" parent="Areas/SeaCaveArea" unique_id=995278127 groups=["breakable"] instance=ExtResource("171_b5a1g")]
 self_modulate = Color(0.6663601, 0.9999998, 0.9141866, 1)
@@ -15242,7 +15242,7 @@ offset_bottom = 86.0
 
 [node name="CollisionShape2D" parent="Areas/CliffsArea/LockedDoorCastleTopLeft3/BaseTop/RailsMask/AnimatableBody2D" parent_id_path=PackedInt32Array(1320249704, 929080659) index="0" unique_id=1751103844]
 position = Vector2(13.5, 39)
-shape = SubResource("RectangleShape2D_7tm75")
+shape = SubResource("RectangleShape2D_i2vmn")
 
 [node name="Door" parent="Areas/CliffsArea/LockedDoorCastleTopLeft3/BaseTop/RailsMask/AnimatableBody2D" parent_id_path=PackedInt32Array(1320249704, 929080659) index="1" unique_id=1175073045]
 self_modulate = Color(0.745098, 0.376471, 0.882353, 1)

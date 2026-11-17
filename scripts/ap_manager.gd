@@ -99,7 +99,7 @@ var collectibles: Array[RawCollectible] = [
 
 var collectible_by_name: Dictionary[String, RawCollectible] = {}
 # used to simulate rando
-var unplaced: Array[Array] = []
+var unplaced: Array[RawCollectible] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -110,9 +110,9 @@ func _ready() -> void:
 	get_tree().node_added.connect(_on_node_added)
 
 var index:int = 0
-func _swap_for_ap(original: Collectable, _ap_data: RawCollectible) -> void:
+func _swap_for_ap(original: Node2D, _ap_data: RawCollectible) -> void:
 	print("[AP] swapping out collectible ", original.name)
-	var ap :Collectable = collectible_ap.instantiate()
+	var ap:Collectable = collectible_ap.instantiate()
 	ap.position = original.position
 	original.get_parent().add_child(ap)
 	original.queue_free()
@@ -126,7 +126,7 @@ func _on_node_added(node: Node) -> void:
 		# test for when this location is an item from this game
 		_save_ap_location(node, collectible_by_name[node.name])
 
-var node_by_name: Dictionary[String, Collectable] = {}
+var node_by_name: Dictionary[String, Node2D] = {}
 func _save_ap_location(node:Node, _ap_data: RawCollectible) -> void:
 	node_by_name[node.name] = node
 
@@ -137,12 +137,13 @@ func _ap_shuffle() -> void:
 	for key: String in node_by_name:
 		var node: Node2D = node_by_name[key]
 		original_positions[key] = node.position
-		original_parents[key] = node.parent
+		original_parents[key] = node.get_parent()
 	
 	# Shuffle (simulate rando)
+	print("[AP] shuffling items:", len(unplaced))
 	unplaced.shuffle()
 	for key: String in node_by_name:
-		var node: Collectable = node_by_name[key]
+		var node: Node2D = node_by_name[key]
 		var next_collectible: RawCollectible = unplaced.pop_front()
 		node.position = original_positions[next_collectible.node_name]
 		node.reparent(original_parents[next_collectible.node_name])

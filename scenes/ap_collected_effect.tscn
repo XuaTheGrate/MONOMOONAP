@@ -1,0 +1,162 @@
+[gd_scene format=3 uid="uid://c6tfjxhcq7fgb"]
+
+[ext_resource type="Material" uid="uid://cheg2xnh1f1xb" path="res://gg/materials/particles/scale_collected_effect_mat1.tres" id="2_2kgoq"]
+[ext_resource type="Texture2D" uid="uid://xrrkitc0pa74" path="res://mods-unpacked/MayaXTG-Archipelago/assets/collectible_ap.png" id="3_syj7t"]
+[ext_resource type="Shader" uid="uid://8s5finialr2v" path="res://gg/shaders/tint.tres" id="3_ubcgn"]
+[ext_resource type="Texture2D" uid="uid://bsqqg5jbp5a5t" path="res://gg/textures/game/light/light/light-circle.png" id="5_ydwks"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vkhuc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ds2uw"]
+shader = ExtResource("3_ubcgn")
+shader_parameter/ColorParameter = Color(0, 0, 0, 1)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ltkp1"]
+blend_mode = 1
+
+[sub_resource type="Animation" id="Animation_2eqv2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SmallParticles:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollectableOrb:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -2)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollectableOrb:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollectableOrb:material:shader_parameter/ColorParameter")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_gl3vj"]
+resource_name = "collect"
+length = 1.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SmallParticles:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollectableOrb:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(0.24148433, 1),
+"update": 0,
+"values": [Vector2(0, -2), Vector2(0, -25)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollectableOrb:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.6, 1.4),
+"transitions": PackedFloat32Array(2.6390157, 0.5, 2.6390157, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.9200002, 1.1200005), Vector2(1, 1), Vector2(1e-05, 1e-05)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollectableOrb:material:shader_parameter/ColorParameter")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.90000004),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qu04p"]
+_data = {
+&"RESET": SubResource("Animation_2eqv2"),
+&"collect": SubResource("Animation_gl3vj")
+}
+
+[node name="APCollectedEffect" type="Node2D" unique_id=416817297]
+z_index = 12
+material = SubResource("CanvasItemMaterial_vkhuc")
+
+[node name="SmallParticles" type="GPUParticles2D" parent="." unique_id=2069792555]
+material = SubResource("CanvasItemMaterial_vkhuc")
+lifetime = 1.2
+one_shot = true
+explosiveness = 1.0
+local_coords = true
+process_material = ExtResource("2_2kgoq")
+
+[node name="CollectableOrb" type="Sprite2D" parent="." unique_id=1376632916]
+material = SubResource("ShaderMaterial_ds2uw")
+position = Vector2(0, -2)
+texture = ExtResource("3_syj7t")
+
+[node name="LightSprite" type="Sprite2D" parent="CollectableOrb" unique_id=987678107]
+modulate = Color(1, 1, 1, 0.039215688)
+z_index = -10
+material = SubResource("CanvasItemMaterial_ltkp1")
+position = Vector2(-0.13356781, 0.8664322)
+scale = Vector2(0.390103, 0.390103)
+texture = ExtResource("5_ydwks")
+
+[node name="LightSprite2" type="Sprite2D" parent="CollectableOrb" unique_id=2102532815]
+modulate = Color(1, 1, 1, 0.039215688)
+z_index = -10
+material = SubResource("CanvasItemMaterial_ltkp1")
+position = Vector2(-0.13356782, 0.866433)
+scale = Vector2(0.576038, 0.576038)
+texture = ExtResource("5_ydwks")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1570156382]
+libraries/ = SubResource("AnimationLibrary_qu04p")
+autoplay = &"collect"

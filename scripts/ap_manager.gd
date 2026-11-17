@@ -133,11 +133,11 @@ func _save_ap_location(node:Node, _ap_data: RawCollectible) -> void:
 func _ap_shuffle() -> void:
 	# Save all global positions
 	var original_positions: Dictionary[String, Vector2] = {}
-	var original_parent: Dictionary[String, Node2D] = {}
+	var original_parents: Dictionary[String, Node2D] = {}
 	for key: String in node_by_name:
 		var node: Node2D = node_by_name[key]
 		original_positions[key] = node.position
-		original_parent[key] = node.parent
+		original_parents[key] = node.parent
 	
 	# Shuffle (simulate rando)
 	unplaced.shuffle()
@@ -145,7 +145,7 @@ func _ap_shuffle() -> void:
 		var node: Collectable = node_by_name[key]
 		var next_collectible: RawCollectible = unplaced.pop_front()
 		node.position = original_positions[next_collectible.node_name]
-		# NOTE: we'll need to sort out the telescopes spearately,
-		# and the clam item, and probably others
+		node.reparent(original_parents[next_collectible.node_name])
+		# NOTE: we'll need to sort out the telescopes separately, and some others too
 	print("[AP] item shuffle complete")
 	

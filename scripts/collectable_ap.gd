@@ -1,6 +1,6 @@
 extends Collectable
 
-@export var location_id: String = ""
+@export var location_id: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -8,9 +8,5 @@ func _ready() -> void:
 	super()
 
 func on_collected() -> void:
-	prints("[ARCHIPELAGO] on_Collected AP item")
-	super()
-
-func set_collected() -> void:
-	prints("[ARCHIPELAGO] set_Collected AP item")
+	ModLoaderLog.info("on_Collected AP item", ArchipelagoMod.LOG_NAME)
 	super()

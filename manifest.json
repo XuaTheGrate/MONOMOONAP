@@ -4,7 +4,8 @@
 	"extra": {
 		"godot": {
 			"authors": [
-				"MayaXTG"
+				"MayaXTG",
+				"Chickentuna"
 			],
 			"compatible_game_version": [
 				"1.0.16"

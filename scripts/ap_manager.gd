@@ -1,3 +1,4 @@
+class_name ArchipelagoManager
 extends Node
 
 const collectible_ap: PackedScene = preload("res://mods-unpacked/MayaXTG-Archipelago/scenes/collectible_ap.tscn")
@@ -111,7 +112,7 @@ func _ready() -> void:
 
 var index:int = 0
 func _swap_for_ap(original: Node2D, _ap_data: RawCollectible) -> void:
-	print("[AP] swapping out collectible ", original.name)
+	ModLoaderLog.info("swapping out collectible %s" % original.name, ArchipelagoMod.LOG_NAME)
 	var ap:Collectable = collectible_ap.instantiate()
 	ap.position = original.position
 	original.get_parent().add_child(ap)
@@ -140,7 +141,7 @@ func _ap_shuffle() -> void:
 		original_parents[key] = node.get_parent()
 	
 	# Shuffle (simulate rando)
-	print("[AP] shuffling items:", len(unplaced))
+	ModLoaderLog.info("shuffling items:%d" % len(unplaced), ArchipelagoMod.LOG_NAME)
 	unplaced.shuffle()
 	for key: String in node_by_name:
 		var node: Node2D = node_by_name[key]
@@ -148,5 +149,5 @@ func _ap_shuffle() -> void:
 		node.position = original_positions[next_collectible.node_name]
 		node.reparent(original_parents[next_collectible.node_name])
 		# NOTE: we'll need to sort out the telescopes separately, and some others too
-	print("[AP] item shuffle complete")
+	ModLoaderLog.info("item shuffle complete", ArchipelagoMod.LOG_NAME)
 	

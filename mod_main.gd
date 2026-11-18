@@ -46,3 +46,9 @@ func _ready() -> void:
 	if manager == null:
 		manager = preload("res://mods-unpacked/MayaXTG-Archipelago/scripts/ap_manager.gd").new()
 		add_child(manager)
+	
+	GameSignals.constellation_completed_correctly.connect(_on_constellation_completed_correctly)
+
+func _on_constellation_completed_correctly(cm: ConstellationManager) -> void:
+	if cm.item_reward != null:
+		cm.grant_reward()

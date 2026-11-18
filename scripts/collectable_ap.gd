@@ -1,3 +1,4 @@
+class_name CollectableAP
 extends Collectable
 
 @export var location_id: int = 0
@@ -8,5 +9,5 @@ func _ready() -> void:
 	super()
 
 func on_collected() -> void:
-	ModLoaderLog.info("on_Collected AP item", ArchipelagoMod.LOG_NAME)
+	ModLoaderLog.info("on_Collected AP item %s" % name, ArchipelagoMod.LOG_NAME)
 	super()

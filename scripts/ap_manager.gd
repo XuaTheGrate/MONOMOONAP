@@ -105,15 +105,17 @@ var unplaced: Array[RawCollectible] = []
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	for row:RawCollectible in collectibles:
-		collectible_by_name[row.node_name] = row
-		unplaced.append(row)
+		# special handling for constellations
+		if row.collectible_type != "Moon Piece":
+			collectible_by_name[row.node_name] = row
+			unplaced.append(row)
 
 	get_tree().node_added.connect(_on_node_added)
 
 var index:int = 0
 func _swap_for_ap(original: Node2D, _ap_data: RawCollectible) -> void:
 	ModLoaderLog.info("swapping out collectible %s" % original.name, ArchipelagoMod.LOG_NAME)
-	var ap:Collectable = collectible_ap.instantiate()
+	var ap: CollectableAP = collectible_ap.instantiate()
 	ap.position = original.position
 	original.get_parent().add_child(ap)
 	original.queue_free()
@@ -126,6 +128,19 @@ func _on_node_added(node: Node) -> void:
 		#_swap_for_ap.call_deferred(node, collectible_by_name[node.name])
 		# test for when this location is an item from this game
 		_save_ap_location(node, collectible_by_name[node.name])
+	if node is ConstellationManager and node.name != "KingConstellation":
+		var c: ConstellationManager = node
+		c.ancient = GameGlobals.AncientType.NONE
+		c.conversation_scene = ""
+		
+		# TODO: replace this with a real item
+		var REPLACE_ME: CollectableAP = collectible_ap.instantiate()
+		# random pos outside the map
+		# could place above the telescope?
+		REPLACE_ME.global_position = Vector2(1025, -2332)
+		REPLACE_ME.name = "CollectableAP" + c.name
+		c.add_child(REPLACE_ME)
+		c.item_reward = REPLACE_ME
 
 var node_by_name: Dictionary[String, Node2D] = {}
 func _save_ap_location(node:Node, _ap_data: RawCollectible) -> void:

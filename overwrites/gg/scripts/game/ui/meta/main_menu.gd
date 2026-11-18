@@ -3,7 +3,7 @@ extends RootMenu
 
 @onready var gg_logo: ColorRect = $GGLogo
 @onready var logo_animation_player: AnimationPlayer = $GGLogo / AnimationPlayer
-#@onready var play_button: Button = %PlayButton
+@onready var play_button: Button = %PlayButton
 @onready var connect_button: Button = %ConnectButton
 @onready var settings_button: Button = %SettingsButton
 @onready var main_menu_buttons: MarginContainer = %MainMenuButtons
@@ -316,6 +316,19 @@ func _on_connect_menu_connection_established() -> void:
 
 func _on_connect_menu_connection_failure(reason: String) -> void:
 	message_popup.show_message("Connection to Archipelago failed:\n" + reason)
+
+func _on_play_button_pressed() -> void :
+	StartupProfiler.mark(&"main_menu_play_pressed")
+	GG.set_disabled_and_hide(main_menu_buttons)
+	GG.match_enabled_and_show(main_menu_additions, main_menu_buttons)
+	saves_menu.show_menu()
+	saves_menu.closed.connect(on_saves_menu_closed_play_button)
+
+func on_saves_menu_closed_play_button() -> void: # testing purposes
+	saves_menu.closed.disconnect(on_saves_menu_closed_play_button)
+	GG.set_enabled_and_show(main_menu_buttons)
+	GG.match_enabled_and_show(main_menu_additions, main_menu_buttons)
+	RootMenu.grab_focus_prefer_hovered(main_menu_buttons, play_button)
 
 func on_saves_menu_closed() -> void :
 	saves_menu.closed.disconnect(on_saves_menu_closed)

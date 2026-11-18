@@ -294,6 +294,16 @@ size_flags_vertical = 4
 alignment = 1
 vertical = true
 
+[node name="PlayButton" type="Button" parent="MainMenuButtons/BoxContainer" unique_id=731937030 groups=["focusable_ui"]]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_qtqk6")
+text = "Play"
+
+[node name="Selector" parent="MainMenuButtons/BoxContainer/PlayButton" unique_id=904768829 instance=ExtResource("11_fl2nh")]
+layout_mode = 1
+
 [node name="ConnectButton" type="Button" parent="MainMenuButtons/BoxContainer" unique_id=990465064 groups=["focusable_ui"]]
 unique_name_in_owner = true
 layout_mode = 2
@@ -301,7 +311,7 @@ size_flags_horizontal = 4
 theme = ExtResource("1_qtqk6")
 text = "Connect"
 
-[node name="Selector" parent="MainMenuButtons/BoxContainer/ConnectButton" unique_id=904768829 instance=ExtResource("11_fl2nh")]
+[node name="Selector" parent="MainMenuButtons/BoxContainer/ConnectButton" unique_id=2138080016 instance=ExtResource("11_fl2nh")]
 layout_mode = 1
 
 [node name="SettingsButton" type="Button" parent="MainMenuButtons/BoxContainer" unique_id=1097546554 groups=["focusable_ui"]]
@@ -561,6 +571,7 @@ texture_under = ExtResource("33_g0l7h")
 texture_progress = ExtResource("33_g0l7h")
 tint_under = Color(0.4506483, 0.4506483, 0.45064825, 1)
 
+[connection signal="pressed" from="MainMenuButtons/BoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="MainMenuButtons/BoxContainer/ConnectButton" to="." method="_on_connect_button_pressed"]
 [connection signal="pressed" from="MainMenuButtons/BoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="MainMenuButtons/BoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]

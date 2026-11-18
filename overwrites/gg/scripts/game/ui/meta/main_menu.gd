@@ -3,12 +3,14 @@ extends RootMenu
 
 @onready var gg_logo: ColorRect = $GGLogo
 @onready var logo_animation_player: AnimationPlayer = $GGLogo / AnimationPlayer
-@onready var play_button: Button = %PlayButton
+#@onready var play_button: Button = %PlayButton
+@onready var connect_button: Button = %ConnectButton
 @onready var settings_button: Button = %SettingsButton
 @onready var main_menu_buttons: MarginContainer = %MainMenuButtons
 @onready var main_menu_additions: CanvasItem = %MainMenuAdditions
 @onready var saves_menu: SavesMenu = %SavesMenu
 @onready var settings_menu: SettingsMenu = %SettingsMenu
+@onready var connect_menu: ConnectMenu = %ConnectMenu
 @onready var version_label: Label = %VersionLabel
 @onready var ap_version_label: Label = %APVersionLabel
 @onready var language_select_popup: LanguageSelectPopup = %LanguageSelectPopup
@@ -70,7 +72,8 @@ func _ready() -> void :
 	version_label.text = ProjectSettings.get_setting_with_override("application/config/version")
 	ap_version_label.text = ArchipelagoMod.VERSION
 	GG.logt(GG.LogTag.GameSetup, "Game Version", version_label.text)
-	RootMenu.grab_focus_prefer_hovered(main_menu_buttons, play_button)
+	#RootMenu.grab_focus_prefer_hovered(main_menu_buttons, play_button)
+	RootMenu.grab_focus_prefer_hovered(main_menu_buttons, connect_button)
 	GameGlobals.update_mouse_mode()
 	ScreenFader.set_hidden()
 	GameSettings.restore_master_volume()
@@ -104,8 +107,10 @@ func _ready() -> void :
 		await message_popup.confirmed
 		GG.set_enabled_and_show(main_menu_buttons)
 		GG.match_enabled_and_show(main_menu_additions, main_menu_buttons)
-		SoundBus.ignore_focus_sound(play_button)
-		play_button.grab_focus()
+		#SoundBus.ignore_focus_sound(play_button)
+		SoundBus.ignore_focus_sound(connect_button)
+		#play_button.grab_focus()
+		connect_button.grab_focus()
 		return
 	if did_show_intro:
 		var tween: Tween = create_tween()
@@ -166,8 +171,10 @@ func _process(delta: float) -> void :
 				GG.set_disabled_and_hide(gg_logo)
 				GG.set_enabled_and_show(main_menu_buttons)
 				GG.match_enabled_and_show(main_menu_additions, main_menu_buttons)
-				SoundBus.ignore_focus_sound(play_button)
-				play_button.grab_focus()
+				#SoundBus.ignore_focus_sound(play_button)
+				SoundBus.ignore_focus_sound(connect_button)
+				#play_button.grab_focus()
+				connect_button.grab_focus()
 				InputManager.is_drawn_cursor_suppressed = false
 				_fading_out_logo = false
 				if _is_warm_up_done():
@@ -291,18 +298,28 @@ func _exit_tree() -> void :
 	InputManager.is_drawn_cursor_suppressed = false
 	SoundBus.stop_all_audio()
 
-func _on_play_button_pressed() -> void :
-	StartupProfiler.mark(&"main_menu_play_pressed")
+func _on_connect_button_pressed() -> void:
 	GG.set_disabled_and_hide(main_menu_buttons)
 	GG.match_enabled_and_show(main_menu_additions, main_menu_buttons)
-	saves_menu.show_menu()
-	saves_menu.closed.connect(on_saves_menu_closed)
+	connect_menu.show_menu()
+	connect_menu.closed.connect(_on_connect_menu_closed)
+
+func _on_connect_menu_closed() -> void:
+	connect_menu.closed.disconnect(_on_connect_menu_closed)
+	# ArchipelagoMod.instance.disconnect()
+	GG.set_enabled_and_show(main_menu_buttons)
+	GG.match_enabled_and_show(main_menu_additions, main_menu_buttons)
+	RootMenu.grab_focus_prefer_hovered(main_menu_buttons, connect_button)
+
+func _on_connect_menu_connection_established() -> void:
+	pass
+
+func _on_connect_menu_connection_failure(reason: String) -> void:
+	message_popup.show_message("Connection to Archipelago failed:\n" + reason)
 
 func on_saves_menu_closed() -> void :
 	saves_menu.closed.disconnect(on_saves_menu_closed)
-	GG.set_enabled_and_show(main_menu_buttons)
-	GG.match_enabled_and_show(main_menu_additions, main_menu_buttons)
-	RootMenu.grab_focus_prefer_hovered(main_menu_buttons, play_button)
+	GG.set_enabled_and_show(connect_menu)
 
 func _on_saves_menu_game_starting() -> void :
 
@@ -348,5 +365,7 @@ func _maybe_show_language_popup() -> void :
 func _on_language_popup_hidden() -> void :
 	GG.safe_disconnect(language_select_popup.hidden, _on_language_popup_hidden)
 	GameSettings.save()
-	SoundBus.ignore_focus_sound(play_button)
-	play_button.grab_focus()
+	#SoundBus.ignore_focus_sound(play_button)
+	SoundBus.ignore_focus_sound(connect_button)
+	#play_button.grab_focus()
+	connect_button.grab_focus()

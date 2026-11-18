@@ -1,0 +1,167 @@
+[gd_scene format=3 uid="uid://b7th0me201lb5"]
+
+[ext_resource type="Theme" uid="uid://bujnxvanlxbrb" path="res://gg/themes/default_theme.tres" id="1_mn2m5"]
+[ext_resource type="Script" uid="uid://c4ldxxeinyg5i" path="res://mods-unpacked/MayaXTG-Archipelago/scripts/connect_menu.gd" id="2_4u86f"]
+[ext_resource type="Resource" uid="uid://bc51piobmwnr1" path="res://gg/input/skip_action.tres" id="3_cx7gh"]
+[ext_resource type="Texture2D" uid="uid://bk1a2yx1qr4rg" path="res://gg/textures/ui/menus/main_menu/small-stars.png" id="4_46cx4"]
+[ext_resource type="Shader" uid="uid://dsdjjlfq55lck" path="res://gg/shaders/stars.gdshader" id="5_k8hji"]
+[ext_resource type="Texture2D" uid="uid://dxgjpardxk34v" path="res://gg/textures/game/environment/shared/stars/bg-star1.png" id="6_qx7dm"]
+[ext_resource type="Texture2D" uid="uid://c8j3r5ltrufe8" path="res://gg/textures/game/environment/shared/stars/bg-star2.png" id="7_cukhc"]
+[ext_resource type="Texture2D" uid="uid://pxegxpmpgmu6" path="res://gg/textures/game/environment/shared/stars/bg-star3.png" id="8_rkpan"]
+[ext_resource type="Texture2D" uid="uid://c8x63x52lwhdw" path="res://gg/textures/ui/menus/title-underline.png" id="9_ilu5n"]
+[ext_resource type="PackedScene" uid="uid://bpyw0lowguhya" path="res://gg/scenes/game/ui/selector.tscn" id="10_7r5e5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jsfu5"]
+shader = ExtResource("5_k8hji")
+shader_parameter/canvas_size = Vector2(640, 352)
+shader_parameter/cell_size_px = 9.0
+shader_parameter/star_size_px = 9.0
+shader_parameter/density = 0.0090000004275
+shader_parameter/seed = 7.25
+shader_parameter/star_tex_0 = ExtResource("6_qx7dm")
+shader_parameter/star_tex_1 = ExtResource("7_cukhc")
+shader_parameter/star_tex_2 = ExtResource("8_rkpan")
+shader_parameter/star_tex_weight_0 = 1.0
+shader_parameter/star_tex_weight_1 = 1.0
+shader_parameter/star_tex_weight_2 = 1.0
+shader_parameter/star_colors = PackedColorArray(0.99215686, 0.9764706, 0.65882355, 1, 0.99215686, 0.69803923, 0.7921569, 1, 0.54509807, 0.8235294, 0.5647059, 1, 0.99215686, 0.9764706, 0.65882355, 0.49411765, 0.99215686, 0.69803923, 0.7921569, 0.44313726, 0.54509807, 0.8235294, 0.5647059, 0.44705883, 0.99215686, 0.9764706, 0.65882355, 1, 0.99215686, 0.9764706, 0.65882355, 0.23921569)
+shader_parameter/num_colors = 8
+shader_parameter/flicker_speed = 2.0
+shader_parameter/flicker_speed_variance = 0.8190000389025
+shader_parameter/flicker_duty = 0.7450000353875
+
+[node name="ConnectMenu" type="Control" unique_id=119604659 node_paths=PackedStringArray("first_focused_item", "back_button", "title_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_mn2m5")
+script = ExtResource("2_4u86f")
+close_menu_action = ExtResource("3_cx7gh")
+first_focused_item = NodePath("SettingsContainer/AddressInput")
+back_button = NodePath("BackButton")
+title_label = NodePath("Label")
+
+[node name="BG" type="ColorRect" parent="." unique_id=687098833]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="SmallStars" type="NinePatchRect" parent="." unique_id=230426359]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_46cx4")
+region_rect = Rect2(0, 0, 620, 256)
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="BigStars" type="ColorRect" parent="." unique_id=592559729]
+material = SubResource("ShaderMaterial_jsfu5")
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 352.0
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="." unique_id=1871191421]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 28.0
+offset_bottom = 60.0
+grow_horizontal = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme = ExtResource("1_mn2m5")
+theme_type_variation = &"MenuTitle"
+text = "CONNECT TO ARCHIPELAGO"
+horizontal_alignment = 1
+
+[node name="TitleUnderline" type="TextureRect" parent="Label" unique_id=1108494694]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -66.0
+offset_top = -3.0
+offset_right = 66.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("9_ilu5n")
+stretch_mode = 3
+
+[node name="BackButton" type="Button" parent="." unique_id=239162565 groups=["focusable_ui"]]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -33.5
+offset_top = -46.0
+offset_right = 33.5
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("1_mn2m5")
+text = "Back"
+
+[node name="Selector" parent="BackButton" unique_id=904768829 instance=ExtResource("10_7r5e5")]
+layout_mode = 1
+
+[node name="SettingsContainer" type="VBoxContainer" parent="." unique_id=222556405]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -77.0
+offset_top = 70.0
+offset_right = 77.0
+offset_bottom = 240.0
+grow_horizontal = 2
+pivot_offset_ratio = Vector2(0.5, 0)
+
+[node name="AddressInput" type="LineEdit" parent="SettingsContainer" unique_id=250832614 groups=["focusable_ui"]]
+layout_mode = 2
+placeholder_text = "Address"
+alignment = 1
+
+[node name="PortInput" type="LineEdit" parent="SettingsContainer" unique_id=3800797 groups=["focusable_ui"]]
+layout_mode = 2
+placeholder_text = "Port"
+alignment = 1
+
+[node name="SlotInput" type="LineEdit" parent="SettingsContainer" unique_id=1503414809 groups=["focusable_ui"]]
+layout_mode = 2
+placeholder_text = "Slot"
+alignment = 1
+
+[node name="PasswordInput" type="LineEdit" parent="SettingsContainer" unique_id=829293903 groups=["focusable_ui"]]
+layout_mode = 2
+placeholder_text = "Password"
+alignment = 1
+secret = true
+
+[node name="ConnectButton" type="Button" parent="SettingsContainer" unique_id=1866452575 groups=["focusable_ui"]]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_mn2m5")
+text = "Connect"
+
+[node name="Selector" parent="SettingsContainer/ConnectButton" unique_id=1351225402 instance=ExtResource("10_7r5e5")]
+layout_mode = 1
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="SettingsContainer/ConnectButton" to="." method="_on_connect_button_pressed"]

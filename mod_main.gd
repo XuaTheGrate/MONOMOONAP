@@ -11,7 +11,12 @@ var translations_dir_path: String = ""
 
 static var instance: ArchipelagoMod
 
+var ws: ArchipelagoWS
+var manager: ArchipelagoManager
+
+## Emit this signal from the game to tell the websocket to dispatch the location.
 signal ap_location_collected(location_id: int)
+## Emit this signal from the websocket to give the item to the player.
 signal ap_item_received(item: Variant) # TODO
 
 func _init() -> void:
@@ -31,5 +36,13 @@ func install_script_extensions() -> void:
 func _ready() -> void:
 	ModLoaderLog.info("Ready", LOG_NAME)
 	
+	# handles low level websocket connection
+	# use [manager] to handle high level information
+	if ws == null:
+		ws = preload("res://mods-unpacked/MayaXTG-Archipelago/scripts/ap_websocket.gd").new()
+		add_child(ws)
+	
 	# instatiates the main bridge between the game and the ap server
-	add_child(preload("res://mods-unpacked/MayaXTG-Archipelago/scripts/ap_manager.gd").new())
+	if manager == null:
+		manager = preload("res://mods-unpacked/MayaXTG-Archipelago/scripts/ap_manager.gd").new()
+		add_child(manager)

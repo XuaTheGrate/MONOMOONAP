@@ -23,6 +23,7 @@ signal connection_updated(success: bool)
 signal packet_room_info(packet: APWSClasses.RoomInfo)
 signal packet_connection_refused(packet: APWSClasses.ConnectionRefused)
 signal packet_connected(packet: APWSClasses.Connected)
+signal packet_location_info(packet: APWSClasses.LocationInfo)
 
 func _init() -> void:
 	packet_connection_refused.connect(_on_packet_connection_refused)
@@ -87,10 +88,17 @@ func connect_to_ap() -> void:
 	_send_connect()
 
 func disconnect_from_ap() -> void:
+	ModLoaderLog.info("Disconnecting from Archipelago", ArchipelagoMod.LOG_NAME)
 	_socket.close(1000)
 	_connected = false
 	_connecting = false
 	# invalidate caches?
+
+func request_location_scouts(locations: Array[int]) -> void:
+	var c: APWSClasses.LocationScouts = APWSClasses.LocationScouts.new(locations, APWSClasses.LocationScoutsHint.Disabled)
+	var err: Error = _socket.send_text(JSON.stringify([c.to_json()]))
+	if err != OK:
+		ModLoaderLog.error("Failed to send LocationScouts packet (errno %d)" % err, ArchipelagoMod.LOG_NAME)
 
 func _get_cached_uuid() -> String:
 	if FileAccess.file_exists("user://ap_uuid.txt"):
@@ -172,6 +180,9 @@ func _process_packet(packet: String) -> void:
 			"Connected":
 				var r: APWSClasses.Connected = APWSClasses.Connected.new(pack)
 				packet_connected.emit(r)
+			"LocationInfo":
+				var r: APWSClasses.LocationInfo = APWSClasses.LocationInfo.new(pack)
+				packet_location_info.emit(r)
 
 func _on_packet_connection_refused(packet: APWSClasses.ConnectionRefused) -> void:
 	var reason: String = "\n".join(packet.errors)

@@ -141,6 +141,9 @@ func _save_ap_location(node:Node, _ap_data: RawCollectible) -> void:
 	node_by_name[node.name] = node
 
 func _ap_shuffle() -> void:
+	var scouts: Array[APWSClasses.NetworkItem] = await ArchipelagoMod.instance.get_location_scouts([1000])
+	ModLoaderLog.debug("Received location scouts: %s" % scouts, ArchipelagoMod.LOG_NAME)
+	
 	# Save all global positions
 	var original_positions: Dictionary[String, Vector2] = {}
 	var original_parents: Dictionary[String, Node2D] = {}

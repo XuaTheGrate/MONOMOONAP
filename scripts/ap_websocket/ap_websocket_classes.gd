@@ -188,4 +188,66 @@ class Connected extends RefCounted:
 			slot_info[i] = NetworkSlot.new(d)
 		
 		hint_points = json['hint_points']
+
+enum LocationScoutsHint {
+	## Do not hint locations.
+	Disabled,
+	## Hint all locations, including already hinted locations.
+	Enabled,
+	## Only hint locations that have not been already hinted.
+	OnlyNew
+}
+
+## Sent to the server to retrieve the items that are on a specified list of locations.
+## The server will respond with a LocationInfo packet containing the items located in the scouted locations. 
+class LocationScouts extends RefCounted:
+	## The ids of the locations seen by the client.
+	## May contain any number of locations, even ones sent before;
+	## duplicates do not cause issues with the Archipelago server.
+	var locations: Array[int]
+	var create_as_hint: LocationScoutsHint
 	
+	func _init(l: Array[int], c: LocationScoutsHint) -> void:
+		locations.assign(l)
+		create_as_hint = c
+	
+	func to_json() -> Dictionary:
+		return {
+			"cmd": "LocationScouts",
+			"locations": locations,
+			"create_as_hint": create_as_hint
+		}
+
+enum NetworkItemFlags {
+	Progression = 0b001,
+	Useful = 0b010,
+	Trap = 0b100
+}
+
+## Items that are sent over the net.
+class NetworkItem extends RefCounted:
+	## The ID of the item.
+	var item: int
+	## The location ID of the item inside the world.
+	var location: int
+	## The player slot of the world the item is located in,
+	## except when inside an LocationInfo Packet then it will be the slot of the player to receive the item
+	var player: int
+	var flags: int
+	
+	func _init(json: Dictionary) -> void:
+		item = json['item']
+		location = json['location']
+		player = json['player']
+		flags = json['flags']
+	
+	func _to_string() -> String:
+		return "NetworkItem(item=%s, location=%s, player=%s, flags=%s)" % [item, location, player, flags]
+
+## Sent to clients to acknowledge a received [LocationScouts] packet and responds with the item in the location(s) being scouted.
+class LocationInfo extends RefCounted:
+	var locations: Array[NetworkItem]
+	
+	func _init(json: Dictionary) -> void:
+		for i: Dictionary in json['locations']:
+			locations.append(NetworkItem.new(i))

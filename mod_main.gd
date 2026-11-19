@@ -5,7 +5,7 @@ const MOD_DIR: String = "MayaXTG-Archipelago"
 const LOG_NAME: String = "MayaXTG-Archipelago:Main"
 const VERSION: String = "0.0.1"
 
-const AP_COLLECTABLE_TYPE = (1 << 16) as Collectable.Type
+const AP_COLLECTABLE_TYPE: Collectable.Type = (1 << 16) as Collectable.Type
 
 var mod_dir_path: String = ""
 var extensions_dir_path: String = ""
@@ -61,3 +61,8 @@ func connect_to_ap(address: String, port: String, slot: String, password: String
 
 func disconnect_from_ap() -> void:
 	ws.disconnect_from_ap()
+
+func get_location_scouts(locations: Array[int]) -> Array[APWSClasses.NetworkItem]:
+	ws.request_location_scouts(locations)
+	var loc: APWSClasses.LocationInfo = await ws.packet_location_info
+	return loc.locations

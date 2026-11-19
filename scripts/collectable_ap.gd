@@ -5,7 +5,7 @@ extends Collectable
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	type = (1 << 14) as Collectable.Type
+	type = ArchipelagoMod.AP_COLLECTABLE_TYPE
 	super()
 
 func on_collected() -> void:

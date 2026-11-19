@@ -38,7 +38,7 @@ shader_parameter/show_lit_when_eyes_lit = false
 
 [node name="CollectibleAP" unique_id=1678456492 instance=ExtResource("1_2hcds")]
 script = ExtResource("2_olirh")
-location_id = ""
+location_id = 0
 icon = ExtResource("5_6yv8k")
 collected_effect = ExtResource("4_6yv8k")
 

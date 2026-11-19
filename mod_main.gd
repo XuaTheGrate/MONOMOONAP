@@ -5,6 +5,8 @@ const MOD_DIR: String = "MayaXTG-Archipelago"
 const LOG_NAME: String = "MayaXTG-Archipelago:Main"
 const VERSION: String = "0.0.1"
 
+const AP_COLLECTABLE_TYPE = (1 << 16) as Collectable.Type
+
 var mod_dir_path: String = ""
 var extensions_dir_path: String = ""
 var translations_dir_path: String = ""
@@ -46,9 +48,3 @@ func _ready() -> void:
 	if manager == null:
 		manager = preload("res://mods-unpacked/MayaXTG-Archipelago/scripts/ap_manager.gd").new()
 		add_child(manager)
-	
-	GameSignals.constellation_completed_correctly.connect(_on_constellation_completed_correctly)
-
-func _on_constellation_completed_correctly(cm: ConstellationManager) -> void:
-	if cm.item_reward != null:
-		cm.grant_reward()

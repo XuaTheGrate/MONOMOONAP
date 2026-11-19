@@ -21,6 +21,9 @@ signal ap_location_collected(location_id: int)
 ## Emit this signal from the websocket to give the item to the player.
 signal ap_item_received(item: Variant) # TODO
 
+signal ap_ws_connected
+signal ap_ws_connection_failure(reason: String)
+
 func _init() -> void:
 	if instance != null and is_instance_valid(instance):
 		ModLoaderLog.error("ArchipelagoMod already instanced", LOG_NAME)
@@ -41,10 +44,20 @@ func _ready() -> void:
 	# handles low level websocket connection
 	# use [manager] to handle high level information
 	if ws == null:
-		ws = preload("res://mods-unpacked/MayaXTG-Archipelago/scripts/ap_websocket.gd").new()
+		ws = preload("res://mods-unpacked/MayaXTG-Archipelago/scripts/ap_websocket/ap_websocket.gd").new()
 		add_child(ws)
 	
 	# instatiates the main bridge between the game and the ap server
 	if manager == null:
 		manager = preload("res://mods-unpacked/MayaXTG-Archipelago/scripts/ap_manager.gd").new()
 		add_child(manager)
+
+func connect_to_ap(address: String, port: String, slot: String, password: String) -> void:
+	ws.address = address
+	ws.port = port
+	ws.slot = slot
+	ws.password = password
+	ws.connect_to_ap()
+
+func disconnect_from_ap() -> void:
+	ws.disconnect_from_ap()

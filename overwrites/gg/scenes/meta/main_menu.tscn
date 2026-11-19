@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://2k3hin3satj"]
 
 [ext_resource type="Theme" uid="uid://bujnxvanlxbrb" path="res://gg/themes/default_theme.tres" id="1_qtqk6"]
-[ext_resource type="Script" path="res://mods-unpacked/MayaXTG-Archipelago/overwrites/gg/scripts/game/ui/meta/main_menu.gd" id="2_pgvel"]
+[ext_resource type="Script" uid="uid://dej6gxu4kgnlj" path="res://mods-unpacked/MayaXTG-Archipelago/overwrites/gg/scripts/game/ui/meta/main_menu.gd" id="2_pgvel"]
 [ext_resource type="Texture2D" uid="uid://bk1a2yx1qr4rg" path="res://gg/textures/ui/menus/main_menu/small-stars.png" id="3_8jeok"]
 [ext_resource type="Shader" uid="uid://dsdjjlfq55lck" path="res://gg/shaders/stars.gdshader" id="4_vfwsj"]
 [ext_resource type="Texture2D" uid="uid://dxgjpardxk34v" path="res://gg/textures/game/environment/shared/stars/bg-star1.png" id="5_fpxti"]
@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://kyofq442f4iw" path="res://gg/scenes/meta/saves_menu.tscn" id="12_oit66"]
 [ext_resource type="PackedScene" uid="uid://11fpwo1rndyf" path="res://gg/scenes/meta/settings/main_settings_menu.tscn" id="13_p07lt"]
 [ext_resource type="PackedScene" uid="uid://cld2o735dd8f1" path="res://gg/scenes/meta/settings/main_audio_menu.tscn" id="14_a1ruy"]
-[ext_resource type="PackedScene" path="res://mods-unpacked/MayaXTG-Archipelago/scenes/connect_menu.tscn" id="14_pgvel"]
+[ext_resource type="PackedScene" uid="uid://d2060ouldgvir" path="res://mods-unpacked/MayaXTG-Archipelago/scenes/connect_menu.tscn" id="14_pgvel"]
 [ext_resource type="PackedScene" uid="uid://bf1ijijcpc101" path="res://gg/scenes/meta/settings/main_graphics_menu.tscn" id="15_5e47j"]
 [ext_resource type="PackedScene" uid="uid://blpw1488t0csn" path="res://gg/scenes/meta/settings/main_controls_menu.tscn" id="16_blyuh"]
 [ext_resource type="PackedScene" uid="uid://dags3bbplocg7" path="res://gg/scenes/meta/settings/main_language_menu.tscn" id="17_hjs4w"]
@@ -296,6 +296,7 @@ vertical = true
 
 [node name="PlayButton" type="Button" parent="MainMenuButtons/BoxContainer" unique_id=731937030 groups=["focusable_ui"]]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("1_qtqk6")
@@ -576,6 +577,5 @@ tint_under = Color(0.4506483, 0.4506483, 0.45064825, 1)
 [connection signal="pressed" from="MainMenuButtons/BoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="MainMenuButtons/BoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="MainMenuButtons/BoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
-[connection signal="closed" from="ConnectMenu" to="." method="_on_connect_menu_closed"]
-[connection signal="connection_established" from="ConnectMenu" to="." method="_on_connect_menu_connection_established"]
 [connection signal="connection_failure" from="ConnectMenu" to="." method="_on_connect_menu_connection_failure"]
+[connection signal="connection_success" from="ConnectMenu" to="." method="_on_connect_menu_connection_success"]

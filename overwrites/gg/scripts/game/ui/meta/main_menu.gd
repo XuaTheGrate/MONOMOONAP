@@ -311,12 +311,6 @@ func _on_connect_menu_closed() -> void:
 	GG.match_enabled_and_show(main_menu_additions, main_menu_buttons)
 	RootMenu.grab_focus_prefer_hovered(main_menu_buttons, connect_button)
 
-func _on_connect_menu_connection_established() -> void:
-	pass
-
-func _on_connect_menu_connection_failure(reason: String) -> void:
-	message_popup.show_message("Connection to Archipelago failed:\n" + reason)
-
 func _on_play_button_pressed() -> void :
 	StartupProfiler.mark(&"main_menu_play_pressed")
 	GG.set_disabled_and_hide(main_menu_buttons)
@@ -330,9 +324,18 @@ func on_saves_menu_closed_play_button() -> void: # testing purposes
 	GG.match_enabled_and_show(main_menu_additions, main_menu_buttons)
 	RootMenu.grab_focus_prefer_hovered(main_menu_buttons, play_button)
 
+func _on_connect_menu_connection_success() -> void:
+	GG.set_disabled_and_hide(connect_menu)
+	saves_menu.show_menu()
+	saves_menu.closed.connect(on_saves_menu_closed)
+
+func _on_connect_menu_connection_failure(reason: String) -> void:
+	message_popup.show_message("Connection to Archipelago failed:\n%s" % reason)
+
 func on_saves_menu_closed() -> void :
 	saves_menu.closed.disconnect(on_saves_menu_closed)
 	GG.set_enabled_and_show(connect_menu)
+	ArchipelagoMod.instance.disconnect_from_ap()
 
 func _on_saves_menu_game_starting() -> void :
 

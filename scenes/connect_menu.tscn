@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://b7th0me201lb5"]
+[gd_scene format=3 uid="uid://d2060ouldgvir"]
 
 [ext_resource type="Theme" uid="uid://bujnxvanlxbrb" path="res://gg/themes/default_theme.tres" id="1_mn2m5"]
 [ext_resource type="Script" uid="uid://c4ldxxeinyg5i" path="res://mods-unpacked/MayaXTG-Archipelago/scripts/connect_menu.gd" id="2_4u86f"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://pxegxpmpgmu6" path="res://gg/textures/game/environment/shared/stars/bg-star3.png" id="8_rkpan"]
 [ext_resource type="Texture2D" uid="uid://c8x63x52lwhdw" path="res://gg/textures/ui/menus/title-underline.png" id="9_ilu5n"]
 [ext_resource type="PackedScene" uid="uid://bpyw0lowguhya" path="res://gg/scenes/game/ui/selector.tscn" id="10_7r5e5"]
+[ext_resource type="PackedScene" uid="uid://c48u4cvguwyf7" path="res://gg/scenes/game/ui/saving_icon.tscn" id="11_mn2m5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jsfu5"]
 shader = ExtResource("5_k8hji")
@@ -102,6 +103,7 @@ texture = ExtResource("9_ilu5n")
 stretch_mode = 3
 
 [node name="BackButton" type="Button" parent="." unique_id=239162565 groups=["focusable_ui"]]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -134,27 +136,32 @@ grow_horizontal = 2
 pivot_offset_ratio = Vector2(0.5, 0)
 
 [node name="AddressInput" type="LineEdit" parent="SettingsContainer" unique_id=250832614 groups=["focusable_ui"]]
+unique_name_in_owner = true
 layout_mode = 2
 placeholder_text = "Address"
 alignment = 1
 
 [node name="PortInput" type="LineEdit" parent="SettingsContainer" unique_id=3800797 groups=["focusable_ui"]]
+unique_name_in_owner = true
 layout_mode = 2
 placeholder_text = "Port"
 alignment = 1
 
 [node name="SlotInput" type="LineEdit" parent="SettingsContainer" unique_id=1503414809 groups=["focusable_ui"]]
+unique_name_in_owner = true
 layout_mode = 2
 placeholder_text = "Slot"
 alignment = 1
 
 [node name="PasswordInput" type="LineEdit" parent="SettingsContainer" unique_id=829293903 groups=["focusable_ui"]]
+unique_name_in_owner = true
 layout_mode = 2
 placeholder_text = "Password"
 alignment = 1
 secret = true
 
 [node name="ConnectButton" type="Button" parent="SettingsContainer" unique_id=1866452575 groups=["focusable_ui"]]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("1_mn2m5")
@@ -162,6 +169,18 @@ text = "Connect"
 
 [node name="Selector" parent="SettingsContainer/ConnectButton" unique_id=1351225402 instance=ExtResource("10_7r5e5")]
 layout_mode = 1
+
+[node name="SavingIcon" parent="." unique_id=1108278934 instance=ExtResource("11_mn2m5")]
+visible = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = -60.0
+offset_right = 27.0
+offset_bottom = -42.0
+grow_vertical = 0
 
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="SettingsContainer/ConnectButton" to="." method="_on_connect_button_pressed"]

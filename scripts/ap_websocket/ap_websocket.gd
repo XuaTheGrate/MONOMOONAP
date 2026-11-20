@@ -17,6 +17,8 @@ var _checked_insecure: bool = false
 var _connect_start_time: int = -1
 var _connecting: bool = false
 var _connected: bool = false
+var _player_id: int = 0
+var _players: Array[APWSClasses.NetworkPlayer] = []
 
 signal connection_updated(success: bool)
 
@@ -95,6 +97,12 @@ func disconnect_from_ap() -> void:
 	# invalidate caches?
 
 func request_location_scouts(locations: Array[int]) -> void:
+	if not _connected:
+		ModLoaderLog.warning("Attempted to communicate with socket before connected.", ArchipelagoMod.LOG_NAME)
+	
+	while not _connected:
+		await get_tree().create_timer(5.0).timeout
+	
 	var c: APWSClasses.LocationScouts = APWSClasses.LocationScouts.new(locations, APWSClasses.LocationScoutsHint.Disabled)
 	var err: Error = _socket.send_text(JSON.stringify([c.to_json()]))
 	if err != OK:
@@ -191,5 +199,8 @@ func _on_packet_connection_refused(packet: APWSClasses.ConnectionRefused) -> voi
 	_connected = false
 	ArchipelagoMod.instance.ap_ws_connection_failure.emit(reason)
 
-func _on_packet_connected(_packet: APWSClasses.Connected) -> void:
+func _on_packet_connected(packet: APWSClasses.Connected) -> void:
+	_player_id = packet.slot
+	_players.assign(packet.players)
+	
 	ArchipelagoMod.instance.ap_ws_connected.emit()

@@ -15,7 +15,16 @@ static var instance: ArchipelagoMod
 
 var ws: ArchipelagoWS
 var manager: ArchipelagoManager
-var node_name_to_id: Dictionary[String, int] = {}
+var ancient_to_id: Dictionary[GameGlobals.AncientType, int] = {
+	GameGlobals.AncientType.OWL: 6000,
+	GameGlobals.AncientType.RABBIT: 6001,
+	GameGlobals.AncientType.FISH: 6002,
+	GameGlobals.AncientType.WOLF: 6003
+}
+var ancient_sprite_overrides: Dictionary[GameGlobals.AncientType, Texture2D] = {}
+
+var player_id: int:
+	get: return ws._player_id
 
 ## Emit this signal from the game to tell the websocket to dispatch the location.
 signal ap_location_collected(location_id: int)
@@ -70,4 +79,5 @@ func get_location_scouts(locations: Array[int]) -> Array[APWSClasses.NetworkItem
 	return loc.locations
 
 func _on_collectable_collected(collectable: Collectable) -> void:
-	ModLoaderLog.info("Collected %s (location: %d)" % [collectable.name, node_name_to_id[collectable.name]], LOG_NAME)
+	if manager.NODE_TO_ID.has(collectable.name):
+		ap_location_collected.emit(manager.NODE_TO_ID[collectable.name])

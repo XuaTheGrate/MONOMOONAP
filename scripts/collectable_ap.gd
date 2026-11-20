@@ -1,8 +1,6 @@
 class_name CollectableAP
 extends Collectable
 
-@export var location_id: int = 0
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	type = ArchipelagoMod.AP_COLLECTABLE_TYPE

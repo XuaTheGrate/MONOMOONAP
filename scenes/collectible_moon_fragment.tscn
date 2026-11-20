@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://dysi2wbthkgy0"]
+
+[ext_resource type="PackedScene" uid="uid://bhifbuxer58ds" path="res://gg/scenes/game/collectables/orb/collectable_item.tscn" id="1_pbajk"]
+[ext_resource type="Script" uid="uid://bd8e6qpfjbuqp" path="res://mods-unpacked/MayaXTG-Archipelago/scripts/collectable_moon_fragment.gd" id="2_2sqsq"]
+[ext_resource type="Texture2D" uid="uid://mbfw2uiwac2j" path="res://gg/textures/game/constellation/ancients/moon-fragment-1.png" id="3_bmxf8"]
+[ext_resource type="Shader" uid="uid://yhlqd262cvkd" path="res://gg/shaders/dither.gdshader" id="5_ugfi6"]
+[ext_resource type="Texture2D" uid="uid://xrrkitc0pa74" path="res://mods-unpacked/MayaXTG-Archipelago/assets/collectible_ap.png" id="6_uw3lt"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ebpeo"]
+load_path = "res://.godot/imported/bayer8.png-014a09faf332a1db6f7966496a827394.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iy10h"]
+shader = ExtResource("5_ugfi6")
+shader_parameter/unlit_texture = ExtResource("3_bmxf8")
+shader_parameter/u_dither_tex = SubResource("CompressedTexture2D_ebpeo")
+shader_parameter/flip_normal_x = false
+shader_parameter/flip_normal_y = false
+shader_parameter/invert = false
+shader_parameter/u_bit_depth = 32
+shader_parameter/u_contrast = 1.0
+shader_parameter/u_offset = 0.0
+shader_parameter/light_color_amount = 0.15
+shader_parameter/light_value_amount = 1.0
+shader_parameter/ignore_modulate_color = false
+shader_parameter/override_modulate_color = Color(1, 1, 1, 1)
+shader_parameter/modulate_alpha_is_unlit_color = true
+shader_parameter/dither_with_texture_alpha = false
+shader_parameter/hide_around_moon = false
+shader_parameter/only_show_around_moon = false
+shader_parameter/hidden_alpha = 0.3
+shader_parameter/weak_hidden_alpha = 0.95
+shader_parameter/hide_around_player = false
+shader_parameter/hidden_player_alpha = 0.9
+shader_parameter/show_lit_when_eyes_lit = false
+
+[node name="CollectibleMoonFragment" unique_id=1678456492 instance=ExtResource("1_pbajk")]
+script = ExtResource("2_2sqsq")
+icon = ExtResource("3_bmxf8")
+
+[node name="Sprite" parent="Squasher" parent_id_path=PackedInt32Array(881018182) index="0" unique_id=1857260621]
+light_mask = 4
+material = SubResource("ShaderMaterial_iy10h")
+texture = ExtResource("3_bmxf8")
+
+[node name="SelectedOutline" parent="Squasher/Sprite" index="0" unique_id=79338765]
+texture = ExtResource("6_uw3lt")
+
+[node name="Light" parent="Squasher" parent_id_path=PackedInt32Array(881018182) index="3" unique_id=2122678392]
+height = 2.0

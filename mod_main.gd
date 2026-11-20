@@ -15,6 +15,7 @@ static var instance: ArchipelagoMod
 
 var ws: ArchipelagoWS
 var manager: ArchipelagoManager
+var node_name_to_id: Dictionary[String, int] = {}
 
 ## Emit this signal from the game to tell the websocket to dispatch the location.
 signal ap_location_collected(location_id: int)
@@ -42,7 +43,6 @@ func _ready() -> void:
 	ModLoaderLog.info("Ready", LOG_NAME)
 	
 	# handles low level websocket connection
-	# use [manager] to handle high level information
 	if ws == null:
 		ws = preload("res://mods-unpacked/MayaXTG-Archipelago/scripts/ap_websocket/ap_websocket.gd").new()
 		add_child(ws)
@@ -51,6 +51,8 @@ func _ready() -> void:
 	if manager == null:
 		manager = preload("res://mods-unpacked/MayaXTG-Archipelago/scripts/ap_manager.gd").new()
 		add_child(manager)
+	
+	GameSignals.collectable_collected.connect(_on_collectable_collected)
 
 func connect_to_ap(address: String, port: String, slot: String, password: String) -> void:
 	ws.address = address
@@ -66,3 +68,6 @@ func get_location_scouts(locations: Array[int]) -> Array[APWSClasses.NetworkItem
 	ws.request_location_scouts(locations)
 	var loc: APWSClasses.LocationInfo = await ws.packet_location_info
 	return loc.locations
+
+func _on_collectable_collected(collectable: Collectable) -> void:
+	ModLoaderLog.info("Collected %s (location: %d)" % [collectable.name, node_name_to_id[collectable.name]], LOG_NAME)

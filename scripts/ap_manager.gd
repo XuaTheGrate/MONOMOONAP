@@ -102,14 +102,17 @@ var collectible_by_name: Dictionary[String, RawCollectible] = {}
 # used to simulate rando
 var unplaced: Array[RawCollectible] = []
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
+func _init() -> void:
+	for row: RawCollectible in collectibles:
+		ArchipelagoMod.instance.node_name_to_id[row.node_name] = row.ap_id
+	
 	for row:RawCollectible in collectibles:
 		# special handling for constellations
 		if row.collectible_type != "Moon Piece":
 			collectible_by_name[row.node_name] = row
 			unplaced.append(row)
 
+func _ready() -> void:
 	get_tree().node_added.connect(_on_node_added)
 
 var index:int = 0

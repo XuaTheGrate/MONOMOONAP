@@ -186,18 +186,20 @@ func _move_pickup(original: Node2D, node_to_move:Node2D, location_id:int) -> voi
 func _place_ap_at(original: Node2D, location_name: String, location_id:int) -> void:
 	ModLoaderLog.info("Spawning AP collectible at %s" % location_name, ArchipelagoMod.LOG_NAME)
 	var ap: Collectable = collectible_ap.instantiate()
-	ap.name += str(location_id)
-	original_parents[original.name].add_child(ap)
-	ap.position = original_positions[original.name]	
-	NODE_TO_ID[ap.name] = location_id
+	_place_at(ap, original, location_id)
+	
 
 func _place_moon_piece_at(original: Node2D, location_name: String, location_id:int) -> void:
 	ModLoaderLog.info("Spawning moon piece collectible at %s" % location_name, ArchipelagoMod.LOG_NAME)
 	var ap: CollectableMoonFragment = collectible_moon_piece.instantiate()
+	_place_at(ap, original, location_id)
+
+func _place_at(ap:Collectable, original:Node2D, location_id: int) -> void:
 	ap.name += str(location_id)
 	original_parents[original.name].add_child(ap)
 	ap.position = original_positions[original.name]	
 	NODE_TO_ID[ap.name] = location_id
+	
 
 #TODO: use this
 func ancient_conversation_override(conv: AncientConversationOverride) -> void:

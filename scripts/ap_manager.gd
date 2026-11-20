@@ -4,6 +4,33 @@ extends Node
 const collectible_ap: PackedScene = preload("res://mods-unpacked/MayaXTG-Archipelago/scenes/collectible_ap.tscn")
 const collectible_moon_piece: PackedScene = preload("res://mods-unpacked/MayaXTG-Archipelago/scenes/collectible_moon_fragment.tscn")
 
+#region Ancient sprite overrides
+const MOON_FRAGMENT_1: Texture2D = preload("res://gg/textures/game/constellation/ancients/moon-fragment-1.png")
+const MOON_FRAGMENT_2: Texture2D = preload("res://gg/textures/game/constellation/ancients/moon-fragment-2.png")
+const MOON_FRAGMENT_3: Texture2D = preload("res://gg/textures/game/constellation/ancients/moon-fragment-3.png")
+const MOON_FRAGMENT_4: Texture2D = preload("res://gg/textures/game/constellation/ancients/moon-fragment-4.png")
+const CANDLE_SPRITE: Texture2D = preload("res://gg/textures/game/collectables/items/candle.png")
+const CONCH_SPRITE: Texture2D = preload("res://gg/textures/game/collectables/items/conch.tres")
+const LYRE_SPRITE: Texture2D = preload("res://gg/textures/game/collectables/items/instrument.tres")
+const MARKERS_SPRITE: Texture2D = preload("res://gg/textures/game/collectables/items/map-markers.png")
+const MAP_SPRITE: Texture2D = preload("res://gg/textures/game/collectables/items/map.tres")
+const GQUILL_SPRITE: Texture2D = preload("res://gg/textures/game/collectables/golden-quill.png")
+const PAGE_SPRITE: Texture2D = preload("res://gg/textures/game/collectables/quill.png")
+const AMULET_SPRITE: Texture2D = preload("res://gg/textures/game/collectables/secret-collectables/relic_amulet.tres")
+const CROWN_SPRITE: Texture2D = preload("res://gg/textures/game/collectables/secret-collectables/relic_crown.tres")
+const FRUIT_SPRITE: Texture2D = preload("res://gg/textures/game/collectables/secret-collectables/relic_fruit.tres")
+const HOURGLASS_SPRITE: Texture2D = preload("res://gg/textures/game/collectables/secret-collectables/relic_hourglass.tres")
+const MIRROR_SPRITE: Texture2D = preload("res://gg/textures/game/collectables/secret-collectables/relic_mirror.tres")
+const SCALES_SPRITE: Texture2D = preload("res://gg/textures/game/collectables/secret-collectables/relic_scales.tres")
+const SKULL_SPRITE: Texture2D = preload("res://gg/textures/game/collectables/secret-collectables/relic_skull.tres")
+const WAND_SPRITE: Texture2D = preload("res://gg/textures/game/collectables/secret-collectables/relic_wand.tres")
+const BLUE_ORB_SPRITE: Texture2D = preload("res://mods-unpacked/MayaXTG-Archipelago/assets/blue_orb.tres")
+const GREEN_ORB_SPRITE: Texture2D = preload("res://mods-unpacked/MayaXTG-Archipelago/assets/green_orb.tres")
+const RED_ORB_SPRITE: Texture2D = preload("res://mods-unpacked/MayaXTG-Archipelago/assets/red_orb.tres")
+const YELLOW_ORB_SPRITE: Texture2D = preload("res://mods-unpacked/MayaXTG-Archipelago/assets/yellow_orb.tres")
+const AP_SPRITE: Texture2D = preload("res://mods-unpacked/MayaXTG-Archipelago/assets/collectible_ap.png")
+#endregion
+
 var NODE_TO_ID: Dictionary[String, int] = {}
 
 func load_from_data_file(filename: String) -> Array[PackedStringArray]:
@@ -43,6 +70,47 @@ var collectible_by_item_name: Dictionary[String, RawCollectible] = {}
 var collectible_by_item_id: Dictionary[int, RawCollectible] = {}
 var collectible_by_location_id: Dictionary[int, RawCollectible] = {}
 var collectible_by_node_name: Dictionary[String, RawCollectible] = {}
+
+## This is for sprite overrides in ancient_conversation.gd
+var ancient_collectibles: Dictionary[int, APWSClasses.NetworkItem] = {}
+
+func get_ancient_override_sprite(location_id: int) -> Texture2D:
+	var item: APWSClasses.NetworkItem = ancient_collectibles.get(location_id)
+	if item == null:
+		ModLoaderLog.error("Attempted to get sprite override of null %d" % location_id, ArchipelagoMod.LOG_NAME)
+		return AP_SPRITE
+	if item.player != ArchipelagoMod.instance.player_id:
+		return AP_SPRITE
+	
+	match item.item:
+		1000: return MAP_SPRITE
+		1001: return CONCH_SPRITE
+		1002: return LYRE_SPRITE
+		1003: return MARKERS_SPRITE
+		5000: return SKULL_SPRITE
+		5001: return AMULET_SPRITE
+		5002: return FRUIT_SPRITE
+		5003: return MIRROR_SPRITE
+		5004: return HOURGLASS_SPRITE
+		5005: return WAND_SPRITE
+		5006: return SCALES_SPRITE
+		5007: return CROWN_SPRITE
+		_:
+			match item.item / 1000:
+				2: return PAGE_SPRITE
+				3:
+					# TODO: update item ids so orbs are 3Nxx
+					match item.item / 100:
+						30: return BLUE_ORB_SPRITE
+						31: return GREEN_ORB_SPRITE
+						32: return RED_ORB_SPRITE
+						33: return YELLOW_ORB_SPRITE
+				4: return GQUILL_SPRITE
+				# TODO: swap this to be progressive
+				6: return MOON_FRAGMENT_1
+	# Fallback
+	ModLoaderLog.warning("Location ID '%d' wasn't found, falling back to AP sprite" % location_id, ArchipelagoMod.LOG_NAME)
+	return AP_SPRITE
 
 func _init() -> void:
 	
@@ -86,10 +154,6 @@ func _on_node_added(node: Node) -> void:
 		# This node corresponds to a pickup location, save the position
 		# so we can replace it with another pickup, a custom local pickup, or an AP logo
 		node_by_name[node.name] = node
-	
-	#TODO: move this to the appropriate place
-	if node is AncientConversation:
-		ancient_conversation_override(node)
 	
 	# _node_scan_complete is called once the node scan is complete
 
@@ -139,12 +203,17 @@ func _ap_shuffle() -> void:
 		# What goes here?
 		var scout: APWSClasses.NetworkItem = scout_by_id[location_id]
 		
+		if scout.location / 1000 == 6:
+			# this is part of a constellation override
+			ModLoaderLog.debug("Assigning ancient override %d -> %d" % [scout.location, scout.item], ArchipelagoMod.LOG_NAME)
+			ancient_collectibles[scout.location] = scout
+			continue
+		
 		# Is it just a normal pickup location?
 		if raw_loc.is_basic():
 			var original: Node2D = node_by_name[raw_loc.node_name]
 			
-			#TODO: check if scout has found item of this world
-			var is_local_item: bool = true
+			var is_local_item: bool = scout.player == ArchipelagoMod.instance.player_id
 			var item_id:int = scout.item
 			# Is there an exisitng node of this item?
 			var pool: Array[Node2D] = []
@@ -180,19 +249,19 @@ func _ap_shuffle() -> void:
 	ModLoaderLog.info("item shuffle complete", ArchipelagoMod.LOG_NAME)
 
 func _move_pickup(original: Node2D, node_to_move:Node2D, location_id:int) -> void:
-	ModLoaderLog.info("moving collectible %s -> %s" % [node_to_move.name, original.name], ArchipelagoMod.LOG_NAME)
+	ModLoaderLog.debug("moving collectible %s -> %s" % [node_to_move.name, original.name], ArchipelagoMod.LOG_NAME)
 	node_to_move.reparent(original_parents[original.name])
 	node_to_move.position = original_positions[original.name]
 	NODE_TO_ID[node_to_move.name] = location_id
 	
 func _place_ap_at(original: Node2D, location_name: String, location_id:int) -> void:
-	ModLoaderLog.info("Spawning AP collectible at %s" % location_name, ArchipelagoMod.LOG_NAME)
+	ModLoaderLog.debug("Spawning AP collectible at %s" % location_name, ArchipelagoMod.LOG_NAME)
 	var ap: Collectable = collectible_ap.instantiate()
 	_place_at(ap, original, location_id)
 	
 
 func _place_moon_piece_at(original: Node2D, location_name: String, location_id:int) -> void:
-	ModLoaderLog.info("Spawning moon piece collectible at %s" % location_name, ArchipelagoMod.LOG_NAME)
+	ModLoaderLog.debug("Spawning moon piece collectible at %s" % location_name, ArchipelagoMod.LOG_NAME)
 	var ap: CollectableMoonFragment = collectible_moon_piece.instantiate()
 	_place_at(ap, original, location_id)
 
@@ -201,10 +270,3 @@ func _place_at(ap:Collectable, original:Node2D, location_id: int) -> void:
 	original_parents[original.name].add_child(ap)
 	ap.position = original_positions[original.name]	
 	NODE_TO_ID[ap.name] = location_id
-	
-
-#TODO: use this
-func ancient_conversation_override(conv: AncientConversationOverride) -> void:
-	# replace with item sprite
-	conv.sprite_override = preload("res://mods-unpacked/MayaXTG-Archipelago/assets/collectible_ap.png")
-	conv.ap_location = 0 # TODO

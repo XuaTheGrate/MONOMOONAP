@@ -30,6 +30,8 @@ signal packet_location_info(packet: APWSClasses.LocationInfo)
 func _init() -> void:
 	packet_connection_refused.connect(_on_packet_connection_refused)
 	packet_connected.connect(_on_packet_connected)
+	
+	process_mode = Node.PROCESS_MODE_ALWAYS
 
 func _create_url() -> String:
 	if not _checked_insecure:

@@ -2,9 +2,6 @@
 class_name AncientConversationOverride
 extends "res://gg/scripts/game/conversation/ancient_conversation.gd"
 
-var sprite_override: Texture2D
-var ap_location: int = 0
-
 func start(ancient: GameGlobals.AncientType) -> void:
 	ModLoaderLog.debug("Starting ancient conversation with %s" % ancient, ArchipelagoMod.LOG_NAME)
 	GameGlobals.in_conversation = true
@@ -13,13 +10,16 @@ func start(ancient: GameGlobals.AncientType) -> void:
 	match ancient:
 		GameGlobals.AncientType.FISH:
 			ancient_sprite.texture = fish_texture
+			moon_fragment_sprite.texture = ArchipelagoMod.instance.manager.get_ancient_override_sprite(6002)
 		GameGlobals.AncientType.OWL:
 			ancient_sprite.texture = owl_texture
+			moon_fragment_sprite.texture = ArchipelagoMod.instance.manager.get_ancient_override_sprite(6000)
 		GameGlobals.AncientType.RABBIT:
 			ancient_sprite.texture = rabbit_texture
+			moon_fragment_sprite.texture = ArchipelagoMod.instance.manager.get_ancient_override_sprite(6001)
 		GameGlobals.AncientType.WOLF:
 			ancient_sprite.texture = wolf_texture
-	moon_fragment_sprite.texture = sprite_override
+			moon_fragment_sprite.texture = ArchipelagoMod.instance.manager.get_ancient_override_sprite(6003)
 	allow_to_continue = false
 	animation_player.play(&"show")
 	animation_player.advance(0.0)

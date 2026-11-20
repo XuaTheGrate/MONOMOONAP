@@ -6,7 +6,10 @@ uid="uid://cly3hpsish3t"
 
 [deps]
 
+files=["res://mods-unpacked/MayaXTG-Archipelago/assets/data/pickups.13	Map	CollectableMap.translation"]
+
 source_file="res://mods-unpacked/MayaXTG-Archipelago/assets/data/pickups.csv"
+dest_files=["res://mods-unpacked/MayaXTG-Archipelago/assets/data/pickups.13	Map	CollectableMap.translation"]
 
 [params]
 

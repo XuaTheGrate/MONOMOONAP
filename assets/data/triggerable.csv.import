@@ -1,0 +1,16 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://kiny2rf6y7vd"
+
+[deps]
+
+source_file="res://mods-unpacked/MayaXTG-Archipelago/assets/data/triggerable.csv"
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

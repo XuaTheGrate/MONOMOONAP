@@ -1,0 +1,65 @@
+1000	Map	Map	CollectableMap
+1001	Conch	Conch	CollectableConch
+1002	Lyre	Lyre	CollectableInstrument
+1003	Map Markers	Map Markers	CollectableMarkers
+2000	Page: Ruins Emblems	Glade Quill (18,14)	CollectablePageRS
+2001	Page: Moon Repair	Glade Quill (21,14)	CollectablePageMM
+2002	Page: Canvas Usage	Glade Quill (12,12)	CollectablePageCU
+2003	Page: Telescopes	Glade Quill (12,16)	CollectablePageC
+2004	Page: Castle Interior	Castle Quill East	CollectablePageCI
+2005	Page: Castle Power Mechanism	Castle Quill West	CollectablePageCPM
+2006	Page: Sky Dragon Magic Grid	Glade Quill (10,14)	CollectablePageSDMG
+2007	Page: Constellation Owl	Den Quill (24,13)	CollectablePageCO
+2008	Page: Den Creatures	Den Quill (23,12)	CollectablePageDC
+2009	Page: Magic Grid	Den Quill (23,10)	CollectablePageMG
+2010	Page: Earth Dragon Magic Grid	Forest Quill (27,17)	CollectablePageEDMG
+2011	Page: Chest Ritual Bed	Catacombs Quill (25,8)	CollectablePageCRB
+2012	Page: Slide	Swamp Quill (3,9)	CollectablePageS
+2013	Page: Throne	Cliffs Quill (7,17)	CollectablePageT
+2014	Page: Canvas Regions	Swamp Quill (13,7)	CollectablePageCR
+2015	Page: Waterworks Water Wheel	Waterworks Quill (13,11)	CollectablePageWWWW
+2016	Page: Waterworks Map	Waterworks Quill (9,10)	CollectablePageWM
+2017	Page: Checkpoint Mechanism	City Quill (27,3)	CollectablePageCM
+2018	Page: Engineers Tower	City Quill (27,9)	CollectablePageET
+2019	Page: Swamp Creatures	Swamp Quill (7,9)	CollectablePageSC
+2020	Page: Water Dragon Magic Grid	Coast Quill (10,4)	CollectablePageWDMG
+2021	Page: Water Dragon Puzzle Hint	Coast Quill (4,3)	CollectablePageWDPH
+2022	Page: Sky Dragon Puzzle Hint	Swamp Quill (10,7)	CollectablePageSDPH
+2023	Page: Chest Two-Button Door	Lab Quill (16,12)	CollectablePageCD
+2024	Page: Chest Repel Stone	Tundra Quill (2,13)	CollectablePageCRS
+2025	Page: Chest Diamonds Wall	City Quill (23,6)	CollectablePageCDW
+2026	Page: Ending	Sky Ruins Quill (19,16)	CollectablePageE
+2027	Page: Relics	Bamboo Forest Quill (11,1)	CollectablePageR
+3000	Yellow Orb	Glade Yellow Orb (13,15)	CollectableOrb
+3001	Yellow Orb	Glade Yellow Orb (11,16)	CollectableOrb2
+3002	Blue Orb	Cliffs Blue Orb (1,16)	CollectableOrb3
+3003	Blue Orb	Tundra Blue Orb (2,14)	CollectableOrb4
+3004	Blue Orb	Tundra Blue Orb (5,11)	CollectableOrb5
+3005	Blue Orb	Waterworks Blue Orb (8,9)	CollectableOrb6
+3006	Red Orb	Swamp Red Orb (8,7)	CollectableOrb7
+3007	Blue Orb	Waterworks Blue Orb (12,10)	CollectableOrb8
+3008	Yellow Orb	Lab Yellow Orb (16,10)	CollectableOrb9
+3009	Yellow Orb	Catacombs Yellow Orb (18,8)	CollectableOrb10
+3010	Red Orb	City Red Orb (28,5)	CollectableOrb11
+3011	Green Orb	Catacombs Green Orb (26,8)	CollectableOrb12
+3012	Green Orb	Cavern Green Orb (28,12)	CollectableOrb13
+3013	Green Orb	Cavern Green Orb (25,12)	CollectableOrb14
+3014	Green Orb	Forest Green Orb (28,15)	CollectableOrb15
+3015	Green Orb	Den Green Orb (23,13)	CollectableOrb16
+3016	Yellow Orb	Forest Yellow Orb (25,18)	CollectableOrb17
+3017	Blue Orb	Glade Blue Orb (6,14)	CollectableOrb18
+3018	Yellow Orb	Glade Yellow Orb (16,17)	CollectableOrb19
+3019	Yellow Orb	Den Yellow Orb (21,13)	CollectableOrb20
+3020	Green Orb	Den Green Orb (22,10)	CollectableOrb21
+3021	Blue Orb	Swamp Blue Orb (4,11)	CollectableOrb22
+3022	Red Orb	Sea Cave Red Orb (7,3)	CollectableOrb23
+3023	Red Orb	Coast Red Orb (5,1)	CollectableOrb24
+3024	Red Orb	Abyss Red Orb (17,2)	CollectableOrb25
+3025	Red Orb	City Red Orb (24,6)	CollectableOrb26
+3026	Red Orb	Coast Red Orb (5,5)	CollectableOrb27
+3027	Green Orb	Catacombs Green Orb (23,7)	CollectableOrb28
+4000	Golden Quill	Glade Golden Quill (16,14)	CollectableGoldenQuill3
+4001	Golden Quill	Castle Golden Quill	CollectableGoldenQuill2
+4002	Golden Quill	Elevator Golden Quill	CollectableGoldenQuill
+4003	Golden Quill	Abyss Golden Quill (14,2)	CollectableGoldenQuill4
+4004	Golden Quill	Sea Cave Golden Quill (13,2)	CollectableGoldenQuill5

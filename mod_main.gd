@@ -70,4 +70,4 @@ func get_location_scouts(locations: Array[int]) -> Array[APWSClasses.NetworkItem
 	return loc.locations
 
 func _on_collectable_collected(collectable: Collectable) -> void:
-	ModLoaderLog.info("Collected %s (location: %d)" % [collectable.name, node_name_to_id[collectable.name]], LOG_NAME)
+	ModLoaderLog.info("Collected %s (location: %d)" % [collectable.name, node_name_to_id.get(collectable.name)], LOG_NAME)

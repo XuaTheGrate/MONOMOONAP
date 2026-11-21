@@ -30,34 +30,34 @@
 2025	Page: Chest Diamonds Wall	City Quill (23,6)	City	23,6	Quill	CollectablePageCDW
 2026	Page: Ending	Sky Ruins Quill (19,16)	Sky Ruins	19,16	Quill	CollectablePageE
 2027	Page: Relics	Bamboo Forest Quill (11,1)	Bamboo Forest	11,1	Quill	CollectablePageR
-3000	Yellow Orb	Glade Yellow Orb (13,15)	Glade	13,15	Yellow Orb	CollectableOrb
-3001	Yellow Orb	Glade Yellow Orb (11,16)	Glade	11,16	Yellow Orb	CollectableOrb2
-3002	Blue Orb	Cliffs Blue Orb (1,16)	Cliffs	1,16	Blue Orb	CollectableOrb3
-3003	Blue Orb	Tundra Blue Orb (2,14)	Tundra	2,14	Blue Orb	CollectableOrb4
-3004	Blue Orb	Tundra Blue Orb (5,11)	Tundra	5,11	Blue Orb	CollectableOrb5
-3005	Blue Orb	Waterworks Blue Orb (8,9)	Waterworks	8,9	Blue Orb	CollectableOrb6
-3006	Red Orb	Swamp Red Orb (8,7)	Swamp	8,7	Red Orb	CollectableOrb7
-3007	Blue Orb	Waterworks Blue Orb (12,10)	Waterworks	12,10	Blue Orb	CollectableOrb8
-3008	Yellow Orb	Lab Yellow Orb (16,10)	Lab	16,10	Yellow Orb	CollectableOrb9
-3009	Yellow Orb	Catacombs Yellow Orb (18,8)	Catacombs	18,8	Yellow Orb	CollectableOrb10
-3010	Red Orb	City Red Orb (28,5)	City	28,5	Red Orb	CollectableOrb11
-3011	Green Orb	Catacombs Green Orb (26,8)	Catacombs	26,8	Green Orb	CollectableOrb12
-3012	Green Orb	Cavern Green Orb (28,12)	Cavern	28,12	Green Orb	CollectableOrb13
-3013	Green Orb	Cavern Green Orb (25,12)	Cavern	25,12	Green Orb	CollectableOrb14
-3014	Green Orb	Forest Green Orb (28,15)	Forest	28,15	Green Orb	CollectableOrb15
-3015	Green Orb	Den Green Orb (23,13)	Den	23,13	Green Orb	CollectableOrb16
-3016	Yellow Orb	Forest Yellow Orb (25,18)	Forest	25,18	Yellow Orb	CollectableOrb17
-3017	Blue Orb	Glade Blue Orb (6,14)	Glade	6,14	Blue Orb	CollectableOrb18
-3018	Yellow Orb	Glade Yellow Orb (16,17)	Glade	16,17	Yellow Orb	CollectableOrb19
-3019	Yellow Orb	Den Yellow Orb (21,13)	Den	21,13	Yellow Orb	CollectableOrb20
-3020	Green Orb	Den Green Orb (22,10)	Den	22,10	Green Orb	CollectableOrb21
-3021	Blue Orb	Swamp Blue Orb (4,11)	Swamp	4,11	Blue Orb	CollectableOrb22
-3022	Red Orb	Sea Cave Red Orb (7,3)	Sea Cave	7,3	Red Orb	CollectableOrb23
-3023	Red Orb	Coast Red Orb (5,1)	Coast	5,1	Red Orb	CollectableOrb24
-3024	Red Orb	Abyss Red Orb (17,2)	Abyss	17,2	Red Orb	CollectableOrb25
-3025	Red Orb	City Red Orb (24,6)	City	24,6	Red Orb	CollectableOrb26
-3026	Red Orb	Coast Red Orb (5,5)	Coast	5,5	Red Orb	CollectableOrb27
-3027	Green Orb	Catacombs Green Orb (23,7)	Catacombs	23,7	Green Orb	CollectableOrb28
+3300	Yellow Orb	Glade Yellow Orb (13,15)	Glade	13,15	Yellow Orb	CollectableOrb
+3301	Yellow Orb	Glade Yellow Orb (11,16)	Glade	11,16	Yellow Orb	CollectableOrb2
+3000	Blue Orb	Cliffs Blue Orb (1,16)	Cliffs	1,16	Blue Orb	CollectableOrb3
+3001	Blue Orb	Tundra Blue Orb (2,14)	Tundra	2,14	Blue Orb	CollectableOrb4
+3002	Blue Orb	Tundra Blue Orb (5,11)	Tundra	5,11	Blue Orb	CollectableOrb5
+3003	Blue Orb	Waterworks Blue Orb (8,9)	Waterworks	8,9	Blue Orb	CollectableOrb6
+3200	Red Orb	Swamp Red Orb (8,7)	Swamp	8,7	Red Orb	CollectableOrb7
+3004	Blue Orb	Waterworks Blue Orb (12,10)	Waterworks	12,10	Blue Orb	CollectableOrb8
+3302	Yellow Orb	Lab Yellow Orb (16,10)	Lab	16,10	Yellow Orb	CollectableOrb9
+3303	Yellow Orb	Catacombs Yellow Orb (18,8)	Catacombs	18,8	Yellow Orb	CollectableOrb10
+3201	Red Orb	City Red Orb (28,5)	City	28,5	Red Orb	CollectableOrb11
+3100	Green Orb	Catacombs Green Orb (26,8)	Catacombs	26,8	Green Orb	CollectableOrb12
+3101	Green Orb	Cavern Green Orb (28,12)	Cavern	28,12	Green Orb	CollectableOrb13
+3102	Green Orb	Cavern Green Orb (25,12)	Cavern	25,12	Green Orb	CollectableOrb14
+3103	Green Orb	Forest Green Orb (28,15)	Forest	28,15	Green Orb	CollectableOrb15
+3104	Green Orb	Den Green Orb (23,13)	Den	23,13	Green Orb	CollectableOrb16
+3304	Yellow Orb	Forest Yellow Orb (25,18)	Forest	25,18	Yellow Orb	CollectableOrb17
+3005	Blue Orb	Glade Blue Orb (6,14)	Glade	6,14	Blue Orb	CollectableOrb18
+3305	Yellow Orb	Glade Yellow Orb (16,17)	Glade	16,17	Yellow Orb	CollectableOrb19
+3306	Yellow Orb	Den Yellow Orb (21,13)	Den	21,13	Yellow Orb	CollectableOrb20
+3105	Green Orb	Den Green Orb (22,10)	Den	22,10	Green Orb	CollectableOrb21
+3006	Blue Orb	Swamp Blue Orb (4,11)	Swamp	4,11	Blue Orb	CollectableOrb22
+3202	Red Orb	Sea Cave Red Orb (7,3)	Sea Cave	7,3	Red Orb	CollectableOrb23
+3203	Red Orb	Coast Red Orb (5,1)	Coast	5,1	Red Orb	CollectableOrb24
+3204	Red Orb	Abyss Red Orb (17,2)	Abyss	17,2	Red Orb	CollectableOrb25
+3205	Red Orb	City Red Orb (24,6)	City	24,6	Red Orb	CollectableOrb26
+3206	Red Orb	Coast Red Orb (5,5)	Coast	5,5	Red Orb	CollectableOrb27
+3107	Green Orb	Catacombs Green Orb (23,7)	Catacombs	23,7	Green Orb	CollectableOrb28
 4000	Golden Quill	Glade Golden Quill (16,14)	Glade	16,14	Golden Quill	CollectableGoldenQuill3
 4001	Golden Quill	Castle Golden Quill	Castle	N/A	Golden Quill	CollectableGoldenQuill2
 4002	Golden Quill	Elevator Golden Quill	Elevator	N/A	Golden Quill	CollectableGoldenQuill
@@ -71,10 +71,10 @@
 5005	Wand Relic	Wand Relic	Temple	16,4	Relic	CollectableTrophyWand
 5006	Scales Relic	Scales Relic	City	22,6	Relic	CollectableTrophy
 5007	Crown Relic	Crown Relic	Sky Ruins	19,17	Relic	CollectableTrophy
-6000	Moon Piece	Owl Telescope	Forest	22,16	Moon Piece	OwlTelescope
-6001	Moon Piece	Rabbit Telescope	City	27,11	Moon Piece	RabbitTelescope2
-6002	Moon Piece	Fish Telescope	Coast	3,8	Moon Piece	FishTelescope3
-6003	Moon Piece	Wolf Telescope	Cliffs	3,16	Moon Piece	BigTelescope
+6000	Moon Piece	Owl Telescope	Forest	22,16	Moon Piece	
+6001	Moon Piece	Rabbit Telescope	City	27,11	Moon Piece	
+6002	Moon Piece	Fish Telescope	Coast	3,8	Moon Piece	
+6003	Moon Piece	Wolf Telescope	Cliffs	3,16	Moon Piece	
 7000	Earth Emblem	Earth Dragon	Forest	24,18	Emblem	EarthDragon
 7001	Sea Emblem	Sea Dragon	Coast	1,4	Emblem	SeaDragon
 7002	Sky Emblem	Sky Dragon	Glade	10,17	Emblem	SkyDragon

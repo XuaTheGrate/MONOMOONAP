@@ -27,6 +27,7 @@ signal packet_room_info(packet: APWSClasses.RoomInfo)
 signal packet_connection_refused(packet: APWSClasses.ConnectionRefused)
 signal packet_connected(packet: APWSClasses.Connected)
 signal packet_location_info(packet: APWSClasses.LocationInfo)
+signal packet_received_items(packet: APWSClasses.ReceivedItems)
 
 func _init() -> void:
 	packet_connection_refused.connect(_on_packet_connection_refused)
@@ -207,6 +208,9 @@ func _process_packet(packet: String) -> void:
 			"LocationInfo":
 				var r: APWSClasses.LocationInfo = APWSClasses.LocationInfo.new(pack)
 				packet_location_info.emit(r)
+			"ReceivedItems":
+				var r: APWSClasses.ReceivedItems = APWSClasses.ReceivedItems.new(pack)
+				packet_received_items.emit(r)
 
 func _on_packet_connection_refused(packet: APWSClasses.ConnectionRefused) -> void:
 	var reason: String = "\n".join(packet.errors)

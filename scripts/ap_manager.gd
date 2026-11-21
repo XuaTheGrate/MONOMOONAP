@@ -28,7 +28,57 @@ const BLUE_ORB_SPRITE: Texture2D = preload("res://mods-unpacked/MayaXTG-Archipel
 const GREEN_ORB_SPRITE: Texture2D = preload("res://mods-unpacked/MayaXTG-Archipelago/assets/green_orb.tres")
 const RED_ORB_SPRITE: Texture2D = preload("res://mods-unpacked/MayaXTG-Archipelago/assets/red_orb.tres")
 const YELLOW_ORB_SPRITE: Texture2D = preload("res://mods-unpacked/MayaXTG-Archipelago/assets/yellow_orb.tres")
+const EARTH_EMBLEM_SPRITE: Texture2D = preload("res://mods-unpacked/MayaXTG-Archipelago/assets/earth_emblem.tres")
+const STAR_EMBLEM_SPRITE: Texture2D = preload("res://mods-unpacked/MayaXTG-Archipelago/assets/star_emblem.tres")
+const WATER_EMBLEM_SPRITE: Texture2D = preload("res://mods-unpacked/MayaXTG-Archipelago/assets/water_emblem.tres")
+const CROWN_EMBLEM_SPRITE: Texture2D = preload("res://mods-unpacked/MayaXTG-Archipelago/assets/crown_emblem.tres")
 const AP_SPRITE: Texture2D = preload("res://mods-unpacked/MayaXTG-Archipelago/assets/collectible_ap.png")
+#endregion
+
+#region Page type definition
+const PAGE_TYPE: Dictionary[int, BookPage.Type] = {
+	2000: BookPage.Type.RUINS_EMBLEMS,
+	2001: BookPage.Type.MERGE_MONOMOON, # assumption
+	2002: BookPage.Type.CANVAS_USAGE,
+	2003: BookPage.Type.CONSTELLATIONS, # assumption
+	2004: BookPage.Type.CASTLE_INTERIOR,
+	2005: BookPage.Type.CASTLE_POWER_MECHANISM,
+	2006: BookPage.Type.SKY_DRAGON_MAGIC_GRID,
+	2007: BookPage.Type.CONSTELLATION_OWL,
+	2008: BookPage.Type.DEN_CREATURES,
+	2009: BookPage.Type.MAGIC_GRID,
+	2010: BookPage.Type.EARTH_DRAGON_MAGIC_GRID,
+	2011: BookPage.Type.CHEST_RITUAL_BED,
+	2012: BookPage.Type.SLIDE, # NOTICE: we could tie the sliding mechanic to this item specifically
+	2013: BookPage.Type.THRONE,
+	2014: BookPage.Type.CANVAS_REGIONS,
+	2015: BookPage.Type.WATERWORKS_WATER_WHEEL,
+	2016: BookPage.Type.WATERWORKS_MAP,
+	2017: BookPage.Type.CHECKPOINT_MECHANISM,
+	2018: BookPage.Type.ENGINEERS_TOWER,
+	2019: BookPage.Type.SWAMP_CREATURES,
+	2020: BookPage.Type.WATER_DRAGON_MAGIC_GRID,
+	2021: BookPage.Type.WATER_DRAGON_PUZZLE_HINT,
+	2022: BookPage.Type.SKY_DRAGON_PUZZLE_HINT,
+	2023: BookPage.Type.CHEST_DOOR, # assumption
+	2024: BookPage.Type.CHEST_REPEL_STONE,
+	2025: BookPage.Type.CHEST_DIAMONDS_WALL,
+	2026: BookPage.Type.ENDING,
+	2027: BookPage.Type.RELICS
+}
+#endregion
+
+#region Relic definitions
+const RELICS: Dictionary[int, int] = {
+	5000: 1,
+	5001: 5,
+	5002: 4,
+	5003: 3,
+	5004: 6,
+	5005: 7,
+	5006: 2,
+	5007: 0
+}
 #endregion
 
 var NODE_TO_ID: Dictionary[String, int] = {}
@@ -74,6 +124,8 @@ var collectible_by_node_name: Dictionary[String, RawCollectible] = {}
 ## This is for sprite overrides in ancient_conversation.gd
 var ancient_collectibles: Dictionary[int, APWSClasses.NetworkItem] = {}
 
+var _setup_complete: bool = false
+
 func get_ancient_override_sprite(location_id: int) -> Texture2D:
 	var item: APWSClasses.NetworkItem = ancient_collectibles.get(location_id)
 	if item == null:
@@ -95,6 +147,10 @@ func get_ancient_override_sprite(location_id: int) -> Texture2D:
 		5005: return WAND_SPRITE
 		5006: return SCALES_SPRITE
 		5007: return CROWN_SPRITE
+		7000: return EARTH_EMBLEM_SPRITE
+		7001: return WATER_EMBLEM_SPRITE
+		7002: return STAR_EMBLEM_SPRITE
+		7003: return CROWN_EMBLEM_SPRITE
 		_:
 			match item.item / 1000:
 				2: return PAGE_SPRITE
@@ -144,6 +200,7 @@ func _ready() -> void:
 	# This is to collect info on the in-game Nodes.
 	# NOTE: we don't want to edit the scene directly as it would put the entire world in the mod files
 	get_tree().node_added.connect(_on_node_added)
+	ArchipelagoMod.instance.ap_item_received.connect(_on_ap_item_received)
 
 var node_by_name: Dictionary[String, Node2D]
 
@@ -180,6 +237,7 @@ func _node_scan_complete() -> void:
 		original_nodes_by_item_id[item_id].append(node)
 	
 	_ap_shuffle()
+	_setup_complete = true
 
 #NOTE: This only tested in solo randos
 func _ap_shuffle() -> void:
@@ -255,12 +313,11 @@ func _move_pickup(original: Node2D, node_to_move:Node2D, location_id:int) -> voi
 	node_to_move.reparent(original_parents[original.name])
 	node_to_move.position = original_positions[original.name]
 	NODE_TO_ID[node_to_move.name] = location_id
-	
+
 func _place_ap_at(original: Node2D, location_name: String, location_id:int) -> void:
 	ModLoaderLog.debug("Spawning AP collectible at %s" % location_name, ArchipelagoMod.LOG_NAME)
 	var ap: Collectable = collectible_ap.instantiate()
 	_place_at(ap, original, location_id)
-	
 
 func _place_moon_piece_at(original: Node2D, location_name: String, location_id:int) -> void:
 	ModLoaderLog.debug("Spawning moon piece collectible at %s" % location_name, ArchipelagoMod.LOG_NAME)
@@ -272,3 +329,70 @@ func _place_at(ap:Collectable, original:Node2D, location_id: int) -> void:
 	original_parents[original.name].add_child(ap)
 	ap.position = original_positions[original.name]	
 	NODE_TO_ID[ap.name] = location_id
+
+#region Item receive handling
+func _on_ap_item_received(item: int) -> void:
+	while not _setup_complete:
+		ModLoaderLog.debug("Attempted to process received item before loading complete", ArchipelagoMod.LOG_NAME)
+		await get_tree().create_timer(5.0).timeout
+	
+	ModLoaderLog.debug("Handle: %d" % item, ArchipelagoMod.LOG_NAME)
+	
+	var coll: Collectable
+	# NOTICE: this will need to be changed if item ids get updated
+	# otherwise uses the same system as the ancient sprite overrider
+	match item:
+		1000:
+			coll = Collectable.new()
+			coll.type = Collectable.Type.MAP
+			coll.icon = MAP_SPRITE
+			coll.display_name = "MAP"
+		1001:
+			coll = Collectable.new()
+			coll.type = Collectable.Type.CONCH
+			coll.icon = CONCH_SPRITE
+			coll.display_name = "CONCH"
+		1002:
+			coll = Collectable.new()
+			coll.type = Collectable.Type.INSTRUMENT
+			coll.icon = LYRE_SPRITE
+			coll.display_name = "LYRE"
+		1003:
+			coll = Collectable.new()
+			coll.type = Collectable.Type.MARKERS
+			coll.icon = MARKERS_SPRITE
+			coll.display_name = "MARKERS"
+		_:
+			match item / 1000:
+				2:
+					coll = CollectablePage.new()
+					coll.page_type = PAGE_TYPE[item]
+					coll.type = Collectable.Type.PAGE
+				3:
+					# TODO: handle orbs progressively
+					ModLoaderLog.debug("TODO", ArchipelagoMod.LOG_NAME)
+					pass
+				4:
+					coll = CollectableGoldenQuill.new()
+					coll.type = Collectable.Type.GOLDEN_QUILL
+				5:
+					coll = CollectableTrophy.new()
+					coll.id = RELICS[item]
+					coll.frame = coll.id
+					coll.type = Collectable.Type.TROPHY
+				6:
+					# TODO: make progressive
+					coll = CollectableMoonFragment.new()
+					coll.type = Collectable.Type.FRAGMENT_1
+					coll.icon = MOON_FRAGMENT_1
+					coll.display_name = "MOONPIECE"
+				7: pass # TODO
+	
+	if coll == null:
+		ModLoaderLog.error("Null collectable", ArchipelagoMod.LOG_NAME)
+		return
+	
+	# hopefully doesn't cause an explosion
+	GameSignals.collectable_collected.emit(coll)
+	coll.queue_free()
+#endregion

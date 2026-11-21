@@ -1,8 +1,8 @@
 class_name CollectableMoonFragment
 extends Collectable
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# TODO: make progressive
 	type = Collectable.Type.FRAGMENT_1
 	super()
 

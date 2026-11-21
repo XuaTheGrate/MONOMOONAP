@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" format=3 uid="uid://botybf6ktfdqt"]
+
+[ext_resource type="Texture2D" uid="uid://ov8joss2221k" path="res://gg/textures/ui/items/map-markers/water-marker-big.png" id="1_1r372"]
+
+[resource]
+atlas = ExtResource("1_1r372")
+region = Rect2(0, 0, 64, 64)

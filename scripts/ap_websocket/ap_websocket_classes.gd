@@ -265,3 +265,17 @@ class LocationChecks extends RefCounted:
 	
 	func to_json() -> Dictionary:
 		return {"cmd":"LocationChecks","locations":locations}
+
+## Sent to clients when they receive an item.
+class ReceivedItems extends RefCounted:
+	## The next empty slot in the list of items for the receiving client.
+	## Truthfully I don't know what this means
+	var index: int
+	## The items which the client is receiving.
+	var items: Array[NetworkItem]
+	
+	func _init(json: Dictionary) -> void:
+		index = json['index']
+		
+		for i: Dictionary in json['items']:
+			items.append(NetworkItem.new(i))

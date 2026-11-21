@@ -155,7 +155,6 @@ func get_ancient_override_sprite(location_id: int) -> Texture2D:
 			match item.item / 1000:
 				2: return PAGE_SPRITE
 				3:
-					# TODO: update item ids so orbs are 3Nxx
 					match item.item / 100:
 						30: return BLUE_ORB_SPRITE
 						31: return GREEN_ORB_SPRITE

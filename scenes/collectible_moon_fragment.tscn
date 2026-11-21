@@ -35,6 +35,7 @@ shader_parameter/show_lit_when_eyes_lit = false
 [node name="CollectibleMoonFragment" unique_id=1678456492 instance=ExtResource("1_pbajk")]
 script = ExtResource("2_2sqsq")
 icon = ExtResource("3_bmxf8")
+type = 64
 
 [node name="Sprite" parent="Squasher" parent_id_path=PackedInt32Array(881018182) index="0" unique_id=1857260621]
 light_mask = 4

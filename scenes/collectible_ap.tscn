@@ -4,7 +4,6 @@
 [ext_resource type="Shader" uid="uid://yhlqd262cvkd" path="res://gg/shaders/dither.gdshader" id="2_dx4ld"]
 [ext_resource type="Script" uid="uid://bsrqh3fkpaatd" path="res://mods-unpacked/MayaXTG-Archipelago/scripts/collectable_ap.gd" id="2_olirh"]
 [ext_resource type="PackedScene" path="res://mods-unpacked/MayaXTG-Archipelago/scenes/ap_collected_effect.tscn" id="4_6yv8k"]
-[ext_resource type="Texture2D" uid="uid://xrrkitc0pa74" path="res://mods-unpacked/MayaXTG-Archipelago/assets/collectible_ap.png" id="5_6yv8k"]
 [ext_resource type="Texture2D" uid="uid://dert2nx78k4qq" path="res://mods-unpacked/MayaXTG-Archipelago/assets/monomoon-archipelago-normal.png" id="6_6yv8k"]
 [ext_resource type="Texture2D" uid="uid://bs24tdcugs1fm" path="res://mods-unpacked/MayaXTG-Archipelago/assets/monomoon-archipelago-unlit.png" id="7_odtpc"]
 [ext_resource type="Texture2D" uid="uid://btdgiygv7y2gh" path="res://mods-unpacked/MayaXTG-Archipelago/assets/monomoon-archipelago.png" id="8_ndhwf"]
@@ -39,7 +38,7 @@ shader_parameter/show_lit_when_eyes_lit = false
 
 [node name="CollectibleAP" unique_id=1678456492 instance=ExtResource("1_2hcds")]
 script = ExtResource("2_olirh")
-icon = ExtResource("5_6yv8k")
+icon = ExtResource("7_odtpc")
 collected_effect = ExtResource("4_6yv8k")
 
 [node name="Sprite" parent="Squasher" parent_id_path=PackedInt32Array(881018182) index="0" unique_id=1857260621]
@@ -48,7 +47,7 @@ material = SubResource("ShaderMaterial_odtpc")
 texture = ExtResource("8_ndhwf")
 
 [node name="SelectedOutline" parent="Squasher/Sprite" index="0" unique_id=79338765]
-texture = ExtResource("5_6yv8k")
+texture = ExtResource("8_ndhwf")
 
 [node name="Light" parent="Squasher" parent_id_path=PackedInt32Array(881018182) index="3" unique_id=2122678392]
 height = 2.0

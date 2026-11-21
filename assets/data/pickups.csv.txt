@@ -78,3 +78,4 @@
 7000	Earth Emblem	Earth Dragon	Forest	24,18	Emblem	EarthDragon
 7001	Sea Emblem	Sea Dragon	Coast	1,4	Emblem	SeaDragon
 7002	Sky Emblem	Sky Dragon	Glade	10,17	Emblem	SkyDragon
+7003	Crown Emblem	Fix Moon Reward			Emblem	

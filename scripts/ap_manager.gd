@@ -169,7 +169,7 @@ func get_ancient_override_sprite(location_id: int) -> Texture2D:
 
 func _init() -> void:
 	
-	var pickups_csv: Array[PackedStringArray] = load_from_data_file("pickups.csv")
+	var pickups_csv: Array[PackedStringArray] = load_from_data_file("pickups.csv.txt")
 	
 	for line:PackedStringArray in pickups_csv:
 		var ap_id:int = int(line[0])

@@ -161,11 +161,24 @@ func get_ancient_override_sprite(location_id: int) -> Texture2D:
 						32: return RED_ORB_SPRITE
 						33: return YELLOW_ORB_SPRITE
 				4: return GQUILL_SPRITE
-				# TODO: swap this to be progressive
-				6: return MOON_FRAGMENT_1
+				6: 
+					match get_next_fragment:
+						Collectable.Type.FRAGMENT_1: return MOON_FRAGMENT_1
+						Collectable.Type.FRAGMENT_2: return MOON_FRAGMENT_2
+						Collectable.Type.FRAGMENT_3: return MOON_FRAGMENT_3
+						Collectable.Type.FRAGMENT_4: return MOON_FRAGMENT_4
 	# Fallback
 	ModLoaderLog.warning("Location ID '%d' wasn't found, falling back to AP sprite" % location_id, ArchipelagoMod.LOG_NAME)
 	return AP_SPRITE
+
+
+static func get_next_fragment() -> Collectable.Type:
+	var fragment_types: Array[int] = [Collectable.Type.FRAGMENT_1, Collectable.Type.FRAGMENT_2, Collectable.Type.FRAGMENT_3, Collectable.Type.FRAGMENT_4]
+	for i: int in fragment_types.size():
+		if fragment_types[i] not in GameState.items:
+			return fragment_types[i] as Collectable.Type
+	# Fallback
+	return Collectable.Type.FRAGMENT_4
 
 func _init() -> void:
 	
@@ -297,7 +310,6 @@ func _ap_shuffle() -> void:
 			# Yes there is, so we move it
 			var node_to_move: Node2D = pool.pop_back()
 			_move_pickup(original, node_to_move, raw_loc.location_id)
-			# TODO: restore ancient conversations
 	
 	# Anything that wasn't popped out of a pool is not an item in this world and can't be freed
 	for item_id: int in original_nodes_by_item_id:

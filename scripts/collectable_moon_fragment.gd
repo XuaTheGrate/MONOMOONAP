@@ -24,18 +24,10 @@ func on_collected() -> void:
 	super()
 
 func _update_progressive_type() -> void:
-	type = _get_next_fragment()
+	type = ArchipelagoManager.get_next_fragment()
 	sprite.texture = sprites[type]
 	selected_outline.texture = sprites[type]
 	icon = sprites[type]
 
 func _on_item_received() -> void:
 	_update_progressive_type()
-
-func _get_next_fragment() -> Collectable.Type:
-	var fragment_types: Array[int] = [Collectable.Type.FRAGMENT_1, Collectable.Type.FRAGMENT_2, Collectable.Type.FRAGMENT_3, Collectable.Type.FRAGMENT_4]
-	for i: int in fragment_types.size():
-		if fragment_types[i] not in GameState.items:
-			return fragment_types[i] as Collectable.Type
-	# Fallback
-	return Collectable.Type.FRAGMENT_4

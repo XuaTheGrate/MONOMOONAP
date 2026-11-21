@@ -34,8 +34,8 @@ func _on_item_received() -> void:
 
 func _get_next_fragment() -> Collectable.Type:
 	var fragment_types: Array[int] = [Collectable.Type.FRAGMENT_1, Collectable.Type.FRAGMENT_2, Collectable.Type.FRAGMENT_3, Collectable.Type.FRAGMENT_4]
-	for i: int in fragment_types.size()-1:
-		if fragment_types[i] in GameState.items:
-			return fragment_types[i+1] as Collectable.Type
+	for i: int in fragment_types.size():
+		if fragment_types[i] not in GameState.items:
+			return fragment_types[i] as Collectable.Type
 	# Fallback
 	return Collectable.Type.FRAGMENT_4

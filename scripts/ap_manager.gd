@@ -110,9 +110,9 @@ class RawCollectible:
 		self.type = type
 	
 	func is_basic() -> bool:
-		return type in ['Map', 'Conch', 'Lyre', 'Map Markers', 'Quill', 'Golden Quill',
-		'Yellow Orb', 'Red Orb', 'Blue Orb', 'Green Orb', 
-		'Mirror Relic', 'Fruit Relic', 'Amulet relic', 'Hourglass Relic', 'Wand Relic']
+		var basic_type: bool = self.type in ['Map', 'Conch', 'Lyre', 'Map Markers', 'Quill', 'Golden Quill', 'Yellow Orb', 'Red Orb', 'Blue Orb', 'Green Orb']
+		var relic_placed_in_world: bool = self.item_name in ['Mirror Relic', 'Fruit Relic', 'Amulet Relic', 'Hourglass Relic', 'Wand Relic']
+		return basic_type or relic_placed_in_world
 	
 var collectibles: Array[RawCollectible] = []
 var collectible_by_location_name: Dictionary[String, RawCollectible] = {}

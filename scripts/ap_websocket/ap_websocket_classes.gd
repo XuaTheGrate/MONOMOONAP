@@ -251,3 +251,17 @@ class LocationInfo extends RefCounted:
 	func _init(json: Dictionary) -> void:
 		for i: Dictionary in json['locations']:
 			locations.append(NetworkItem.new(i))
+
+## Sent to server to inform it of locations that the client has checked.
+## Used to inform the server of new checks that are made, as well as to sync state.
+class LocationChecks extends RefCounted:
+	## The ids of the locations checked by the client.
+	## May contain any number of checks, even ones sent before;
+	## duplicates do not cause issues with the Archipelago server.
+	var locations: Array[int]
+	
+	func _init(l: Array[int]) -> void:
+		locations.assign(l)
+	
+	func to_json() -> Dictionary:
+		return {"cmd":"LocationChecks","locations":locations}

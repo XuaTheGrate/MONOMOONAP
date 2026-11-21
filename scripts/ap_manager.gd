@@ -192,7 +192,6 @@ func _ap_shuffle() -> void:
 	var scout_by_id: Dictionary[int,APWSClasses.NetworkItem] = {}
 	for scout:APWSClasses.NetworkItem in scouts:
 		scout_by_id[scout.location] = scout
-	ModLoaderLog.debug("Received location scouts: %s" % scouts, ArchipelagoMod.LOG_NAME)
 	
 	# Shuffle (using scout data)
 	ModLoaderLog.info("shuffling items:%d" % len(scouts), ArchipelagoMod.LOG_NAME)
@@ -221,13 +220,16 @@ func _ap_shuffle() -> void:
 				pool = original_nodes_by_item_id[item_id]
 			# No there isn't
 			if not pool:
+				ModLoaderLog.debug("Item not in pool %d" % item_id, ArchipelagoMod.LOG_NAME)
 				# So we need to create our own Node
 				if is_local_item:
+					ModLoaderLog.debug("Item %d is local" % item_id, ArchipelagoMod.LOG_NAME)
 					# if it's a local item, create it with it's own icon
 					var raw_item: RawCollectible = collectible_by_item_id.get(item_id)
 					if raw_item.type == 'Moon Piece':
 						_place_moon_piece_at(original, raw_loc.loc_name, raw_loc.location_id)
 					else:
+						ModLoaderLog.warning("Item %d does not exist in pool, this should never occur" % item_id, ArchipelagoMod.LOG_NAME)
 						# Fallback
 						_place_ap_at(original, raw_loc.loc_name, raw_loc.location_id)
 					

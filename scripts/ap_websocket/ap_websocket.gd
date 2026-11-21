@@ -19,6 +19,7 @@ var _connecting: bool = false
 var _connected: bool = false
 var _player_id: int = 0
 var _players: Array[APWSClasses.NetworkPlayer] = []
+var _send_queue: Array[int] = []
 
 signal connection_updated(success: bool)
 
@@ -110,6 +111,10 @@ func request_location_scouts(locations: Array[int]) -> void:
 	if err != OK:
 		ModLoaderLog.error("Failed to send LocationScouts packet (errno %d)" % err, ArchipelagoMod.LOG_NAME)
 
+func queue_send_location(location: int) -> void:
+	if location not in _send_queue:
+		_send_queue.append(location)
+
 func _get_cached_uuid() -> String:
 	if FileAccess.file_exists("user://ap_uuid.txt"):
 		ModLoaderLog.info("Using cached uuid", ArchipelagoMod.LOG_NAME)
@@ -168,6 +173,15 @@ func _process(_delta: float) -> void:
 				_process_packet(text)
 			else:
 				ModLoaderLog.error("Received bytes data of size %d" % packet.size(), ArchipelagoMod.LOG_NAME)
+		
+		if not _send_queue.is_empty():
+			var loc: APWSClasses.LocationChecks = APWSClasses.LocationChecks.new(_send_queue)
+			var err: Error = _socket.send_text(JSON.stringify([loc.to_json()]))
+			if err != OK:
+				ModLoaderLog.error("Failed to send location checks (errno %d)" % err, ArchipelagoMod.LOG_NAME)
+			else:
+				_send_queue.clear()
+		
 	elif state == WebSocketPeer.STATE_CLOSING:
 		#ModLoaderLog.debug("Socket state closing", ArchipelagoMod.LOG_NAME)
 		pass
@@ -204,5 +218,9 @@ func _on_packet_connection_refused(packet: APWSClasses.ConnectionRefused) -> voi
 func _on_packet_connected(packet: APWSClasses.Connected) -> void:
 	_player_id = packet.slot
 	_players.assign(packet.players)
+	
+	# NOTICE: 'packet.checked_locations' contains a list of location ids that we already collected
+	# We can use this to skip over locations, or we can use a custom save file
+	# Either one works
 	
 	ArchipelagoMod.instance.ap_ws_connected.emit()

@@ -62,6 +62,7 @@ func _ready() -> void:
 		add_child(manager)
 	
 	GameSignals.collectable_collected.connect(_on_collectable_collected)
+	ap_location_collected.connect(_on_ap_location_collected)
 
 func connect_to_ap(address: String, port: String, slot: String, password: String) -> void:
 	ws.address = address
@@ -81,3 +82,6 @@ func get_location_scouts(locations: Array[int]) -> Array[APWSClasses.NetworkItem
 func _on_collectable_collected(collectable: Collectable) -> void:
 	if manager.NODE_TO_ID.has(collectable.name):
 		ap_location_collected.emit(manager.NODE_TO_ID[collectable.name])
+
+func _on_ap_location_collected(location: int) -> void:
+	ws.queue_send_location(location)

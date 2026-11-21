@@ -7,19 +7,21 @@ func start(ancient: GameGlobals.AncientType) -> void:
 	GameGlobals.in_conversation = true
 	GG.safe_connect(GameSignals.debug_skip, _on_debug_skip)
 	var fragment_type: Collectable.Type = ArchipelagoMod.AP_COLLECTABLE_TYPE
+	var location: int = 0
 	match ancient:
 		GameGlobals.AncientType.FISH:
 			ancient_sprite.texture = fish_texture
-			moon_fragment_sprite.texture = ArchipelagoMod.instance.manager.get_ancient_override_sprite(6002)
+			location = 6002
 		GameGlobals.AncientType.OWL:
 			ancient_sprite.texture = owl_texture
-			moon_fragment_sprite.texture = ArchipelagoMod.instance.manager.get_ancient_override_sprite(6000)
+			location = 6000
 		GameGlobals.AncientType.RABBIT:
 			ancient_sprite.texture = rabbit_texture
-			moon_fragment_sprite.texture = ArchipelagoMod.instance.manager.get_ancient_override_sprite(6001)
+			location = 6001
 		GameGlobals.AncientType.WOLF:
 			ancient_sprite.texture = wolf_texture
-			moon_fragment_sprite.texture = ArchipelagoMod.instance.manager.get_ancient_override_sprite(6003)
+			location = 6003
+	moon_fragment_sprite.texture = ArchipelagoMod.instance.manager.get_ancient_override_sprite(location)
 	allow_to_continue = false
 	animation_player.play(&"show")
 	animation_player.advance(0.0)
@@ -40,3 +42,4 @@ func start(ancient: GameGlobals.AncientType) -> void:
 	GameSignals.collectable_collected.emit(temp_collectable)
 	ModLoaderLog.debug("Emitted new collectable", ArchipelagoMod.LOG_NAME)
 	temp_collectable.queue_free()
+	ArchipelagoMod.instance.ap_location_collected.emit(location)

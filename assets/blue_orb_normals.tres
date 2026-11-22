@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" format=3 uid="uid://coh8fyvxkwon5"]
+
+[ext_resource type="Texture2D" uid="uid://8v6mdwtmrk73" path="res://gg/textures/game/collectables/orb/collectable-orb-normals.png" id="1_xrj3i"]
+
+[resource]
+atlas = ExtResource("1_xrj3i")
+region = Rect2(0, 0, 32, 32)

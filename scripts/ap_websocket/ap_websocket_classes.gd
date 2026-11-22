@@ -121,7 +121,7 @@ class Connect extends RefCounted:
 	var version: NetworkVersion = NetworkVersion.new(0, 6, 8)
 	## Flags configuring which items should be sent by the server.
 	## https://github.com/ArchipelagoMW/Archipelago/blob/main/docs/network%20protocol.md#items_handling-flags
-	var items_handling: int = 0b001
+	var items_handling: int = 0b111
 	## Denotes special features or capabilities that the sender is capable of.
 	var tags: Array[String] = []
 	## If true, the Connect answer will contain slot_data.

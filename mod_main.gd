@@ -7,6 +7,17 @@ const VERSION: String = "0.0.1"
 
 const AP_COLLECTABLE_TYPE: Collectable.Type = (1 << 16) as Collectable.Type
 
+enum RelicType {
+	Crown,     # 5007
+	Skull,     # 5000
+	Scales,    # 5006
+	Mirror,    # 5003
+	Fruit,     # 5002
+	Amulet,    # 5001
+	Hourglass, # 5004
+	Wand,      # 5005
+}
+
 var mod_dir_path: String = ""
 var extensions_dir_path: String = ""
 var translations_dir_path: String = ""
@@ -81,8 +92,8 @@ func get_location_scouts(locations: Array[int]) -> Array[APWSClasses.NetworkItem
 	return loc.locations
 
 func _on_collectable_collected(collectable: Collectable) -> void:
-	if manager.NODE_TO_ID.has(collectable.name):
-		ap_location_collected.emit(manager.NODE_TO_ID[collectable.name])
+	if collectable is CollectableAP:
+		ap_location_collected.emit(collectable.location_id)
 
 func _on_ap_location_collected(location: int) -> void:
 	ws.queue_send_location(location)

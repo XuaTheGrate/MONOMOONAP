@@ -21,7 +21,12 @@ func start(ancient: GameGlobals.AncientType) -> void:
 		GameGlobals.AncientType.WOLF:
 			ancient_sprite.texture = wolf_texture
 			location = 6003
-	moon_fragment_sprite.texture = ArchipelagoMod.instance.manager.get_ancient_override_sprite(location)
+	var item: APWSClasses.NetworkItem = ArchipelagoMod.instance.manager.scouts[location]
+	if item.player == ArchipelagoMod.instance.player_id:
+		moon_fragment_sprite.texture = ArchipelagoMod.instance.manager.get_sprite_override(
+			ArchipelagoMod.instance.manager.scouts[location].item)
+	else:
+		moon_fragment_sprite.texture = ArchipelagoMod.instance.manager.get_sprite_override(-1)
 	allow_to_continue = false
 	animation_player.play(&"show")
 	animation_player.advance(0.0)

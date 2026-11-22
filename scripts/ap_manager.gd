@@ -1,9 +1,6 @@
 class_name ArchipelagoManager
 extends Node
 
-const collectible_ap: PackedScene = preload("res://mods-unpacked/MayaXTG-Archipelago/scenes/collectible_ap.tscn")
-const collectible_moon_piece: PackedScene = preload("res://mods-unpacked/MayaXTG-Archipelago/scenes/collectible_moon_fragment.tscn")
-
 #region Ancient sprite overrides
 const MOON_FRAGMENT_1: Texture2D = preload("res://gg/textures/game/constellation/ancients/moon-fragment-1.png")
 const MOON_FRAGMENT_2: Texture2D = preload("res://gg/textures/game/constellation/ancients/moon-fragment-2.png")
@@ -35,7 +32,6 @@ const CROWN_EMBLEM_SPRITE: Texture2D = preload("res://mods-unpacked/MayaXTG-Arch
 const AP_SPRITE: Texture2D = preload("res://mods-unpacked/MayaXTG-Archipelago/assets/collectible_ap.png")
 #endregion
 
-#region Page type definition
 const PAGE_TYPE: Dictionary[int, BookPage.Type] = {
 	2000: BookPage.Type.RUINS_EMBLEMS,
 	2001: BookPage.Type.MERGE_MONOMOON, # assumption
@@ -66,9 +62,7 @@ const PAGE_TYPE: Dictionary[int, BookPage.Type] = {
 	2026: BookPage.Type.ENDING,
 	2027: BookPage.Type.RELICS
 }
-#endregion
 
-#region Relic definitions
 const RELICS: Dictionary[int, int] = {
 	5000: 1,
 	5001: 5,
@@ -79,19 +73,6 @@ const RELICS: Dictionary[int, int] = {
 	5006: 2,
 	5007: 0
 }
-#endregion
-
-var NODE_TO_ID: Dictionary[String, int] = {}
-
-func load_from_data_file(filename: String) -> Array[PackedStringArray]:
-	var file :FileAccess = FileAccess.open("res://mods-unpacked/MayaXTG-Archipelago/assets/data/" + filename, FileAccess.READ)
-	#var content :String = file.get_as_text()
-	var lines:Array[PackedStringArray] = []
-	while not file.eof_reached():
-		var row: PackedStringArray = file.get_csv_line("\t")
-		if len(row) > 1:
-			lines.append(row)
-	return lines
 
 class RawCollectible:
 	var location_id: int
@@ -113,7 +94,15 @@ class RawCollectible:
 		var basic_type: bool = self.type in ['Map', 'Conch', 'Lyre', 'Map Markers', 'Quill', 'Golden Quill', 'Yellow Orb', 'Red Orb', 'Blue Orb', 'Green Orb']
 		var relic_placed_in_world: bool = self.item_name in ['Mirror Relic', 'Fruit Relic', 'Amulet Relic', 'Hourglass Relic', 'Wand Relic']
 		return basic_type or relic_placed_in_world
-	
+
+var NODE_TO_ID: Dictionary[String, int] = {}
+
+## This is for sprite overrides in ancient_conversation.gd
+var ancient_collectibles: Dictionary[int, APWSClasses.NetworkItem] = {}
+
+var scouts: Dictionary[int, APWSClasses.NetworkItem] = {}
+
+var all_location_ids: Array[int] = []
 var collectibles: Array[RawCollectible] = []
 var collectible_by_location_name: Dictionary[String, RawCollectible] = {}
 var collectible_by_item_name: Dictionary[String, RawCollectible] = {}
@@ -121,20 +110,12 @@ var collectible_by_item_id: Dictionary[int, RawCollectible] = {}
 var collectible_by_location_id: Dictionary[int, RawCollectible] = {}
 var collectible_by_node_name: Dictionary[String, RawCollectible] = {}
 
-## This is for sprite overrides in ancient_conversation.gd
-var ancient_collectibles: Dictionary[int, APWSClasses.NetworkItem] = {}
-
 var _setup_complete: bool = false
 
-func get_ancient_override_sprite(location_id: int) -> Texture2D:
-	var item: APWSClasses.NetworkItem = ancient_collectibles.get(location_id)
-	if item == null:
-		ModLoaderLog.error("Attempted to get sprite override of null %d" % location_id, ArchipelagoMod.LOG_NAME)
-		return AP_SPRITE
-	if item.player != ArchipelagoMod.instance.player_id:
-		return AP_SPRITE
-	
-	match item.item:
+## Pass -1 to get the AP sprite without a warning
+func get_sprite_override(item_id: int) -> Texture2D:
+	match item_id:
+		-1: return AP_SPRITE
 		1000: return MAP_SPRITE
 		1001: return CONCH_SPRITE
 		1002: return LYRE_SPRITE
@@ -152,36 +133,32 @@ func get_ancient_override_sprite(location_id: int) -> Texture2D:
 		7002: return STAR_EMBLEM_SPRITE
 		7003: return CROWN_EMBLEM_SPRITE
 		_:
-			match item.item / 1000:
+			match item_id / 1000:
 				2: return PAGE_SPRITE
 				3:
-					match item.item / 100:
+					match item_id / 100:
 						30: return BLUE_ORB_SPRITE
 						31: return GREEN_ORB_SPRITE
 						32: return RED_ORB_SPRITE
 						33: return YELLOW_ORB_SPRITE
 				4: return GQUILL_SPRITE
-				6: 
-					match get_next_fragment:
-						Collectable.Type.FRAGMENT_1: return MOON_FRAGMENT_1
-						Collectable.Type.FRAGMENT_2: return MOON_FRAGMENT_2
-						Collectable.Type.FRAGMENT_3: return MOON_FRAGMENT_3
-						Collectable.Type.FRAGMENT_4: return MOON_FRAGMENT_4
+				# TODO: swap this to be progressive
+				6: return MOON_FRAGMENT_1
 	# Fallback
-	ModLoaderLog.warning("Location ID '%d' wasn't found, falling back to AP sprite" % location_id, ArchipelagoMod.LOG_NAME)
+	ModLoaderLog.warning("Item ID '%d' wasn't found, falling back to AP sprite" % item_id, ArchipelagoMod.LOG_NAME)
 	return AP_SPRITE
 
-
-static func get_next_fragment() -> Collectable.Type:
-	var fragment_types: Array[int] = [Collectable.Type.FRAGMENT_1, Collectable.Type.FRAGMENT_2, Collectable.Type.FRAGMENT_3, Collectable.Type.FRAGMENT_4]
-	for i: int in fragment_types.size():
-		if fragment_types[i] not in GameState.items:
-			return fragment_types[i] as Collectable.Type
-	# Fallback
-	return Collectable.Type.FRAGMENT_4
+func load_from_data_file(filename: String) -> Array[PackedStringArray]:
+	var file :FileAccess = FileAccess.open("res://mods-unpacked/MayaXTG-Archipelago/assets/data/" + filename, FileAccess.READ)
+	#var content :String = file.get_as_text()
+	var lines:Array[PackedStringArray] = []
+	while not file.eof_reached():
+		var row: PackedStringArray = file.get_csv_line("\t")
+		if len(row) > 1:
+			lines.append(row)
+	return lines
 
 func _init() -> void:
-	
 	var pickups_csv: Array[PackedStringArray] = load_from_data_file("pickups.csv.txt")
 	
 	for line:PackedStringArray in pickups_csv:
@@ -203,207 +180,92 @@ func _init() -> void:
 		if item_name not in collectible_by_item_name:
 			collectible_by_item_name[item_name] = raw
 			collectible_by_item_id[item_id] = raw
-
-	
-	# We have now referenced each existing item and location (for simple pickups).
-	# Next, ready will run and we will find the corresponding Nnodes.
+		if ap_id not in all_location_ids:
+			all_location_ids.append(ap_id)
 
 func _ready() -> void:
-	# This is to collect info on the in-game Nodes.
-	# NOTE: we don't want to edit the scene directly as it would put the entire world in the mod files
 	get_tree().node_added.connect(_on_node_added)
+	ArchipelagoMod.instance.ws.packet_connected.connect(_on_packet_connected, CONNECT_ONE_SHOT)
 	ArchipelagoMod.instance.ap_item_received.connect(_on_ap_item_received)
 
-var node_by_name: Dictionary[String, Node2D]
+func _on_packet_connected(_packet: APWSClasses.Connected) -> void:
+	for item: APWSClasses.NetworkItem in await ArchipelagoMod.instance.get_location_scouts(all_location_ids):
+		scouts[item.location] = item
 
 func _on_node_added(node: Node) -> void:
-	if node.name == 'OutsideLevel':
-		node.ready.connect(_node_scan_complete, CONNECT_ONE_SHOT)
-	if node.name in collectible_by_node_name:
-		# This node corresponds to a pickup location, save the position
-		# so we can replace it with another pickup, a custom local pickup, or an AP logo
-		node_by_name[node.name] = node
-	
-	# _node_scan_complete is called once the node scan is complete
+	if node.name == "OutsideLevel":
+		node.ready.connect(_on_outside_level_ready, CONNECT_ONE_SHOT)
+	if node is Collectable and node is not CollectableAP:
+		var location: int
+		if node is CollectableTrophy:
+			match node.id:
+				ArchipelagoMod.RelicType.Skull:
+					location = collectible_by_item_name["Skull Relic"].location_id
+				ArchipelagoMod.RelicType.Scales:
+					location = collectible_by_item_name["Scales Relic"].location_id
+				ArchipelagoMod.RelicType.Crown:
+					location = collectible_by_item_name["Crown Relic"].location_id
+				_:
+					location = collectible_by_node_name[node.name].location_id
+		else:
+			if not collectible_by_node_name.has(node.name):
+				ModLoaderLog.error("Missing location: %s (%s)" % [node.name, node.get_path()], ArchipelagoMod.LOG_NAME)
+				return
+			else:
+				location = collectible_by_node_name[node.name].location_id
+		var item: APWSClasses.NetworkItem = scouts[location]
+		var ap: CollectableAP
+		if item.player == ArchipelagoMod.instance.player_id:
+			ap = CollectableAP.create_new(location, scouts[location].item)
+			ModLoaderLog.debug("Replaced collectable '%s' with local item %d" % [node.name, scouts[location].item], ArchipelagoMod.LOG_NAME)
+		else:
+			ap = CollectableAP.create_new(location, -1)
+			ModLoaderLog.debug("Replaced collectable '%s' with remote item" % [node.name], ArchipelagoMod.LOG_NAME)
+		ap.name = node.name
+		ap.global_position = node.global_position
+		node.name = "BEINGDELETED"
+		node.get_parent().add_child.call_deferred(ap)
+		node.queue_free()
 
-var original_positions: Dictionary[String, Vector2] = {}
-var original_parents: Dictionary[String, Node2D] = {}
-var original_nodes_by_item_id: Dictionary[int, Array] = {}
+func _on_outside_level_ready() -> void:
+	if get_tree().node_added.is_connected(_on_node_added):
+		get_tree().node_added.disconnect(_on_node_added)
+		_setup_complete = true
 
-func _node_scan_complete() -> void:
-	get_tree().node_added.disconnect(_on_node_added)
-	
-	# Save all global positions
-	for key: String in node_by_name:
-		var node: Node2D = node_by_name[key]
-		original_positions[key] = node.position
-		original_parents[key] = node.get_parent()
-	
-		# Keep a reference of each node that satisfies a given item id
-		# so we can move them if they ended up somewhere in the world
-		# otherwise we have to delete them.
-		# Some items will be instantiated, like the moon pieces, as they do not exist out in the world
-		var item_id: int = collectible_by_node_name[key].item_id
-		if item_id not in original_nodes_by_item_id:
-			original_nodes_by_item_id[item_id] = [] as Array[Node2D]
-		original_nodes_by_item_id[item_id].append(node)
-	
-	_ap_shuffle()
-	_setup_complete = true
-
-#NOTE: This only tested in solo randos
-func _ap_shuffle() -> void:
-	
-	# To start, we need to know which item goes in which location according to the server
-	var all_location_ids: Array[int] = []
-	for row:RawCollectible in collectibles:
-		all_location_ids.append(row.location_id)
-	var scouts: Array[APWSClasses.NetworkItem] = await ArchipelagoMod.instance.get_location_scouts(all_location_ids)
-	var scout_by_id: Dictionary[int,APWSClasses.NetworkItem] = {}
-	for scout:APWSClasses.NetworkItem in scouts:
-		scout_by_id[scout.location] = scout
-	
-	# Shuffle (using scout data)
-	ModLoaderLog.info("shuffling items:%d" % len(scouts), ArchipelagoMod.LOG_NAME)
-	for raw_loc:RawCollectible in collectibles:
-		# The location we are considering
-		var location_id: int = raw_loc.location_id
-
-		# What goes here?
-		var scout: APWSClasses.NetworkItem = scout_by_id[location_id]
-		
-		if scout.location / 1000 == 6:
-			# this is part of a constellation override
-			ModLoaderLog.debug("Assigning ancient override %d -> %d" % [scout.location, scout.item], ArchipelagoMod.LOG_NAME)
-			ancient_collectibles[scout.location] = scout
-			continue
-		
-		# Is it just a normal pickup location?
-		if raw_loc.is_basic():
-			var original: Node2D = node_by_name[raw_loc.node_name]
-			
-			var is_local_item: bool = scout.player == ArchipelagoMod.instance.player_id
-			var item_id:int = scout.item
-			# Is there an exisitng node of this item?
-			var pool: Array[Node2D] = []
-			if item_id in original_nodes_by_item_id:
-				pool = original_nodes_by_item_id[item_id]
-			# No there isn't
-			if not pool:
-				ModLoaderLog.debug("Item not in pool %d" % item_id, ArchipelagoMod.LOG_NAME)
-				# So we need to create our own Node
-				if is_local_item:
-					ModLoaderLog.debug("Item %d is local" % item_id, ArchipelagoMod.LOG_NAME)
-					# if it's a local item, create it with it's own icon
-					var raw_item: RawCollectible = collectible_by_item_id.get(item_id)
-					if raw_item.type == 'Moon Piece':
-						_place_moon_piece_at(original, raw_loc.loc_name, raw_loc.location_id)
-					else:
-						ModLoaderLog.warning("Item %d does not exist in pool, this should never occur" % item_id, ArchipelagoMod.LOG_NAME)
-						# Fallback
-						_place_ap_at(original, raw_loc.loc_name, raw_loc.location_id)
-					
-				else:
-					# if it's an external item, create it with AP logo
-					_place_ap_at(original, raw_loc.loc_name, raw_loc.location_id)
-				continue
-			# Yes there is, so we move it
-			var node_to_move: Node2D = pool.pop_back()
-			_move_pickup(original, node_to_move, raw_loc.location_id)
-	
-	# Anything that wasn't popped out of a pool is not an item in this world and can't be freed
-	for item_id: int in original_nodes_by_item_id:
-		var pool: Array[Node2D] = original_nodes_by_item_id[item_id]
-		for unused_node: Node2D in pool:
-			unused_node.queue_free()
-	
-	ModLoaderLog.info("item shuffle complete", ArchipelagoMod.LOG_NAME)
-
-func _move_pickup(original: Node2D, node_to_move:Node2D, location_id:int) -> void:
-	ModLoaderLog.debug("moving collectible %s -> %s" % [node_to_move.name, original.name], ArchipelagoMod.LOG_NAME)
-	node_to_move.reparent(original_parents[original.name])
-	node_to_move.position = original_positions[original.name]
-	NODE_TO_ID[node_to_move.name] = location_id
-
-func _place_ap_at(original: Node2D, location_name: String, location_id:int) -> void:
-	ModLoaderLog.debug("Spawning AP collectible at %s" % location_name, ArchipelagoMod.LOG_NAME)
-	var ap: Collectable = collectible_ap.instantiate()
-	_place_at(ap, original, location_id)
-
-func _place_moon_piece_at(original: Node2D, location_name: String, location_id:int) -> void:
-	ModLoaderLog.debug("Spawning moon piece collectible at %s" % location_name, ArchipelagoMod.LOG_NAME)
-	var ap: CollectableMoonFragment = collectible_moon_piece.instantiate()
-	_place_at(ap, original, location_id)
-
-func _place_at(ap:Collectable, original:Node2D, location_id: int) -> void:
-	ap.name += str(location_id)
-	original_parents[original.name].add_child(ap)
-	ap.position = original_positions[original.name]	
-	NODE_TO_ID[ap.name] = location_id
-
-#region Item receive handling
 func _on_ap_item_received(item: int) -> void:
 	while not _setup_complete:
-		ModLoaderLog.debug("Attempted to process received item before loading complete", ArchipelagoMod.LOG_NAME)
+		ModLoaderLog.debug("Received items before setup, sleeping", ArchipelagoMod.LOG_NAME)
 		await get_tree().create_timer(5.0).timeout
 	
-	ModLoaderLog.debug("Handle: %d" % item, ArchipelagoMod.LOG_NAME)
-	
-	var coll: Collectable
-	# NOTICE: this will need to be changed if item ids get updated
-	# otherwise uses the same system as the ancient sprite overrider
+	var c: Collectable
 	match item:
-		1000:
-			coll = Collectable.new()
-			coll.type = Collectable.Type.MAP
-			coll.icon = MAP_SPRITE
-			coll.display_name = "MAP"
-		1001:
-			coll = Collectable.new()
-			coll.type = Collectable.Type.CONCH
-			coll.icon = CONCH_SPRITE
-			coll.display_name = "CONCH"
-		1002:
-			coll = Collectable.new()
-			coll.type = Collectable.Type.INSTRUMENT
-			coll.icon = LYRE_SPRITE
-			coll.display_name = "LYRE"
-		1003:
-			coll = Collectable.new()
-			coll.type = Collectable.Type.MARKERS
-			coll.icon = MARKERS_SPRITE
-			coll.display_name = "MARKERS"
+		1000: c = preload("res://gg/scenes/game/collectables/collectable_map.tscn").instantiate()
+		1001: c = preload("res://gg/scenes/game/collectables/collectable_conch.tscn").instantiate()
+		1002: c = preload("res://gg/scenes/game/collectables/collectable_instrument.tscn").instantiate()
+		1003: c = preload("res://gg/scenes/game/collectables/collectable_markers.tscn").instantiate()
 		_:
 			match item / 1000:
 				2:
-					coll = CollectablePage.new()
-					coll.page_type = PAGE_TYPE[item]
-					coll.type = Collectable.Type.PAGE
+					c = preload("res://gg/scenes/game/collectables/orb/collectable_page.tscn").instantiate()
+					c.page_type = PAGE_TYPE[item]
 				3:
-					# TODO: handle orbs progressively
-					ModLoaderLog.debug("TODO", ArchipelagoMod.LOG_NAME)
-					pass
+					c = preload("res://gg/scenes/game/collectables/orb/collectable_orb.tscn").instantiate()
+					match item / 100:
+						30: c.orb_color = CollectableOrb.OrbColor.BLUE
+						31: c.orb_color = CollectableOrb.OrbColor.GREEN
+						32: c.orb_color = CollectableOrb.OrbColor.RED
+						33: c.orb_color = CollectableOrb.OrbColor.YELLOW
 				4:
-					coll = CollectableGoldenQuill.new()
-					coll.type = Collectable.Type.GOLDEN_QUILL
+					c = preload("res://gg/scenes/game/collectables/orb/collectable_golden_quill.tscn").instantiate()
 				5:
-					coll = CollectableTrophy.new()
-					coll.id = RELICS[item]
-					coll.frame = coll.id
-					coll.type = Collectable.Type.TROPHY
-				6:
-					# TODO: make progressive
-					coll = CollectableMoonFragment.new()
-					coll.type = Collectable.Type.FRAGMENT_1
-					coll.icon = MOON_FRAGMENT_1
-					coll.display_name = "MOONPIECE"
-				7: pass # TODO
-	
-	if coll == null:
-		ModLoaderLog.error("Null collectable", ArchipelagoMod.LOG_NAME)
+					c = preload("res://gg/scenes/game/collectables/trophy/collectable_trophy.tscn").instantiate()
+					c.id = RELICS[item]
+					c.frame = RELICS[item]
+					# I think I can skip assigning the achievement? Probably
+				6: pass # TODO: moon fragments
+				7: pass # TODO: emblems
+	if c == null:
+		ModLoaderLog.warning("Skipped receiving item id %d" % item, ArchipelagoMod.LOG_NAME)
 		return
-	
-	# hopefully doesn't cause an explosion
-	GameSignals.collectable_collected.emit(coll)
-	coll.queue_free()
-#endregion
+	GameSignals.collectable_collected.emit(c)
+	c.queue_free()

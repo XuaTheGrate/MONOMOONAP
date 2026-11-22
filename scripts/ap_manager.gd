@@ -111,6 +111,8 @@ var collectible_by_location_id: Dictionary[int, RawCollectible] = {}
 var collectible_by_node_name: Dictionary[String, RawCollectible] = {}
 
 var _setup_complete: bool = false
+var _seed: String = ""
+var _save: ArchipelagoSave
 
 ## Pass -1 to get the AP sprite without a warning
 func get_sprite_override(item_id: int) -> Texture2D:
@@ -186,9 +188,21 @@ func _init() -> void:
 func _ready() -> void:
 	get_tree().node_added.connect(_on_node_added)
 	ArchipelagoMod.instance.ws.packet_connected.connect(_on_packet_connected, CONNECT_ONE_SHOT)
+	ArchipelagoMod.instance.ws.packet_room_info.connect(_on_packet_room_info)
 	ArchipelagoMod.instance.ap_item_received.connect(_on_ap_item_received)
+	ArchipelagoMod.instance.ap_location_collected.connect(_on_ap_location_collected)
+	GameSignals.request_save_game.connect(_on_request_save_game)
+
+func _on_request_save_game() -> void:
+	if _save != null:
+		_save.save_to_disk(_seed)
+
+func _on_packet_room_info(packet: APWSClasses.RoomInfo) -> void:
+	_seed = packet.seed_name
 
 func _on_packet_connected(_packet: APWSClasses.Connected) -> void:
+	_save = ArchipelagoSave.load_from_disk(_seed)
+	
 	for item: APWSClasses.NetworkItem in await ArchipelagoMod.instance.get_location_scouts(all_location_ids):
 		scouts[item.location] = item
 
@@ -213,6 +227,12 @@ func _on_node_added(node: Node) -> void:
 				return
 			else:
 				location = collectible_by_node_name[node.name].location_id
+		
+		if location in _save.locations:
+			ModLoaderLog.info("Skipping location %d as it's already collected" % location, ArchipelagoMod.LOG_NAME)
+			node.queue_free()
+			return
+		
 		var item: APWSClasses.NetworkItem = scouts[location]
 		var ap: CollectableAP
 		if item.player == ArchipelagoMod.instance.player_id:
@@ -232,10 +252,25 @@ func _on_outside_level_ready() -> void:
 		get_tree().node_added.disconnect(_on_node_added)
 		_setup_complete = true
 
+func _on_ap_location_collected(location: int) -> void:
+	while not _setup_complete:
+		ModLoaderLog.debug("Collected location before setup, sleeping", ArchipelagoMod.LOG_NAME)
+		await get_tree().create_timer(5.0).timeout
+	
+	if location in _save.locations:
+		ModLoaderLog.debug("Location %d already collected" % location, ArchipelagoMod.LOG_NAME)
+		return
+	_save.locations.append(location)
+
 func _on_ap_item_received(item: int) -> void:
 	while not _setup_complete:
 		ModLoaderLog.debug("Received items before setup, sleeping", ArchipelagoMod.LOG_NAME)
 		await get_tree().create_timer(5.0).timeout
+	
+	if item in _save.items:
+		ModLoaderLog.debug("Skipping receiving item %d as it's already been acquired" % item, ArchipelagoMod.LOG_NAME)
+		return
+	_save.items.append(item)
 	
 	var c: Collectable
 	match item:
@@ -251,10 +286,14 @@ func _on_ap_item_received(item: int) -> void:
 				3:
 					c = preload("res://gg/scenes/game/collectables/orb/collectable_orb.tscn").instantiate()
 					match item / 100:
-						30: c.orb_color = CollectableOrb.OrbColor.BLUE
-						31: c.orb_color = CollectableOrb.OrbColor.GREEN
-						32: c.orb_color = CollectableOrb.OrbColor.RED
-						33: c.orb_color = CollectableOrb.OrbColor.YELLOW
+						30:
+							c.orb_color = CollectableOrb.OrbColor.BLUE
+						31:
+							c.orb_color = CollectableOrb.OrbColor.GREEN
+						32:
+							c.orb_color = CollectableOrb.OrbColor.RED
+						33:
+							c.orb_color = CollectableOrb.OrbColor.YELLOW
 				4:
 					c = preload("res://gg/scenes/game/collectables/orb/collectable_golden_quill.tscn").instantiate()
 				5:

@@ -145,10 +145,24 @@ func get_sprite_override(item_id: int) -> Texture2D:
 						33: return YELLOW_ORB_SPRITE
 				4: return GQUILL_SPRITE
 				# TODO: swap this to be progressive
-				6: return MOON_FRAGMENT_1
+				6: 
+					match get_next_fragment():
+						Collectable.Type.FRAGMENT_1: return MOON_FRAGMENT_1
+						Collectable.Type.FRAGMENT_2: return MOON_FRAGMENT_2
+						Collectable.Type.FRAGMENT_3: return MOON_FRAGMENT_3
+						Collectable.Type.FRAGMENT_4: return MOON_FRAGMENT_4
+					return MOON_FRAGMENT_1
 	# Fallback
 	ModLoaderLog.warning("Item ID '%d' wasn't found, falling back to AP sprite" % item_id, ArchipelagoMod.LOG_NAME)
 	return AP_SPRITE
+
+static func get_next_fragment() -> Collectable.Type:
+	var fragment_types: Array[int] = [Collectable.Type.FRAGMENT_1, Collectable.Type.FRAGMENT_2, Collectable.Type.FRAGMENT_3, Collectable.Type.FRAGMENT_4]
+	for i: int in fragment_types.size():
+		if fragment_types[i] not in GameState.items:
+			return fragment_types[i] as Collectable.Type
+	# Fallback
+	return Collectable.Type.FRAGMENT_4
 
 func load_from_data_file(filename: String) -> Array[PackedStringArray]:
 	var file :FileAccess = FileAccess.open("res://mods-unpacked/MayaXTG-Archipelago/assets/data/" + filename, FileAccess.READ)

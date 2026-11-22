@@ -32,6 +32,8 @@ const CROWN_EMBLEM_SPRITE: Texture2D = preload("res://mods-unpacked/MayaXTG-Arch
 const AP_SPRITE: Texture2D = preload("res://mods-unpacked/MayaXTG-Archipelago/assets/collectible_ap.png")
 #endregion
 
+const MAX_ORB_COUNT:int = 7
+
 const PAGE_TYPE: Dictionary[int, BookPage.Type] = {
 	2000: BookPage.Type.RUINS_EMBLEMS,
 	2001: BookPage.Type.MERGE_MONOMOON, # assumption
@@ -295,6 +297,9 @@ func _on_ap_item_received(item: int) -> void:
 		await get_tree().create_timer(5.0).timeout
 	
 	if item / 1000 == 3:
+		if _cached_orb_count[item] >= MAX_ORB_COUNT:
+			ModLoaderLog.debug("Skipping receiving orb %d as cached count >= max count" % item, ArchipelagoMod.LOG_NAME)
+			return
 		_cached_orb_count[item] += 1
 		if _cached_orb_count[item] <= _save.orbs[item]:
 			ModLoaderLog.debug("Skipping receiving orb %d as cached count <= acquired count" % item, ArchipelagoMod.LOG_NAME)
@@ -319,7 +324,7 @@ func _on_ap_item_received(item: int) -> void:
 					c.page_type = PAGE_TYPE[item]
 				3:
 					c = preload("res://gg/scenes/game/collectables/orb/collectable_orb.tscn").instantiate()
-					c.id = COMPASS_IDS[item][_save.orbs[item]]
+					c.id = COMPASS_IDS[item][_save.orbs[item] - 1]
 					match item / 100:
 						30:
 							c.orb_color = CollectableOrb.OrbColor.BLUE

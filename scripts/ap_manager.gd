@@ -373,7 +373,9 @@ func _on_ap_item_received(item: int) -> void:
 				6: 
 					c = preload("res://mods-unpacked/MayaXTG-Archipelago/scenes/collectible_moon_fragment.tscn").instantiate()
 					c.update_progressive_type()
-				7: pass # TODO: emblems
+				7: 
+					# Handled in [BookFrontCoverOverwrite]
+					return
 	if c == null:
 		ModLoaderLog.warning("Skipped receiving item id %d" % item, ArchipelagoMod.LOG_NAME)
 		return
@@ -383,3 +385,9 @@ func _on_ap_item_received(item: int) -> void:
 func _on_ap_goal_reached(goal: Goal) -> void:
 	if self.goal == goal:
 		ArchipelagoMod.instance.ws.send_goal()
+
+func have_item(ap_item_name:String) -> bool:
+	# TODO: do not rely on collectible_by_item_name for this!
+	# Instead, get item_name_to_id from AP server using GetDataPackage
+	return collectible_by_item_name[ap_item_name].item_id in _save.items
+	

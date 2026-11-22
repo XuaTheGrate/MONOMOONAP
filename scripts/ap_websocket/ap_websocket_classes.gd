@@ -279,3 +279,19 @@ class ReceivedItems extends RefCounted:
 		
 		for i: Dictionary in json['items']:
 			items.append(NetworkItem.new(i))
+
+enum ClientStatus {
+	UNKNOWN = 0,
+	CONNECTED = 5,
+	READY = 10,
+	PLAYING = 20,
+	GOAL = 30
+}
+
+## Sent to the server to update on the sender's status. Examples include readiness or goal completion. (Example: defeated Ganon in A Link to the Past)
+class StatusUpdate extends RefCounted:
+	## One of Client States. Send as int. Follow the link for more information.
+	var status: ClientStatus
+	
+	func to_json() -> Dictionary:
+		return {"cmd":"StatusUpdate","status":status}

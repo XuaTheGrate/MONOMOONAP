@@ -144,9 +144,19 @@ func _send_connect() -> void:
 	c.name = slot
 	c.uuid = _get_cached_uuid()
 	c.password = password
+	c.slot_data = true
 	var err: Error = _socket.send_text(JSON.stringify([c.to_json()]))
 	if err != OK:
 		ModLoaderLog.error("Failed to send connect packet (errno %d)" % err, ArchipelagoMod.LOG_NAME)
+
+
+func _send_goal() -> void:
+	ModLoaderLog.info("Sending Goal packet", ArchipelagoMod.LOG_NAME)
+	var c: APWSClasses.StatusUpdate = APWSClasses.StatusUpdate.new()
+	c.status = APWSClasses.ClientStatus.GOAL
+	var err: Error = _socket.send_text(JSON.stringify([c.to_json()]))
+	if err != OK:
+		ModLoaderLog.error("Failed to send goal packet (errno %d)" % err, ArchipelagoMod.LOG_NAME)
 
 func _process(_delta: float) -> void:
 	if not _connecting: return

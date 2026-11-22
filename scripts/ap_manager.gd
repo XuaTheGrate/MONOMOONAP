@@ -229,8 +229,17 @@ func _on_request_save_game() -> void:
 func _on_packet_room_info(packet: APWSClasses.RoomInfo) -> void:
 	_seed = packet.seed_name
 
-func _on_packet_connected(_packet: APWSClasses.Connected) -> void:
+enum Goal {
+	FIX_MOON = 0,
+	THE_END = 1,
+	FULL_MOON = 2
+}
+
+var goal: Goal
+
+func _on_packet_connected(packet: APWSClasses.Connected) -> void:
 	_save = ArchipelagoSave.load_from_disk(_seed)
+	goal = packet.slot_data['goal']
 	
 	for item: APWSClasses.NetworkItem in await ArchipelagoMod.instance.get_location_scouts(all_location_ids):
 		scouts[item.location] = item

@@ -83,6 +83,8 @@ const COMPASS_IDS: Dictionary[int, Array] = {
 	3300: [0,1,8,9,16,18,19]
 }
 
+signal ap_goal_reached(goal: ArchipelagoManager.Goal)
+
 class RawCollectible:
 	var location_id: int
 	var item_id: int
@@ -222,6 +224,7 @@ func _ready() -> void:
 	ArchipelagoMod.instance.ap_item_received.connect(_on_ap_item_received)
 	ArchipelagoMod.instance.ap_location_collected.connect(_on_ap_location_collected)
 	GameSignals.request_save_game.connect(_on_request_save_game)
+	ap_goal_reached.connect(_on_ap_goal_reached)
 
 func _on_request_save_game() -> void:
 	if _save != null:
@@ -366,3 +369,7 @@ func _on_ap_item_received(item: int) -> void:
 		return
 	GameSignals.collectable_collected.emit(c)
 	c.queue_free()
+
+func _on_ap_goal_reached(goal: Goal) -> void:
+	if self.goal == goal:
+		ArchipelagoMod.instance.ws.send_goal()

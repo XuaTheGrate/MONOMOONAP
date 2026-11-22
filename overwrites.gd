@@ -12,3 +12,6 @@ func _init() -> void:
 	
 	r = preload("res://mods-unpacked/MayaXTG-Archipelago/overwrites/gg/scripts/game/ui/inventory.gd")
 	r.take_over_path("res://gg/scripts/game/ui/inventory.gd")
+	
+	r = preload("res://mods-unpacked/MayaXTG-Archipelago/overwrites/gg/scripts/game/limbo/moon_limbo.gd")
+	r.take_over_path("res://gg/scripts/game/limbo/moon_limbo.gd")

@@ -150,7 +150,7 @@ func _send_connect() -> void:
 		ModLoaderLog.error("Failed to send connect packet (errno %d)" % err, ArchipelagoMod.LOG_NAME)
 
 
-func _send_goal() -> void:
+func send_goal() -> void:
 	ModLoaderLog.info("Sending Goal packet", ArchipelagoMod.LOG_NAME)
 	var c: APWSClasses.StatusUpdate = APWSClasses.StatusUpdate.new()
 	c.status = APWSClasses.ClientStatus.GOAL

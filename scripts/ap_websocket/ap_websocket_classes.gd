@@ -293,5 +293,8 @@ class StatusUpdate extends RefCounted:
 	## One of Client States. Send as int. Follow the link for more information.
 	var status: ClientStatus
 	
+	func _init(s: ClientStatus) -> void:
+		status = s
+	
 	func to_json() -> Dictionary:
 		return {"cmd":"StatusUpdate","status":status}

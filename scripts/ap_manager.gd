@@ -234,8 +234,12 @@ func _on_packet_room_info(packet: APWSClasses.RoomInfo) -> void:
 	_seed = packet.seed_name
 
 enum Goal {
+	## Receive the 4 moon pieces and reunite the moon
 	FIX_MOON = 0,
+	## Fix the moon, activate all earth pillars, open all chests and activate all fountains,
+	## and obtain all 4 Emblems, then obtain the Crown Relic at the Sky Shrine
 	THE_END = 1,
+	## Obtain all 8 relics and all 28 orbs, activate the 3 OOB statues and hatch the dragon egg
 	FULL_MOON = 2
 }
 

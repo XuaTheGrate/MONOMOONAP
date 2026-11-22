@@ -116,6 +116,13 @@ func queue_send_location(location: int) -> void:
 	if location not in _send_queue:
 		_send_queue.append(location)
 
+func send_goal() -> void:
+	ModLoaderLog.info("Sending Goal packet", ArchipelagoMod.LOG_NAME)
+	var c: APWSClasses.StatusUpdate = APWSClasses.StatusUpdate.new(APWSClasses.ClientStatus.GOAL)
+	var err: Error = _socket.send_text(JSON.stringify([c.to_json()]))
+	if err != OK:
+		ModLoaderLog.error("Failed to send goal packet (errno %d)" % err, ArchipelagoMod.LOG_NAME)
+
 func _get_cached_uuid() -> String:
 	if FileAccess.file_exists("user://ap_uuid.txt"):
 		ModLoaderLog.info("Using cached uuid", ArchipelagoMod.LOG_NAME)
@@ -148,15 +155,6 @@ func _send_connect() -> void:
 	var err: Error = _socket.send_text(JSON.stringify([c.to_json()]))
 	if err != OK:
 		ModLoaderLog.error("Failed to send connect packet (errno %d)" % err, ArchipelagoMod.LOG_NAME)
-
-
-func send_goal() -> void:
-	ModLoaderLog.info("Sending Goal packet", ArchipelagoMod.LOG_NAME)
-	var c: APWSClasses.StatusUpdate = APWSClasses.StatusUpdate.new()
-	c.status = APWSClasses.ClientStatus.GOAL
-	var err: Error = _socket.send_text(JSON.stringify([c.to_json()]))
-	if err != OK:
-		ModLoaderLog.error("Failed to send goal packet (errno %d)" % err, ArchipelagoMod.LOG_NAME)
 
 func _process(_delta: float) -> void:
 	if not _connecting: return

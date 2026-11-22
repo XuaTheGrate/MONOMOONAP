@@ -265,6 +265,9 @@ func _on_node_added(node: Node) -> void:
 					location = collectible_by_node_name[node.name].location_id
 		else:
 			if not collectible_by_node_name.has(node.name):
+				if node.name == "CollectableBook":
+					# We ignore the book.
+					return
 				ModLoaderLog.error("Missing location: %s (%s)" % [node.name, node.get_path()], ArchipelagoMod.LOG_NAME)
 				return
 			else:
@@ -284,7 +287,9 @@ func _on_node_added(node: Node) -> void:
 			ap = CollectableAP.create_new(location, -1)
 			ModLoaderLog.debug("Replaced collectable '%s' with remote item" % [node.name], ArchipelagoMod.LOG_NAME)
 		ap.name = node.name
-		ap.global_position = node.global_position
+		ap.position = node.position
+		ap.visible = node.visible # Used by the collectable in the Cabin Library
+		ap.process_mode = node.process_mode # Used by the collectable in the Cabin Library
 		node.name = "BEINGDELETED"
 		node.get_parent().add_child.call_deferred(ap)
 		node.queue_free()

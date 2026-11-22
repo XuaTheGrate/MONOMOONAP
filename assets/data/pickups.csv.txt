@@ -79,3 +79,4 @@
 7001	Sea Emblem	Sea Dragon	Coast	1,4	Emblem	SeaDragon
 7002	Sky Emblem	Sky Dragon	Glade	10,17	Emblem	SkyDragon
 7003	Crown Emblem	Fix Moon Reward			Emblem	
+2028	Page: Earth Dragon Puzzle Hint	Cabin Library Quill			Quill	CollectablePageEDPH

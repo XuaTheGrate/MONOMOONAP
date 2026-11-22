@@ -290,6 +290,7 @@ func _on_node_added(node: Node) -> void:
 		ap.position = node.position
 		ap.visible = node.visible # Used by the collectable in the Cabin Library
 		ap.process_mode = node.process_mode # Used by the collectable in the Cabin Library
+		ap.z_index = node.z_index
 		node.name = "BEINGDELETED"
 		node.get_parent().add_child.call_deferred(ap)
 		node.queue_free()

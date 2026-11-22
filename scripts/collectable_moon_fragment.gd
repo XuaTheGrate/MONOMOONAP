@@ -15,7 +15,7 @@ const sprites: Dictionary[Collectable.Type, Texture2D] = {
 
 func _ready() -> void:
 	# make progressive
-	_update_progressive_type()
+	update_progressive_type()
 	ArchipelagoMod.instance.ap_item_received.connect(_on_item_received)
 	super()
 
@@ -23,11 +23,12 @@ func on_collected() -> void:
 	ModLoaderLog.info("on_Collected Moon Fragment item %s" % name, ArchipelagoMod.LOG_NAME)
 	super()
 
-func _update_progressive_type() -> void:
+func update_progressive_type() -> void:
 	type = ArchipelagoManager.get_next_fragment()
-	sprite.texture = sprites[type]
-	selected_outline.texture = sprites[type]
 	icon = sprites[type]
+	if is_node_ready():
+		sprite.texture = sprites[type]
+		selected_outline.texture = sprites[type]
 
 func _on_item_received() -> void:
-	_update_progressive_type()
+	update_progressive_type()

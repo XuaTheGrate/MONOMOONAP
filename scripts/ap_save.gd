@@ -12,6 +12,7 @@ extends Resource
 	3200: 0,
 	3300: 0,
 }
+@export var moon_fragments:int = 0
 
 func save_to_disk(seed_: String) -> void:
 	ResourceSaver.save(self, "user://apsave_%s.tres" % seed_)

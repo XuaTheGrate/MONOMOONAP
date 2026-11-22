@@ -128,6 +128,7 @@ var _cached_orb_count: Dictionary[int, int] = {
 	3200: 0,
 	3300: 0,
 }
+var _cached_moon_fragment_count: int = 0
 
 ## Pass -1 to get the AP sprite without a warning
 func get_sprite_override(item_id: int) -> Texture2D:
@@ -314,6 +315,12 @@ func _on_ap_item_received(item: int) -> void:
 			ModLoaderLog.debug("Skipping receiving orb %d as cached count <= acquired count" % item, ArchipelagoMod.LOG_NAME)
 			return
 		_save.orbs[item] += 1
+	elif item / 1000 == 6:
+		_cached_moon_fragment_count += 1
+		if _cached_moon_fragment_count <= _save.moon_fragments:
+			ModLoaderLog.debug("Skipping receiving moon fragment %d as cached count <= acquired count" % item, ArchipelagoMod.LOG_NAME)
+			return
+		_save.moon_fragments += 1
 	elif item in _save.items:
 		ModLoaderLog.debug("Skipping receiving item %d as it's already been acquired" % item, ArchipelagoMod.LOG_NAME)
 		return
@@ -350,7 +357,9 @@ func _on_ap_item_received(item: int) -> void:
 					c.id = RELICS[item]
 					c.frame = RELICS[item]
 					# I think I can skip assigning the achievement? Probably
-				6: pass # TODO: moon fragments
+				6: 
+					c = preload("res://mods-unpacked/MayaXTG-Archipelago/scenes/collectible_moon_fragment.tscn").instantiate()
+					c.update_progressive_type()
 				7: pass # TODO: emblems
 	if c == null:
 		ModLoaderLog.warning("Skipped receiving item id %d" % item, ArchipelagoMod.LOG_NAME)

@@ -74,6 +74,13 @@ const RELICS: Dictionary[int, int] = {
 	5007: 0
 }
 
+const COMPASS_IDS: Dictionary[int, Array] = {
+	3000: [2,3,4,5,7,17,21],
+	3100: [11,12,13,14,15,20,27],
+	3200: [6,10,22,23,24,25,26],
+	3300: [0,1,8,9,16,18,19]
+}
+
 class RawCollectible:
 	var location_id: int
 	var item_id: int
@@ -113,6 +120,12 @@ var collectible_by_node_name: Dictionary[String, RawCollectible] = {}
 var _setup_complete: bool = false
 var _seed: String = ""
 var _save: ArchipelagoSave
+var _cached_orb_count: Dictionary[int, int] = {
+	3000: 0,
+	3100: 0,
+	3200: 0,
+	3300: 0,
+}
 
 ## Pass -1 to get the AP sprite without a warning
 func get_sprite_override(item_id: int) -> Texture2D:
@@ -281,10 +294,17 @@ func _on_ap_item_received(item: int) -> void:
 		ModLoaderLog.debug("Received items before setup, sleeping", ArchipelagoMod.LOG_NAME)
 		await get_tree().create_timer(5.0).timeout
 	
-	if item in _save.items:
+	if item / 1000 == 3:
+		_cached_orb_count[item] += 1
+		if _cached_orb_count[item] <= _save.orbs[item]:
+			ModLoaderLog.debug("Skipping receiving orb %d as cached count <= acquired count" % item, ArchipelagoMod.LOG_NAME)
+			return
+		_save.orbs[item] += 1
+	elif item in _save.items:
 		ModLoaderLog.debug("Skipping receiving item %d as it's already been acquired" % item, ArchipelagoMod.LOG_NAME)
 		return
-	_save.items.append(item)
+	else:
+		_save.items.append(item)
 	
 	var c: Collectable
 	match item:
@@ -299,6 +319,7 @@ func _on_ap_item_received(item: int) -> void:
 					c.page_type = PAGE_TYPE[item]
 				3:
 					c = preload("res://gg/scenes/game/collectables/orb/collectable_orb.tscn").instantiate()
+					c.id = COMPASS_IDS[item][_save.orbs[item]]
 					match item / 100:
 						30:
 							c.orb_color = CollectableOrb.OrbColor.BLUE

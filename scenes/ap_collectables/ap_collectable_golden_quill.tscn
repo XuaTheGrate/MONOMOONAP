@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://cfsr0p6xq5ntx"]
+
+[ext_resource type="PackedScene" uid="uid://bty576thbm2gv" path="res://gg/scenes/game/collectables/orb/collectable_page.tscn" id="1_y8nmi"]
+[ext_resource type="Script" uid="uid://bsrqh3fkpaatd" path="res://mods-unpacked/MayaXTG-Archipelago/scripts/collectable_ap.gd" id="2_elpe6"]
+[ext_resource type="Texture2D" uid="uid://ftrnkymequt7" path="res://gg/textures/ui/map/markers/golden-quill-marker.png" id="3_2m1v5"]
+[ext_resource type="Shader" uid="uid://yhlqd262cvkd" path="res://gg/shaders/dither.gdshader" id="4_stbbn"]
+[ext_resource type="Texture2D" uid="uid://doifgna6oynmw" path="res://gg/textures/game/collectables/golden-quill-unlit.png" id="5_phvjn"]
+[ext_resource type="Texture2D" uid="uid://52sne32o0rdr" path="res://gg/textures/game/collectables/golden-quill.png" id="6_sjmrk"]
+[ext_resource type="Texture2D" uid="uid://wr7mr0ugm0eg" path="res://gg/textures/game/collectables/golden-quill-glow.png" id="7_qlhny"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xrmpu"]
+load_path = "res://.godot/imported/quill-normals.png-ffb4b10e393920cb23c2af8601582b27.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qp3cj"]
+load_path = "res://.godot/imported/bayer8.png-014a09faf332a1db6f7966496a827394.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_40xwu"]
+shader = ExtResource("4_stbbn")
+shader_parameter/unlit_texture = ExtResource("5_phvjn")
+shader_parameter/u_dither_tex = SubResource("CompressedTexture2D_qp3cj")
+shader_parameter/normalmap = SubResource("CompressedTexture2D_xrmpu")
+shader_parameter/flip_normal_x = false
+shader_parameter/flip_normal_y = false
+shader_parameter/invert = false
+shader_parameter/u_bit_depth = 32
+shader_parameter/u_contrast = 1.0
+shader_parameter/u_offset = 0.0
+shader_parameter/light_color_amount = 0.2
+shader_parameter/light_value_amount = 1.0
+shader_parameter/ignore_modulate_color = false
+shader_parameter/override_modulate_color = Color(1, 1, 1, 1)
+shader_parameter/modulate_alpha_is_unlit_color = true
+shader_parameter/dither_with_texture_alpha = false
+shader_parameter/hide_around_moon = false
+shader_parameter/only_show_around_moon = false
+shader_parameter/hidden_alpha = 0.3
+shader_parameter/weak_hidden_alpha = 0.95
+shader_parameter/hide_around_player = false
+shader_parameter/hidden_player_alpha = 0.9
+shader_parameter/show_lit_when_eyes_lit = false
+
+[node name="CollectableGoldenQuill" unique_id=127600643 instance=ExtResource("1_y8nmi")]
+script = ExtResource("2_elpe6")
+icon = ExtResource("3_2m1v5")
+
+[node name="Sprite" parent="Squasher" parent_id_path=PackedInt32Array(1249041062) index="0" unique_id=5184521]
+material = SubResource("ShaderMaterial_40xwu")
+texture = ExtResource("6_sjmrk")
+
+[node name="Glow" parent="Squasher/Sprite" index="0" unique_id=1678428864]
+texture = ExtResource("7_qlhny")
+
+[node name="Glow2" parent="Squasher/Sprite" index="1" unique_id=968944160]
+texture = ExtResource("7_qlhny")
+
+[node name="SelectedOutline" parent="Squasher/Sprite" index="2" unique_id=392643123]
+texture = ExtResource("6_sjmrk")
+
+[node name="BlueMoonParticles" parent="Squasher/Sprite" index="3" unique_id=205046170]
+self_modulate = Color(1, 0.7783333, 0.3, 1)
+amount = 4
+
+[node name="LightSprite" parent="Squasher" parent_id_path=PackedInt32Array(1249041062) index="1" unique_id=1622186717]
+modulate = Color(1, 0.94166666, 0.65, 0.039215688)
+
+[node name="LightSprite2" parent="Squasher" parent_id_path=PackedInt32Array(1249041062) index="2" unique_id=2038355054]
+modulate = Color(1, 0.8666667, 0, 0.019607844)
+
+[node name="Light" parent="Squasher" parent_id_path=PackedInt32Array(1249041062) index="3" unique_id=1589643227]
+color = Color(1, 0.92300004, 0.23000002, 1)

@@ -162,7 +162,6 @@ func get_sprite_override(item_id: int) -> Texture2D:
 						32: return RED_ORB_SPRITE
 						33: return YELLOW_ORB_SPRITE
 				4: return GQUILL_SPRITE
-				# TODO: swap this to be progressive
 				6: 
 					match get_next_fragment():
 						Collectable.Type.FRAGMENT_1: return MOON_FRAGMENT_1
@@ -170,6 +169,9 @@ func get_sprite_override(item_id: int) -> Texture2D:
 						Collectable.Type.FRAGMENT_3: return MOON_FRAGMENT_3
 						Collectable.Type.FRAGMENT_4: return MOON_FRAGMENT_4
 					return MOON_FRAGMENT_1
+				7:
+					# TODO: emblems
+					return AP_SPRITE
 	# Fallback
 	ModLoaderLog.warning("Item ID '%d' wasn't found, falling back to AP sprite" % item_id, ArchipelagoMod.LOG_NAME)
 	return AP_SPRITE

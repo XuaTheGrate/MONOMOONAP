@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://c2yvbh4m8h0fj"]
+
+[ext_resource type="PackedScene" uid="uid://bhifbuxer58ds" path="res://gg/scenes/game/collectables/orb/collectable_item.tscn" id="1_woka4"]
+[ext_resource type="Shader" uid="uid://yhlqd262cvkd" path="res://gg/shaders/dither.gdshader" id="2_0eaio"]
+[ext_resource type="Script" uid="uid://bsrqh3fkpaatd" path="res://mods-unpacked/MayaXTG-Archipelago/scripts/collectable_ap.gd" id="2_egcs6"]
+[ext_resource type="Texture2D" uid="uid://8ash20w3n4iq" path="res://gg/textures/game/collectables/items/map-markers-normals.png" id="3_egcs6"]
+[ext_resource type="Texture2D" uid="uid://b0bhjxwygfxna" path="res://gg/textures/game/collectables/items/map-markers-unlit.png" id="4_06rqe"]
+[ext_resource type="Texture2D" uid="uid://ft43lkrxj3hy" path="res://gg/textures/game/collectables/items/map-markers.png" id="5_2achh"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ebpeo"]
+load_path = "res://.godot/imported/bayer8.png-014a09faf332a1db6f7966496a827394.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hcjsa"]
+shader = ExtResource("2_0eaio")
+shader_parameter/unlit_texture = ExtResource("4_06rqe")
+shader_parameter/u_dither_tex = SubResource("CompressedTexture2D_ebpeo")
+shader_parameter/normalmap = ExtResource("3_egcs6")
+shader_parameter/flip_normal_x = false
+shader_parameter/flip_normal_y = false
+shader_parameter/invert = false
+shader_parameter/u_bit_depth = 32
+shader_parameter/u_contrast = 1.0
+shader_parameter/u_offset = 0.0
+shader_parameter/light_color_amount = 0.15
+shader_parameter/light_value_amount = 1.0
+shader_parameter/ignore_modulate_color = false
+shader_parameter/override_modulate_color = Color(1, 1, 1, 1)
+shader_parameter/modulate_alpha_is_unlit_color = true
+shader_parameter/dither_with_texture_alpha = false
+shader_parameter/hide_around_moon = false
+shader_parameter/only_show_around_moon = false
+shader_parameter/hidden_alpha = 0.3
+shader_parameter/weak_hidden_alpha = 0.95
+shader_parameter/hide_around_player = false
+shader_parameter/hidden_player_alpha = 0.9
+shader_parameter/show_lit_when_eyes_lit = false
+
+[node name="CollectableMarkers" unique_id=1168763330 instance=ExtResource("1_woka4")]
+script = ExtResource("2_egcs6")
+icon = ExtResource("5_2achh")
+
+[node name="Sprite" parent="Squasher" parent_id_path=PackedInt32Array(881018182) index="0" unique_id=1857260621]
+material = SubResource("ShaderMaterial_hcjsa")
+texture = ExtResource("5_2achh")
+
+[node name="SelectedOutline" parent="Squasher/Sprite" index="0" unique_id=79338765]
+texture = ExtResource("5_2achh")
+
+[node name="Light" parent="Squasher" parent_id_path=PackedInt32Array(881018182) index="3" unique_id=2122678392]
+energy = 16.0
+texture_scale = 0.5
+height = 5.0
+
+[node name="InteractableArrow" parent="." index="3" unique_id=2098264951]
+position = Vector2(29, -2)

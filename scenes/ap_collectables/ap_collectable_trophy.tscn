@@ -1,0 +1,670 @@
+[gd_scene format=3 uid="uid://d2luvl6xmhmut"]
+
+[ext_resource type="Script" uid="uid://bsrqh3fkpaatd" path="res://mods-unpacked/MayaXTG-Archipelago/scripts/collectable_ap.gd" id="1_i3at7"]
+[ext_resource type="Resource" uid="uid://mb8wwx20d8rs" path="res://gg/input/game_mode/interact_action.tres" id="2_aq8vy"]
+[ext_resource type="Shader" uid="uid://yhlqd262cvkd" path="res://gg/shaders/dither.gdshader" id="3_173yb"]
+[ext_resource type="Texture2D" uid="uid://bpmrh1er3mn08" path="res://gg/textures/game/collectables/secret-collectables/secret-collectables-normals.png" id="4_cs4c5"]
+[ext_resource type="Texture2D" uid="uid://x3wx4mdxv0mh" path="res://gg/textures/game/light/ditter/bayer8.png" id="5_otapm"]
+[ext_resource type="Texture2D" uid="uid://dosg3cfobsmph" path="res://gg/textures/game/collectables/secret-collectables/secret-collectables-unlit.png" id="6_thid2"]
+[ext_resource type="Texture2D" uid="uid://cj0uj0v0rdl1w" path="res://gg/textures/game/collectables/secret-collectables/secret-collectables.png" id="7_e0jr7"]
+[ext_resource type="Shader" uid="uid://8s5finialr2v" path="res://gg/shaders/tint.tres" id="8_bydqg"]
+[ext_resource type="Script" uid="uid://2ruxfvqyb8bk" path="res://gg/scripts/game/utils/match_sprite_frame.gd" id="9_m8t7j"]
+[ext_resource type="Shader" uid="uid://cdx3xpytq0p22" path="res://gg/shaders/outline.gdshader" id="10_67ecl"]
+[ext_resource type="Texture2D" uid="uid://bsqqg5jbp5a5t" path="res://gg/textures/game/light/light/light-circle.png" id="11_txxhw"]
+[ext_resource type="Texture2D" uid="uid://608wlo2q1tsa" path="res://gg/textures/game/light/light/neutral_point_light.webp" id="12_gj3ld"]
+[ext_resource type="Texture2D" uid="uid://ejx6mhhk1id2" path="res://gg/textures/game/effects/moon_locked/star-particle.png" id="13_a2dml"]
+[ext_resource type="Material" uid="uid://c76h6jsp48w7" path="res://gg/materials/particles/collectable_trophy_mat.tres" id="14_p64sf"]
+[ext_resource type="Texture2D" uid="uid://djja437q28ufe" path="res://gg/textures/game/collectables/secret-collectables/glow-orb.png" id="15_b0i82"]
+[ext_resource type="Material" uid="uid://b4jlvs8365al3" path="res://gg/materials/particles/collectable_trophy_relic_orb_particles.tres" id="16_tymd8"]
+[ext_resource type="Texture2D" uid="uid://c3u3y6ifbacx4" path="res://gg/textures/ui/items/candle/flame-particle.png" id="17_fir7u"]
+[ext_resource type="Material" uid="uid://4hxli2sahen6" path="res://gg/materials/particles/collectable_trophy_relic_orb_particles_2.tres" id="18_difln"]
+[ext_resource type="PackedScene" uid="uid://cq6c7kyos2jx3" path="res://gg/scenes/game/ui/interactable_arrow.tscn" id="19_6x1pn"]
+[ext_resource type="Script" uid="uid://bw2a32fbor111" path="res://gg/scripts/game/utils/enable_when_in_room.gd" id="20_muwle"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_twflx"]
+shader = ExtResource("3_173yb")
+shader_parameter/unlit_texture = ExtResource("6_thid2")
+shader_parameter/u_dither_tex = ExtResource("5_otapm")
+shader_parameter/normalmap = ExtResource("4_cs4c5")
+shader_parameter/flip_normal_x = false
+shader_parameter/flip_normal_y = false
+shader_parameter/invert = false
+shader_parameter/u_bit_depth = 32
+shader_parameter/u_contrast = 1.0
+shader_parameter/u_offset = 0.0
+shader_parameter/light_color_amount = 0.2
+shader_parameter/light_value_amount = 1.0
+shader_parameter/ignore_modulate_color = false
+shader_parameter/override_modulate_color = Color(1, 1, 1, 1)
+shader_parameter/modulate_alpha_is_unlit_color = true
+shader_parameter/dither_with_texture_alpha = false
+shader_parameter/hide_around_moon = false
+shader_parameter/only_show_around_moon = false
+shader_parameter/hidden_alpha = 0.3
+shader_parameter/weak_hidden_alpha = 0.95
+shader_parameter/hide_around_player = false
+shader_parameter/hidden_player_alpha = 0.9
+shader_parameter/show_lit_when_eyes_lit = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6rbes"]
+shader = ExtResource("8_bydqg")
+shader_parameter/ColorParameter = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_trphy2"]
+shader = ExtResource("10_67ecl")
+shader_parameter/border_color = Color(1, 1, 1, 1)
+shader_parameter/border_thickness = 1
+shader_parameter/use_modulate_color = true
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_trphy"]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_twflx"]
+blend_mode = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_trphy"]
+size = Vector2(48, 64)
+
+[sub_resource type="Animation" id="Animation_trphy1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Squasher:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 6)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Squasher/Sprite:material:shader_parameter/modulate_alpha_is_unlit_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Squasher/Sprite/Whiteness:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Squasher/Sprite/Whiteness:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Squasher/GlowOrb:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Squasher:position:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Squasher:position:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Squasher/Sprite:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Squasher/LightSprite:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 0.654902, 0.0392157)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Squasher/LightSprite2:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 0.654902, 0.0196078)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Squasher:scale")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Squasher/GlowOrb:frame")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Squasher/GlowOrb:scale")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Squasher/BlueMoonParticles:emitting")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Squasher/GlowOrb/RelicOrbParticles:emitting")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Squasher/GlowOrb/RelicOrbParticles:amount_ratio")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Squasher/GlowOrb/RelicOrbParticles2:emitting")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("Squasher/GlowOrb/RelicOrbParticles2:amount_ratio")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("Squasher/Light:position")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -8)]
+}
+
+[sub_resource type="Animation" id="Animation_twflx"]
+resource_name = "collected"
+length = 4.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Squasher/Sprite:material:shader_parameter/modulate_alpha_is_unlit_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Squasher/Sprite/Whiteness:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Squasher/Sprite/Whiteness:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Squasher:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(2, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.6666667, 0, 0, 0),
+"times": PackedFloat32Array(0, 3)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Squasher:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(2, 0),
+"points": PackedFloat32Array(0, -0.25103664, 0.071332544, 2.3, -0.65354943, -83, -3.055, -0.436, 0, 0),
+"times": PackedFloat32Array(0, 3)
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Squasher/GlowOrb:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Squasher/Sprite:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Squasher/LightSprite:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 0.654902, 0.0392157), Color(1, 1, 0.65, 0)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Squasher/LightSprite2:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 1.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 0.654902, 0.0196078), Color(1, 1, 0.65, 0)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Squasher:scale")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 1.1, 1.2),
+"transitions": PackedFloat32Array(2, 0, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.315, 0.315), Vector2(1, 1)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Squasher/GlowOrb:frame")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(1.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Squasher/GlowOrb:scale")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(1.2, 2.2),
+"transitions": PackedFloat32Array(0.17075527, 1),
+"update": 0,
+"values": [Vector2(0.8, 1.2), Vector2(1, 1)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Squasher/BlueMoonParticles:emitting")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 1.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Squasher/GlowOrb/RelicOrbParticles:emitting")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 1.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Squasher/GlowOrb/RelicOrbParticles:amount_ratio")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0, 1.1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 1.0]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Squasher/GlowOrb/RelicOrbParticles2:emitting")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0, 1.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Squasher/GlowOrb/RelicOrbParticles2:amount_ratio")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0, 1.1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 1.0]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("Squasher/Light:position")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Vector2(0, -8), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_trphy2"]
+resource_name = "idle"
+length = 3.0
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Squasher:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.5, 2.3, 3),
+"transitions": PackedFloat32Array(0, 0, 0, 0, 0),
+"update": 0,
+"values": [Vector2(0, 6), Vector2(0, 7), Vector2(0, 8), Vector2(0, 7), Vector2(0, 6)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Squasher/Sprite:material:shader_parameter/modulate_alpha_is_unlit_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_trphy"]
+_data = {
+&"RESET": SubResource("Animation_trphy1"),
+&"collected": SubResource("Animation_twflx"),
+&"idle": SubResource("Animation_trphy2")
+}
+
+[node name="CollectableTrophy" type="Area2D" unique_id=111222333]
+z_index = 1
+collision_layer = 0
+script = ExtResource("1_i3at7")
+interact_action = ExtResource("2_aq8vy")
+
+[node name="Squasher" type="Node2D" parent="." unique_id=111222334]
+
+[node name="Sprite" type="Sprite2D" parent="Squasher" unique_id=111222335]
+unique_name_in_owner = true
+light_mask = 4
+visibility_layer = 4
+material = SubResource("ShaderMaterial_twflx")
+position = Vector2(0, -8)
+texture = ExtResource("7_e0jr7")
+hframes = 8
+
+[node name="Whiteness" type="Sprite2D" parent="Squasher/Sprite" unique_id=693594093 node_paths=PackedStringArray("sprite_to_match")]
+unique_name_in_owner = true
+visible = false
+modulate = Color(1, 1, 1, 0)
+light_mask = 0
+visibility_layer = 4
+material = SubResource("ShaderMaterial_6rbes")
+texture = ExtResource("7_e0jr7")
+hframes = 8
+script = ExtResource("9_m8t7j")
+sprite_to_match = NodePath("..")
+
+[node name="SelectedOutline" type="Sprite2D" parent="Squasher/Sprite" unique_id=111222336]
+unique_name_in_owner = true
+visible = false
+show_behind_parent = true
+material = SubResource("ShaderMaterial_trphy2")
+texture = ExtResource("7_e0jr7")
+hframes = 8
+
+[node name="LightSprite" type="Sprite2D" parent="Squasher" unique_id=111222337]
+modulate = Color(1, 1, 0.654902, 0.0392157)
+z_index = -10
+material = SubResource("CanvasItemMaterial_trphy")
+position = Vector2(0, -7)
+scale = Vector2(0.390103, 0.390103)
+texture = ExtResource("11_txxhw")
+
+[node name="LightSprite2" type="Sprite2D" parent="Squasher" unique_id=111222338]
+modulate = Color(1, 1, 0.654902, 0.0196078)
+z_index = -10
+material = SubResource("CanvasItemMaterial_trphy")
+position = Vector2(0, -7)
+scale = Vector2(0.576038, 0.576038)
+texture = ExtResource("11_txxhw")
+
+[node name="Light" type="PointLight2D" parent="Squasher" unique_id=111222339]
+unique_name_in_owner = true
+visible = false
+visibility_layer = 0
+position = Vector2(0, -8)
+scale = Vector2(1.25326, 1.25326)
+color = Color(1, 0.816, 0.31, 1)
+energy = 10.0
+blend_mode = 2
+range_item_cull_mask = 6
+texture = ExtResource("12_gj3ld")
+texture_scale = 0.2
+height = 2.0
+
+[node name="BlueMoonParticles" type="GPUParticles2D" parent="Squasher" unique_id=1185052599]
+material = SubResource("CanvasItemMaterial_twflx")
+position = Vector2(0, -6)
+amount = 4
+texture = ExtResource("13_a2dml")
+lifetime = 1.2
+trail_lifetime = 1.0
+process_material = ExtResource("14_p64sf")
+
+[node name="GlowOrb" type="Sprite2D" parent="Squasher" unique_id=1755733773]
+unique_name_in_owner = true
+visible = false
+light_mask = 0
+texture = ExtResource("15_b0i82")
+hframes = 3
+
+[node name="RelicOrbParticles" type="GPUParticles2D" parent="Squasher/GlowOrb" unique_id=1553991510]
+material = SubResource("CanvasItemMaterial_twflx")
+emitting = false
+amount = 20
+amount_ratio = 0.0
+lifetime = 2.0
+visibility_rect = Rect2(-1000, -1000, 2000, 2000)
+trail_lifetime = 1.0
+process_material = ExtResource("16_tymd8")
+
+[node name="RelicOrbParticles2" type="GPUParticles2D" parent="Squasher/GlowOrb" unique_id=696806528]
+material = SubResource("CanvasItemMaterial_twflx")
+emitting = false
+amount = 40
+amount_ratio = 0.0
+texture = ExtResource("17_fir7u")
+visibility_rect = Rect2(-1000, -1000, 2000, 2000)
+trail_lifetime = 1.0
+process_material = ExtResource("18_difln")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=111222340]
+visible = false
+shape = SubResource("RectangleShape2D_trphy")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=111222341]
+libraries/ = SubResource("AnimationLibrary_trphy")
+autoplay = &"idle"
+
+[node name="InteractableArrow" parent="." unique_id=111222342 instance=ExtResource("19_6x1pn")]
+position = Vector2(0, -32)
+
+[node name="EnableWhenInRoom" type="Node" parent="." unique_id=111222343 node_paths=PackedStringArray("target")]
+script = ExtResource("20_muwle")
+target = NodePath("..")
+metadata/_custom_type_script = "uid://bw2a32fbor111"

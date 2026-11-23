@@ -1,0 +1,174 @@
+[gd_scene format=3 uid="uid://r3krpswtgd55"]
+
+[ext_resource type="Script" uid="uid://bsrqh3fkpaatd" path="res://mods-unpacked/MayaXTG-Archipelago/scripts/collectable_ap.gd" id="1_7q1y6"]
+[ext_resource type="Texture2D" uid="uid://bw6nohu6f85mv" path="res://mods-unpacked/MayaXTG-Archipelago/assets/blue_orb.tres" id="2_6hr52"]
+[ext_resource type="Resource" uid="uid://mb8wwx20d8rs" path="res://gg/input/game_mode/interact_action.tres" id="3_pdyxf"]
+[ext_resource type="Shader" uid="uid://yhlqd262cvkd" path="res://gg/shaders/dither.gdshader" id="4_ajbph"]
+[ext_resource type="Texture2D" uid="uid://8v6mdwtmrk73" path="res://gg/textures/game/collectables/orb/collectable-orb-normals.png" id="5_xgr3v"]
+[ext_resource type="Texture2D" uid="uid://x3wx4mdxv0mh" path="res://gg/textures/game/light/ditter/bayer8.png" id="6_jkyqx"]
+[ext_resource type="Texture2D" uid="uid://i0ow6c5rnkds" path="res://gg/textures/game/collectables/orb/collectable-orb-unlit.png" id="7_k3rp2"]
+[ext_resource type="Texture2D" uid="uid://dl64601hwvfeu" path="res://gg/textures/game/collectables/orb/collectable-orb.png" id="8_qkfuc"]
+[ext_resource type="Shader" uid="uid://cdx3xpytq0p22" path="res://gg/shaders/outline.gdshader" id="9_2rira"]
+[ext_resource type="Texture2D" uid="uid://d7rrv1ojk6c2" path="res://gg/textures/game/collectables/orb/collectable-orb-shine.png" id="10_w50vp"]
+[ext_resource type="Script" uid="uid://b57kgtd01s62m" path="res://gg/scripts/gg/utils/rotate_forever.gd" id="11_v5u66"]
+[ext_resource type="Texture2D" uid="uid://bsqqg5jbp5a5t" path="res://gg/textures/game/light/light/light-circle.png" id="12_fraf1"]
+[ext_resource type="Texture2D" uid="uid://608wlo2q1tsa" path="res://gg/textures/game/light/light/neutral_point_light.webp" id="13_42ofe"]
+[ext_resource type="PackedScene" uid="uid://cq6c7kyos2jx3" path="res://gg/scenes/game/ui/interactable_arrow.tscn" id="14_cxchs"]
+[ext_resource type="Script" uid="uid://bw2a32fbor111" path="res://gg/scripts/game/utils/enable_when_in_room.gd" id="15_fovb0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sb31u"]
+shader = ExtResource("4_ajbph")
+shader_parameter/unlit_texture = ExtResource("7_k3rp2")
+shader_parameter/u_dither_tex = ExtResource("6_jkyqx")
+shader_parameter/normalmap = ExtResource("5_xgr3v")
+shader_parameter/flip_normal_x = false
+shader_parameter/flip_normal_y = false
+shader_parameter/invert = false
+shader_parameter/u_bit_depth = 32
+shader_parameter/u_contrast = 1.0
+shader_parameter/u_offset = 0.0
+shader_parameter/light_color_amount = 0.2
+shader_parameter/light_value_amount = 1.0
+shader_parameter/ignore_modulate_color = false
+shader_parameter/override_modulate_color = Color(1, 1, 1, 1)
+shader_parameter/modulate_alpha_is_unlit_color = true
+shader_parameter/dither_with_texture_alpha = false
+shader_parameter/hide_around_moon = false
+shader_parameter/only_show_around_moon = false
+shader_parameter/hidden_alpha = 0.3
+shader_parameter/weak_hidden_alpha = 0.95
+shader_parameter/hide_around_player = false
+shader_parameter/hidden_player_alpha = 0.9
+shader_parameter/show_lit_when_eyes_lit = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c6q7s"]
+shader = ExtResource("9_2rira")
+shader_parameter/border_color = Color(1, 1, 1, 1)
+shader_parameter/border_thickness = 1
+shader_parameter/use_modulate_color = true
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yqjv7"]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_61ef2"]
+blend_mode = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vh25c"]
+size = Vector2(28, 46)
+
+[sub_resource type="Animation" id="Animation_61ef2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Squasher:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 6)]
+}
+
+[sub_resource type="Animation" id="Animation_6bmau"]
+resource_name = "idle"
+length = 3.0
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Squasher:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.5, 2.3, 3),
+"transitions": PackedFloat32Array(0, 0, 0, 0, 0),
+"update": 0,
+"values": [Vector2(0, 6), Vector2(0, 7), Vector2(0, 8), Vector2(0, 7), Vector2(0, 6)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dy3j5"]
+_data = {
+&"RESET": SubResource("Animation_61ef2"),
+&"idle": SubResource("Animation_6bmau")
+}
+
+[node name="CollectableOrb" type="Area2D" unique_id=901359038]
+collision_layer = 0
+script = ExtResource("1_7q1y6")
+icon = ExtResource("2_6hr52")
+interact_action = ExtResource("3_pdyxf")
+
+[node name="Squasher" type="Node2D" parent="." unique_id=1062541]
+position = Vector2(0, 6)
+
+[node name="Sprite" type="Sprite2D" parent="Squasher" unique_id=363733673]
+unique_name_in_owner = true
+light_mask = 4
+visibility_layer = 4
+material = SubResource("ShaderMaterial_sb31u")
+position = Vector2(0, -8)
+texture = ExtResource("8_qkfuc")
+hframes = 4
+
+[node name="SelectedOutline" type="Sprite2D" parent="Squasher/Sprite" unique_id=1823155257]
+unique_name_in_owner = true
+visible = false
+show_behind_parent = true
+material = SubResource("ShaderMaterial_c6q7s")
+texture = ExtResource("8_qkfuc")
+hframes = 4
+
+[node name="Shine" type="Sprite2D" parent="Squasher" unique_id=1954199340]
+material = SubResource("CanvasItemMaterial_yqjv7")
+position = Vector2(0, -8)
+texture = ExtResource("10_w50vp")
+script = ExtResource("11_v5u66")
+rotation_speed = -40.0
+
+[node name="LightSprite" type="Sprite2D" parent="Squasher" unique_id=843830022]
+modulate = Color(1, 1, 1, 0.039215688)
+z_index = -10
+material = SubResource("CanvasItemMaterial_61ef2")
+position = Vector2(0, -7)
+scale = Vector2(0.390103, 0.390103)
+texture = ExtResource("12_fraf1")
+
+[node name="LightSprite2" type="Sprite2D" parent="Squasher" unique_id=447097818]
+modulate = Color(1, 1, 1, 0.039215688)
+z_index = -10
+material = SubResource("CanvasItemMaterial_61ef2")
+position = Vector2(0, -7)
+scale = Vector2(0.576038, 0.576038)
+texture = ExtResource("12_fraf1")
+
+[node name="Light" type="PointLight2D" parent="Squasher" unique_id=1360348071]
+visibility_layer = 0
+position = Vector2(0, -8)
+scale = Vector2(1.25326, 1.25326)
+color = Color(1, 0.816, 0.31, 1)
+energy = 10.0
+blend_mode = 2
+range_item_cull_mask = 6
+texture = ExtResource("13_42ofe")
+texture_scale = 0.2
+height = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=522516244]
+visible = false
+position = Vector2(0, 9)
+shape = SubResource("RectangleShape2D_vh25c")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=488062291]
+libraries/ = SubResource("AnimationLibrary_dy3j5")
+autoplay = &"idle"
+
+[node name="InteractableArrow" parent="." unique_id=401384356 instance=ExtResource("14_cxchs")]
+position = Vector2(0, -32)
+
+[node name="EnableWhenInRoom" type="Node" parent="." unique_id=26536430 node_paths=PackedStringArray("target")]
+script = ExtResource("15_fovb0")
+target = NodePath("..")
+metadata/_custom_type_script = "uid://bw2a32fbor111"

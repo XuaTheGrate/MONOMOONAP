@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://hicvh35vplld"]
+
+[ext_resource type="PackedScene" uid="uid://bhifbuxer58ds" path="res://gg/scenes/game/collectables/orb/collectable_item.tscn" id="1_gckfp"]
+[ext_resource type="Script" uid="uid://bsrqh3fkpaatd" path="res://mods-unpacked/MayaXTG-Archipelago/scripts/collectable_ap.gd" id="2_16wa0"]
+[ext_resource type="Texture2D" uid="uid://c8wdlogr02ujm" path="res://gg/textures/game/collectables/items/instrument-unlit.tres" id="2_fww44"]
+[ext_resource type="Shader" uid="uid://yhlqd262cvkd" path="res://gg/shaders/dither.gdshader" id="3_16wa0"]
+[ext_resource type="Texture2D" uid="uid://bauy2utd6k7cb" path="res://gg/textures/game/collectables/items/instrument-normals.tres" id="4_makpg"]
+[ext_resource type="Texture2D" uid="uid://x3wx4mdxv0mh" path="res://gg/textures/game/light/ditter/bayer8.png" id="5_opkhq"]
+[ext_resource type="Texture2D" uid="uid://cyxdqb01q1ghh" path="res://gg/textures/game/collectables/items/instrument.tres" id="6_gfdvq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sr5yq"]
+shader = ExtResource("3_16wa0")
+shader_parameter/unlit_texture = ExtResource("2_fww44")
+shader_parameter/u_dither_tex = ExtResource("5_opkhq")
+shader_parameter/normalmap = ExtResource("4_makpg")
+shader_parameter/flip_normal_x = false
+shader_parameter/flip_normal_y = false
+shader_parameter/invert = false
+shader_parameter/u_bit_depth = 32
+shader_parameter/u_contrast = 1.0
+shader_parameter/u_offset = 0.0
+shader_parameter/light_color_amount = 0.25
+shader_parameter/light_value_amount = 1.0
+shader_parameter/ignore_modulate_color = false
+shader_parameter/override_modulate_color = Color(1, 1, 1, 1)
+shader_parameter/modulate_alpha_is_unlit_color = true
+shader_parameter/dither_with_texture_alpha = false
+shader_parameter/hide_around_moon = false
+shader_parameter/only_show_around_moon = false
+shader_parameter/hidden_alpha = 0.3
+shader_parameter/weak_hidden_alpha = 0.95
+shader_parameter/hide_around_player = false
+shader_parameter/hidden_player_alpha = 0.9
+shader_parameter/show_lit_when_eyes_lit = false
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oupo1"]
+size = Vector2(52, 88)
+
+[node name="CollectableInstrument" unique_id=458601868 instance=ExtResource("1_gckfp")]
+script = ExtResource("2_16wa0")
+icon = ExtResource("6_gfdvq")
+
+[node name="Sprite" parent="Squasher" parent_id_path=PackedInt32Array(881018182) index="0" unique_id=1857260621]
+light_mask = 4
+visibility_layer = 4
+material = SubResource("ShaderMaterial_sr5yq")
+texture = ExtResource("6_gfdvq")
+
+[node name="SelectedOutline" parent="Squasher/Sprite" index="0" unique_id=79338765]
+texture = ExtResource("6_gfdvq")
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=672386513]
+position = Vector2(0, 12)
+shape = SubResource("RectangleShape2D_oupo1")

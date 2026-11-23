@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://bk1xcakxhre8g"]
+
+[ext_resource type="PackedScene" uid="uid://bhifbuxer58ds" path="res://gg/scenes/game/collectables/orb/collectable_item.tscn" id="1_1xean"]
+[ext_resource type="Texture2D" uid="uid://q3hifp4k8qhg" path="res://gg/textures/game/collectables/items/conch-unlit.tres" id="2_4p6mk"]
+[ext_resource type="Shader" uid="uid://yhlqd262cvkd" path="res://gg/shaders/dither.gdshader" id="3_i3v8j"]
+[ext_resource type="Texture2D" uid="uid://dnqkndc7mbmot" path="res://gg/textures/game/collectables/items/conch-normals.tres" id="4_fk0q3"]
+[ext_resource type="Texture2D" uid="uid://de61i78iw46pe" path="res://gg/textures/game/collectables/items/conch.tres" id="5_5fnwu"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ebpeo"]
+load_path = "res://.godot/imported/bayer8.png-014a09faf332a1db6f7966496a827394.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rs4ju"]
+shader = ExtResource("3_i3v8j")
+shader_parameter/unlit_texture = ExtResource("2_4p6mk")
+shader_parameter/u_dither_tex = SubResource("CompressedTexture2D_ebpeo")
+shader_parameter/normalmap = ExtResource("4_fk0q3")
+shader_parameter/flip_normal_x = false
+shader_parameter/flip_normal_y = false
+shader_parameter/invert = false
+shader_parameter/u_bit_depth = 32
+shader_parameter/u_contrast = 1.0
+shader_parameter/u_offset = 0.0
+shader_parameter/light_color_amount = 0.15
+shader_parameter/light_value_amount = 1.0
+shader_parameter/ignore_modulate_color = false
+shader_parameter/override_modulate_color = Color(1, 1, 1, 1)
+shader_parameter/modulate_alpha_is_unlit_color = true
+shader_parameter/dither_with_texture_alpha = false
+shader_parameter/hide_around_moon = false
+shader_parameter/only_show_around_moon = false
+shader_parameter/hidden_alpha = 0.3
+shader_parameter/weak_hidden_alpha = 0.95
+shader_parameter/hide_around_player = false
+shader_parameter/hidden_player_alpha = 0.9
+shader_parameter/show_lit_when_eyes_lit = false
+
+[node name="CollectableConch" unique_id=1776369775 instance=ExtResource("1_1xean")]
+icon = ExtResource("2_4p6mk")
+
+[node name="Sprite" parent="Squasher" parent_id_path=PackedInt32Array(881018182) index="0" unique_id=1857260621]
+material = SubResource("ShaderMaterial_rs4ju")
+texture = ExtResource("5_5fnwu")
+
+[node name="SelectedOutline" parent="Squasher/Sprite" index="0" unique_id=79338765]
+texture = ExtResource("5_5fnwu")

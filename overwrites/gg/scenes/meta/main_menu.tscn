@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://2k3hin3satj"]
 
 [ext_resource type="Theme" uid="uid://bujnxvanlxbrb" path="res://gg/themes/default_theme.tres" id="1_qtqk6"]
-[ext_resource type="Script" path="res://mods-unpacked/MayaXTG-Archipelago/overwrites/gg/scripts/game/ui/meta/main_menu.gd" id="2_pgvel"]
+[ext_resource type="Script" uid="uid://dej6gxu4kgnlj" path="res://mods-unpacked/MayaXTG-Archipelago/overwrites/gg/scripts/game/ui/meta/main_menu.gd" id="2_pgvel"]
 [ext_resource type="Texture2D" uid="uid://bk1a2yx1qr4rg" path="res://gg/textures/ui/menus/main_menu/small-stars.png" id="3_8jeok"]
 [ext_resource type="Shader" uid="uid://dsdjjlfq55lck" path="res://gg/shaders/stars.gdshader" id="4_vfwsj"]
 [ext_resource type="Texture2D" uid="uid://dxgjpardxk34v" path="res://gg/textures/game/environment/shared/stars/bg-star1.png" id="5_fpxti"]

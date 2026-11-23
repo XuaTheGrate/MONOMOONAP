@@ -2,6 +2,8 @@ class_name CollectableAP
 extends Collectable
 
 const SCENE: PackedScene = preload("res://mods-unpacked/MayaXTG-Archipelago/scenes/collectible_ap.tscn")
+const FONT_MONOGRAM: Font = preload("res://gg/fonts/monogram-extended.ttf")
+const FONT_MOONSCRIPT: Font = preload("res://gg/fonts/moonscript.ttf")
 
 var location_id: int
 
@@ -38,16 +40,24 @@ func on_collected()->void:
 	GameGlobals.inventory.get_parent().add_child(popup)
 	var info: ArchipelagoManager.ItemDisplayInfo = ArchipelagoMod.instance.manager.get_item_info_at(location_id)
 	
-	# TODO: optional moon script (res://gg/fonts/moonscript.ttf)
-	var text :String = "%s'S %s " % [info.player_name.to_upper(), info.item_name.to_upper()]
-	#var re :RegEx = RegEx.create_from_string("[^A-Z ]+")
-	#var ap_text: String = re.sub(text.replace("[", "[lb]"), "[font_size=16]$0[/font_size]", true)
-	self.display_name = 'ITEM '
+	var use_moonscript: bool = ArchipelagoMod.instance.manager.slot_data.get("moon_script_only", false)
+	var font: Font = FONT_MOONSCRIPT if use_moonscript else FONT_MONOGRAM
+	var font_size:int = 8 if use_moonscript else 16
 	
-	var ap_label: Label = Label.new()
+	var text :String = "%s's %s " % [info.player_name, info.item_name]
+	if use_moonscript:
+		text = text.to_upper()
+		text = text.replace("[", "[lb]") # escape "[" in player/item names
+		var re :RegEx = RegEx.create_from_string("[^A-Z ]+")
+		text = re.sub(text, "[font_size=16]$0[/font_size]", true)
+	
+	var ap_label: RichTextLabel = RichTextLabel.new()
+	ap_label.bbcode_enabled = true
+	ap_label.fit_content = true
+	ap_label.scroll_active = false
 	ap_label.text = text
-	ap_label.add_theme_font_override("font", load("res://gg/fonts/monogram-extended.ttf"))
-	ap_label.add_theme_font_size_override("font_size", 16)
+	ap_label.add_theme_font_override("normal_font", font)
+	ap_label.add_theme_font_size_override("normal_font_size", font_size)
 	ap_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	ap_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	var offset_x:int = 70
@@ -62,6 +72,7 @@ func on_collected()->void:
 	popup.add_child(ap_label)
 	ap_label.create_tween().tween_property(ap_label, "modulate", Color.WHITE, end_fade - start_fade).set_delay(start_fade)
 	
+	self.display_name = 'ITEM '
 	popup.show_popup(self)
 	SoundBus.item_collect.play()
 	

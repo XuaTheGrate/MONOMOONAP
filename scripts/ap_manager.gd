@@ -254,11 +254,13 @@ enum Goal {
 	FULL_MOON = 2
 }
 
+var slot_data: Dictionary = {}
 var goal: Goal
 
 func _on_packet_connected(packet: APWSClasses.Connected) -> void:
 	_save = ArchipelagoSave.load_from_disk(_seed)
-	goal = packet.slot_data['goal']
+	slot_data = packet.slot_data
+	goal = slot_data['goal']
 	slot_info = packet.slot_info
 	
 	for item: APWSClasses.NetworkItem in await ArchipelagoMod.instance.get_location_scouts(all_location_ids):

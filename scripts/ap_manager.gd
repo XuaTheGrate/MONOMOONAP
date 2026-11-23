@@ -225,6 +225,7 @@ func _ready() -> void:
 	ArchipelagoMod.instance.ap_location_collected.connect(_on_ap_location_collected)
 	GameSignals.request_save_game.connect(_on_request_save_game)
 	ap_goal_reached.connect(_on_ap_goal_reached)
+	GameSignals.helped_dragon.connect(_on_helped_dragon)
 
 func _on_request_save_game() -> void:
 	if _save != null:
@@ -382,6 +383,16 @@ func _on_ap_goal_reached(goal: Goal) -> void:
 	if self.goal == goal:
 		ArchipelagoMod.instance.ws.send_goal()
 
+func _on_helped_dragon(element: GameGlobals.Element)->void:
+	match element:
+		GameGlobals.Element.EARTH:
+			ArchipelagoMod.instance.ap_location_collected.emit(7000)
+		GameGlobals.Element.WATER:
+			ArchipelagoMod.instance.ap_location_collected.emit(7001)
+		GameGlobals.Element.SKY:
+			ArchipelagoMod.instance.ap_location_collected.emit(7002)
+	
+	
 func have_item(ap_item_name:String) -> bool:
 	# TODO: do not rely on collectible_by_item_name for this!
 	# Instead, get item_name_to_id from AP server using GetDataPackage

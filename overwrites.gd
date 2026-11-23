@@ -18,3 +18,12 @@ func _init() -> void:
 				 
 	r = preload("res://mods-unpacked/MayaXTG-Archipelago/overwrites/gg/scripts/game/ui/book_front_cover.gd")
 	r.take_over_path("res://gg/scripts/game/ui/book_front_cover.gd")
+	
+	r = preload("res://mods-unpacked/MayaXTG-Archipelago/overwrites/gg/scripts/game/dragons/earth_dragon.gd")
+	r.take_over_path("res://gg/scripts/game/dragons/earth_dragon.gd")
+
+	r = preload("res://mods-unpacked/MayaXTG-Archipelago/overwrites/gg/scripts/game/dragons/sky_dragon.gd")
+	r.take_over_path("res://gg/scripts/game/dragons/sky_dragon.gd")
+
+	r = preload("res://mods-unpacked/MayaXTG-Archipelago/overwrites/gg/scripts/game/dragons/water_dragon.gd")
+	r.take_over_path("res://gg/scripts/game/dragons/water_dragon.gd")

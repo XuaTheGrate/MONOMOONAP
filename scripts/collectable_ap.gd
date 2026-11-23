@@ -38,19 +38,16 @@ func on_collected()->void:
 	GameGlobals.inventory.get_parent().add_child(popup)
 	var info: ArchipelagoManager.ItemDisplayInfo = ArchipelagoMod.instance.manager.get_item_info_at(location_id)
 	
-	# TODO: optional moon script
+	# TODO: optional moon script (res://gg/fonts/moonscript.ttf)
 	var text :String = "%s'S %s " % [info.player_name.to_upper(), info.item_name.to_upper()]
 	#var re :RegEx = RegEx.create_from_string("[^A-Z ]+")
 	#var ap_text: String = re.sub(text.replace("[", "[lb]"), "[font_size=16]$0[/font_size]", true)
 	self.display_name = 'ITEM '
 	
-	popup.show_popup(self)
-	SoundBus.item_collect.play()
-	
 	var ap_label: Label = Label.new()
 	ap_label.text = text
 	ap_label.add_theme_font_override("font", load("res://gg/fonts/monogram-extended.ttf"))
-	ap_label.add_theme_font_size_override("font_size", 13)
+	ap_label.add_theme_font_size_override("font_size", 16)
 	ap_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	ap_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	var offset_x:int = 70
@@ -58,5 +55,13 @@ func on_collected()->void:
 	ap_label.position.x = -offset_x
 	ap_label.position.y = offset_y
 	ap_label.size.x = offset_x * 2
+	# Animate arrival
+	ap_label.modulate = Color(0,0,0,0)
+	var start_fade: float = 0.4333
+	var end_fade: float = 0.9667
 	popup.add_child(ap_label)
+	ap_label.create_tween().tween_property(ap_label, "modulate", Color.WHITE, end_fade - start_fade).set_delay(start_fade)
+	
+	popup.show_popup(self)
+	SoundBus.item_collect.play()
 	

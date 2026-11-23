@@ -62,7 +62,8 @@ const PAGE_TYPE: Dictionary[int, BookPage.Type] = {
 	2024: BookPage.Type.CHEST_REPEL_STONE,
 	2025: BookPage.Type.CHEST_DIAMONDS_WALL,
 	2026: BookPage.Type.ENDING,
-	2027: BookPage.Type.RELICS
+	2027: BookPage.Type.RELICS,
+	2028: BookPage.Type.EARTH_DRAGON_PUZZLE_HINT
 }
 
 const RELICS: Dictionary[int, int] = {

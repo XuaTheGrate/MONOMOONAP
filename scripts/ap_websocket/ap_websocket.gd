@@ -167,8 +167,7 @@ func _send_get_datapackage(slot_info: Dictionary[int, APWSClasses.NetworkSlot]) 
 
 func send_goal() -> void:
 	ModLoaderLog.info("Sending Goal packet", ArchipelagoMod.LOG_NAME)
-	var c: APWSClasses.StatusUpdate = APWSClasses.StatusUpdate.new()
-	c.status = APWSClasses.ClientStatus.GOAL
+	var c: APWSClasses.StatusUpdate = APWSClasses.StatusUpdate.new(APWSClasses.ClientStatus.GOAL)
 	var err: Error = _socket.send_text(JSON.stringify([c.to_json()]))
 	if err != OK:
 		ModLoaderLog.error("Failed to send goal packet (errno %d)" % err, ArchipelagoMod.LOG_NAME)

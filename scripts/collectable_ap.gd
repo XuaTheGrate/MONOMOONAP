@@ -4,6 +4,11 @@ extends Collectable
 const SCENE: PackedScene = preload("res://mods-unpacked/MayaXTG-Archipelago/scenes/collectible_ap.tscn")
 const FONT_MONOGRAM: Font = preload("res://gg/fonts/monogram-extended.ttf")
 const FONT_MOONSCRIPT: Font = preload("res://gg/fonts/moonscript.ttf")
+const COLOUR_PROGRESSION:Color = Color('AF99EF')
+const COLOUR_USEFUL:Color = Color('6D8BE8')
+const COLOUR_TRAP:Color = Color('FA8072')
+const FILLER:Color = Color('00EEEE')
+
 
 var location_id: int
 
@@ -34,20 +39,19 @@ func spawn_collected_effect() -> Node2D:
 	effect.get_node("CollectableOrb").texture = sprite_override
 	return effect
 
-func on_collected()->void:
-	await super()
+static func show_popup_for(collectable_ap: CollectableAP) -> void:
 	var popup: ItemCollectedPopup = load(GameGlobals.inventory.new_item_popup).instantiate()
 	GameGlobals.inventory.get_parent().add_child(popup)
-	var info: ArchipelagoManager.ItemDisplayInfo = ArchipelagoMod.instance.manager.get_item_info_at(location_id)
+	var info: ArchipelagoManager.ItemDisplayInfo = ArchipelagoMod.instance.manager.get_item_info_at(collectable_ap.location_id)
 	
 	var use_moonscript: bool = ArchipelagoMod.instance.manager.slot_data.get("moon_script_only", false)
 	var font: Font = FONT_MOONSCRIPT if use_moonscript else FONT_MONOGRAM
 	var font_size:int = 8 if use_moonscript else 16
 	
 	var text :String = "%s's %s " % [info.player_name, info.item_name]
+	text = text.replace("[", "[lb]") # escape "[" in player/item names
 	if use_moonscript:
 		text = text.to_upper()
-		text = text.replace("[", "[lb]") # escape "[" in player/item names
 		var re :RegEx = RegEx.create_from_string("[^A-Z ]+")
 		text = re.sub(text, "[font_size=16]$0[/font_size]", true)
 	
@@ -72,7 +76,28 @@ func on_collected()->void:
 	popup.add_child(ap_label)
 	ap_label.create_tween().tween_property(ap_label, "modulate", Color.WHITE, end_fade - start_fade).set_delay(start_fade)
 	
-	self.display_name = 'ITEM '
-	popup.show_popup(self)
+	collectable_ap.display_name = 'ITEM '
+	popup.show_popup(collectable_ap)
 	SoundBus.item_collect.play()
+	
+static func show_ap_popup_for(location_id: int) -> void:
+	var scout: APWSClasses.NetworkItem = ArchipelagoMod.instance.manager.scouts[location_id]
+	var item_id: int = -1
+	if scout.player == ArchipelagoMod.instance.player_id:
+		item_id = scout.item
+	var temp: CollectableAP = create_new(location_id, item_id)
+	temp.type = ArchipelagoMod.AP_COLLECTABLE_TYPE
+	temp.icon = temp.sprite_override
+	
+	show_popup_for(temp)
+	temp.queue_free()
+
+
+func on_collected()->void:
+	await super()
+	var scout: APWSClasses.NetworkItem = ArchipelagoMod.instance.manager.scouts[location_id]
+	# If it's a local item, a popup will be created when receiving that item from the server
+	if scout.player != ArchipelagoMod.instance.player_id:
+		show_popup_for(self)
+
 	

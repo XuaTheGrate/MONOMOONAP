@@ -31,3 +31,17 @@ func spawn_collected_effect() -> Node2D:
 	var effect: Node2D =  super()
 	effect.get_node("CollectableOrb").texture = sprite_override
 	return effect
+
+func on_collected()->void:
+	await super()
+	var popup: ItemCollectedPopup = load(GameGlobals.inventory.new_item_popup).instantiate()
+	GameGlobals.inventory.get_parent().add_child(popup)
+	var info: ArchipelagoManager.ItemDisplayInfo = ArchipelagoMod.instance.manager.get_item_info_at(location_id)
+	# Upper case for moon script
+	
+	var re :RegEx = RegEx.create_from_string("[^A-Z ]+")
+	var text :String = "%s'S %s " % [info.player_name.to_upper(), info.item_name.to_upper()]
+	self.display_name = re.sub(text, "[font_size=16]$0[/font_size]", true)
+	
+	popup.show_popup(self)
+	SoundBus.item_collect.play()

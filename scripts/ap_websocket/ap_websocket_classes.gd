@@ -295,3 +295,18 @@ class StatusUpdate extends RefCounted:
 	
 	func to_json() -> Dictionary:
 		return {"cmd":"StatusUpdate","status":status}
+
+## Requests the data package from the server. Does not require client authentication.
+class GetDataPackage extends RefCounted:
+	## The server will send datapackage(s) for the specified game(s) requested in the supplied list. Such as, ["Factorio"] -> Datapackage with only Factorio data.
+	var games: Array[String]
+	
+	func to_json() -> Dictionary:
+		return {"cmd":"GetDataPackage","games":games}
+
+## Sent to clients to provide what is known as a 'data package' which contains information to enable a client to most easily communicate with the Archipelago server.
+## Contents include things like location id to name mappings, among others
+class DataPackage extends RefCounted:
+	var data: Dictionary
+	func _init(json: Dictionary) -> void:
+		data = json["data"]

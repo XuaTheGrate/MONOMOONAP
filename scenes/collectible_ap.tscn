@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://bhifbuxer58ds" path="res://gg/scenes/game/collectables/orb/collectable_item.tscn" id="1_2hcds"]
 [ext_resource type="Script" uid="uid://bsrqh3fkpaatd" path="res://mods-unpacked/MayaXTG-Archipelago/scripts/collectable_ap.gd" id="2_olirh"]
 [ext_resource type="PackedScene" uid="uid://dilh6fkayq6h8" path="res://mods-unpacked/MayaXTG-Archipelago/scenes/ap_collected_effect.tscn" id="4_6yv8k"]
-[ext_resource type="Texture2D" uid="uid://bs24tdcugs1fm" path="res://mods-unpacked/MayaXTG-Archipelago/assets/monomoon-archipelago-unlit.png" id="7_odtpc"]
-[ext_resource type="Texture2D" uid="uid://btdgiygv7y2gh" path="res://mods-unpacked/MayaXTG-Archipelago/assets/monomoon-archipelago.png" id="8_ndhwf"]
+[ext_resource type="Texture2D" path="res://mods-unpacked/MayaXTG-Archipelago/assets/monomoon-archipelago-unlit.png" id="7_odtpc"]
+[ext_resource type="Texture2D" path="res://mods-unpacked/MayaXTG-Archipelago/assets/monomoon-archipelago.png" id="8_ndhwf"]
 
 [node name="CollectibleAP" unique_id=1678456492 instance=ExtResource("1_2hcds")]
 script = ExtResource("2_olirh")

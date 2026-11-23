@@ -1,90 +1,28 @@
 class_name CollectableAP
 extends Collectable
 
-const SCENE_AP: PackedScene = preload("res://mods-unpacked/MayaXTG-Archipelago/scenes/collectible_ap.tscn")
-const SCENE_MAP: PackedScene = preload("res://mods-unpacked/MayaXTG-Archipelago/scenes/ap_collectables/ap_collectable_map.tscn")
-const SCENE_CONCH: PackedScene = preload("res://mods-unpacked/MayaXTG-Archipelago/scenes/ap_collectables/ap_collectable_conch.tscn")
-const SCENE_LYRE: PackedScene = preload("res://mods-unpacked/MayaXTG-Archipelago/scenes/ap_collectables/ap_collectable_instrument.tscn")
-const SCENE_MARKERS: PackedScene = preload("res://mods-unpacked/MayaXTG-Archipelago/scenes/ap_collectables/ap_collectable_markers.tscn")
-const SCENE_PAGE: PackedScene = preload("res://mods-unpacked/MayaXTG-Archipelago/scenes/ap_collectables/ap_collectable_page.tscn")
-const SCENE_ORB: PackedScene = preload("res://mods-unpacked/MayaXTG-Archipelago/scenes/ap_collectables/ap_collectable_orb.tscn")
-const SCENE_GOLDEN_QUILL: PackedScene = preload("res://mods-unpacked/MayaXTG-Archipelago/scenes/ap_collectables/ap_collectable_golden_quill.tscn")
-const SCENE_RELIC: PackedScene = preload("res://mods-unpacked/MayaXTG-Archipelago/scenes/ap_collectables/ap_collectable_trophy.tscn")
-const SCENE_MOON_FRAGMENT: PackedScene = preload("res://mods-unpacked/MayaXTG-Archipelago/scenes/ap_collectables/ap_collectible_moon_fragment.tscn")
+const SCENE: PackedScene = preload("res://mods-unpacked/MayaXTG-Archipelago/scenes/collectible_ap.tscn")
+const FONT_MONOGRAM: Font = preload("res://gg/fonts/monogram-extended.ttf")
+const FONT_MOONSCRIPT: Font = preload("res://gg/fonts/moonscript.ttf")
 
 var location_id: int
 
+var sprite_override: Texture2D
+var sprite_unlit_override: Texture2D
+var sprite_normal_override: Texture2D
+
 static func create_new(location: int, item_id: int) -> CollectableAP:
-	var s: CollectableAP
-	
-	match item_id:
-		-1: s = SCENE_AP.instantiate()
-		1000: s = SCENE_MAP.instantiate()
-		1001: s = SCENE_CONCH.instantiate()
-		1002: s = SCENE_LYRE.instantiate()
-		1003: s = SCENE_MARKERS.instantiate()
-		_:
-			match item_id / 1000:
-				2: s = SCENE_PAGE.instantiate()
-				3:
-					s = SCENE_ORB.instantiate()
-					s._set_orb_data(item_id / 100)
-				4: s = SCENE_GOLDEN_QUILL.instantiate()
-				5:
-					s = SCENE_RELIC.instantiate()
-					s._set_relic_data(item_id)
-				6:
-					s = SCENE_MOON_FRAGMENT.instantiate()
-					s._set_moon_fragment()
-				7:
-					# TODO: emblems
-					s = SCENE_AP.instantiate()
-	
+	var s: CollectableAP = SCENE.instantiate()
 	s.location_id = location
+	s.sprite_override = ArchipelagoMod.instance.manager.get_sprite_override(item_id)
 	return s
 
-func _on_ap_item_received(item: int) -> void:
-	if item / 1000 != 6: return
-	icon = CollectableMoonFragment.sprites[ArchipelagoManager.get_next_fragment()]
-	$Squasher/Sprite.texture = icon
-	$Squasher/Sprite/SelectedOutline.texture = icon
-
-func _set_moon_fragment() -> void:
-	ArchipelagoMod.instance.ap_item_received.connect(_on_ap_item_received)
-	icon = CollectableMoonFragment.sprites[ArchipelagoManager.get_next_fragment()]
-	$Squasher/Sprite.texture = icon
-	$Squasher/Sprite/SelectedOutline.texture = icon
-
-func _set_relic_data(id: int) -> void:
-	match id:
-		5000: icon = preload("res://gg/textures/game/collectables/secret-collectables/relic_skull.tres")
-		5001: icon = preload("res://gg/textures/game/collectables/secret-collectables/relic_amulet.tres")
-		5002: icon = preload("res://gg/textures/game/collectables/secret-collectables/relic_fruit.tres")
-		5003: icon = preload("res://gg/textures/game/collectables/secret-collectables/relic_mirror.tres")
-		5004: icon = preload("res://gg/textures/game/collectables/secret-collectables/relic_hourglass.tres")
-		5005: icon = preload("res://gg/textures/game/collectables/secret-collectables/relic_wand.tres")
-		5006: icon = preload("res://gg/textures/game/collectables/secret-collectables/relic_scales.tres")
-		5007: icon = preload("res://gg/textures/game/collectables/secret-collectables/relic_crown.tres")
-	$Squasher/Sprite.texture = icon
-	$Squasher/Sprite/SelectedOutline.texture = icon
-
-func _set_orb_data(id: int) -> void:
-	match id:
-		30: 
-			icon = preload("res://mods-unpacked/MayaXTG-Archipelago/assets/blue_orb.tres")
-			$Squasher/Sprite.frame = 0
-		31:
-			icon = preload("res://mods-unpacked/MayaXTG-Archipelago/assets/green_orb.tres")
-			$Squasher/Sprite.frame = 2
-		32:
-			icon = preload("res://mods-unpacked/MayaXTG-Archipelago/assets/red_orb.tres")
-			$Squasher/Sprite.frame = 3
-		33:
-			icon = preload("res://mods-unpacked/MayaXTG-Archipelago/assets/yellow_orb.tres")
-			$Squasher/Sprite.frame = 1
-
+# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	type = ArchipelagoMod.AP_COLLECTABLE_TYPE
+	icon = sprite_override
+	sprite.texture = sprite_override
+	selected_outline.texture = sprite_override
 	super()
 
 func set_collected() -> void:
@@ -92,7 +30,49 @@ func set_collected() -> void:
 	ModLoaderLog.info("set_collected AP item %d" % location_id, ArchipelagoMod.LOG_NAME)
 
 func spawn_collected_effect() -> Node2D:
-	var node: Node2D = super()
-	if node != null:
-		node.get_node("CollectableOrb").texture = sprite.texture
-	return node
+	var effect: Node2D =  super()
+	effect.get_node("CollectableOrb").texture = sprite_override
+	return effect
+
+func on_collected()->void:
+	await super()
+	var popup: ItemCollectedPopup = load(GameGlobals.inventory.new_item_popup).instantiate()
+	GameGlobals.inventory.get_parent().add_child(popup)
+	var info: ArchipelagoManager.ItemDisplayInfo = ArchipelagoMod.instance.manager.get_item_info_at(location_id)
+	
+	var use_moonscript: bool = ArchipelagoMod.instance.manager.slot_data.get("moon_script_only", false)
+	var font: Font = FONT_MOONSCRIPT if use_moonscript else FONT_MONOGRAM
+	var font_size:int = 8 if use_moonscript else 16
+	
+	var text :String = "%s's %s " % [info.player_name, info.item_name]
+	if use_moonscript:
+		text = text.to_upper()
+		text = text.replace("[", "[lb]") # escape "[" in player/item names
+		var re :RegEx = RegEx.create_from_string("[^A-Z ]+")
+		text = re.sub(text, "[font_size=16]$0[/font_size]", true)
+	
+	var ap_label: RichTextLabel = RichTextLabel.new()
+	ap_label.bbcode_enabled = true
+	ap_label.fit_content = true
+	ap_label.scroll_active = false
+	ap_label.text = text
+	ap_label.add_theme_font_override("normal_font", font)
+	ap_label.add_theme_font_size_override("normal_font_size", font_size)
+	ap_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	ap_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	var offset_x:int = 70
+	var offset_y:int = 6
+	ap_label.position.x = -offset_x
+	ap_label.position.y = offset_y
+	ap_label.size.x = offset_x * 2
+	# Animate arrival
+	ap_label.modulate = Color(0,0,0,0)
+	var start_fade: float = 0.4333
+	var end_fade: float = 0.9667
+	popup.add_child(ap_label)
+	ap_label.create_tween().tween_property(ap_label, "modulate", Color.WHITE, end_fade - start_fade).set_delay(start_fade)
+	
+	self.display_name = 'ITEM '
+	popup.show_popup(self)
+	SoundBus.item_collect.play()
+	

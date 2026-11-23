@@ -62,7 +62,8 @@ const PAGE_TYPE: Dictionary[int, BookPage.Type] = {
 	2024: BookPage.Type.CHEST_REPEL_STONE,
 	2025: BookPage.Type.CHEST_DIAMONDS_WALL,
 	2026: BookPage.Type.ENDING,
-	2027: BookPage.Type.RELICS
+	2027: BookPage.Type.RELICS,
+	2028: BookPage.Type.EARTH_DRAGON_PUZZLE_HINT
 }
 
 const RELICS: Dictionary[int, int] = {
@@ -112,6 +113,8 @@ var NODE_TO_ID: Dictionary[String, int] = {}
 var ancient_collectibles: Dictionary[int, APWSClasses.NetworkItem] = {}
 
 var scouts: Dictionary[int, APWSClasses.NetworkItem] = {}
+var item_id_to_name_by_game: Dictionary[String, Dictionary] = {}
+var slot_info: Dictionary[int,APWSClasses.NetworkSlot] = {}
 
 var all_location_ids: Array[int] = []
 var collectibles: Array[RawCollectible] = []
@@ -223,10 +226,12 @@ func _ready() -> void:
 	get_tree().node_added.connect(_on_node_added)
 	ArchipelagoMod.instance.ws.packet_connected.connect(_on_packet_connected, CONNECT_ONE_SHOT)
 	ArchipelagoMod.instance.ws.packet_room_info.connect(_on_packet_room_info)
+	ArchipelagoMod.instance.ws.packet_data_package.connect(_on_packet_data_package)
 	ArchipelagoMod.instance.ap_item_received.connect(_on_ap_item_received)
 	ArchipelagoMod.instance.ap_location_collected.connect(_on_ap_location_collected)
 	GameSignals.request_save_game.connect(_on_request_save_game)
 	ap_goal_reached.connect(_on_ap_goal_reached)
+	GameSignals.helped_dragon.connect(_on_helped_dragon)
 
 func _on_request_save_game() -> void:
 	if _save != null:
@@ -234,6 +239,16 @@ func _on_request_save_game() -> void:
 
 func _on_packet_room_info(packet: APWSClasses.RoomInfo) -> void:
 	_seed = packet.seed_name
+
+func _on_packet_data_package(packet: APWSClasses.DataPackage) -> void:
+	#ModLoaderLog.info(JSON.stringify(packet.data, "\t"), ArchipelagoMod.LOG_NAME)
+	var games: Dictionary = packet.data["games"]
+	for game: String in games:
+		var item_id_to_name: Dictionary = {}
+		var item_name_to_id:Dictionary = games[game]["item_name_to_id"]
+		for item_name:String in item_name_to_id:
+			item_id_to_name[int(item_name_to_id[item_name])] = item_name
+		item_id_to_name_by_game[game] = item_id_to_name
 
 enum Goal {
 	## Receive the 4 moon pieces and reunite the moon
@@ -245,11 +260,14 @@ enum Goal {
 	FULL_MOON = 2
 }
 
+var slot_data: Dictionary = {}
 var goal: Goal
 
 func _on_packet_connected(packet: APWSClasses.Connected) -> void:
 	_save = ArchipelagoSave.load_from_disk(_seed)
-	goal = packet.slot_data['goal']
+	slot_data = packet.slot_data
+	goal = slot_data['goal']
+	slot_info = packet.slot_info
 	
 	for item: APWSClasses.NetworkItem in await ArchipelagoMod.instance.get_location_scouts(all_location_ids):
 		scouts[item.location] = item
@@ -387,6 +405,33 @@ func _on_ap_item_received(item: int) -> void:
 func _on_ap_goal_reached(goal: Goal) -> void:
 	if self.goal == goal:
 		ArchipelagoMod.instance.ws.send_goal()
+
+func _on_helped_dragon(element: GameGlobals.Element)->void:
+	match element:
+		GameGlobals.Element.EARTH:
+			ArchipelagoMod.instance.ap_location_collected.emit(7000)
+		GameGlobals.Element.WATER:
+			ArchipelagoMod.instance.ap_location_collected.emit(7001)
+		GameGlobals.Element.SKY:
+			ArchipelagoMod.instance.ap_location_collected.emit(7002)
+	
+
+class ItemDisplayInfo:
+	var player_name:String
+	var item_name:String
+
+func get_item_info_at(location:int) -> ItemDisplayInfo:
+	var scout: APWSClasses.NetworkItem = scouts[location]
+	var slot: APWSClasses.NetworkSlot = slot_info[scout.player]
+	var player_name: String = slot.name
+	var game: String = slot.game
+	var item_name: String = item_id_to_name_by_game[game][scout.item]
+	var item_display_info:ItemDisplayInfo = ItemDisplayInfo.new()
+	item_display_info.item_name = item_name
+	item_display_info.player_name = player_name
+	return item_display_info
+	
+
 
 func have_item(ap_item_name:String) -> bool:
 	# TODO: do not rely on collectible_by_item_name for this!

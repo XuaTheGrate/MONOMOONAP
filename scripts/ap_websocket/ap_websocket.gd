@@ -28,6 +28,7 @@ signal packet_connection_refused(packet: APWSClasses.ConnectionRefused)
 signal packet_connected(packet: APWSClasses.Connected)
 signal packet_location_info(packet: APWSClasses.LocationInfo)
 signal packet_received_items(packet: APWSClasses.ReceivedItems)
+signal packet_data_package(packet: APWSClasses.DataPackage)
 
 func _init() -> void:
 	packet_connection_refused.connect(_on_packet_connection_refused)
@@ -116,13 +117,6 @@ func queue_send_location(location: int) -> void:
 	if location not in _send_queue:
 		_send_queue.append(location)
 
-func send_goal() -> void:
-	ModLoaderLog.info("Sending Goal packet", ArchipelagoMod.LOG_NAME)
-	var c: APWSClasses.StatusUpdate = APWSClasses.StatusUpdate.new(APWSClasses.ClientStatus.GOAL)
-	var err: Error = _socket.send_text(JSON.stringify([c.to_json()]))
-	if err != OK:
-		ModLoaderLog.error("Failed to send goal packet (errno %d)" % err, ArchipelagoMod.LOG_NAME)
-
 func _get_cached_uuid() -> String:
 	if FileAccess.file_exists("user://ap_uuid.txt"):
 		ModLoaderLog.info("Using cached uuid", ArchipelagoMod.LOG_NAME)
@@ -155,6 +149,29 @@ func _send_connect() -> void:
 	var err: Error = _socket.send_text(JSON.stringify([c.to_json()]))
 	if err != OK:
 		ModLoaderLog.error("Failed to send connect packet (errno %d)" % err, ArchipelagoMod.LOG_NAME)
+
+func _send_get_datapackage(slot_info: Dictionary[int, APWSClasses.NetworkSlot]) -> void:
+	ModLoaderLog.info("Sending GetDataPackage packet", ArchipelagoMod.LOG_NAME)
+	var c: APWSClasses.GetDataPackage = APWSClasses.GetDataPackage.new()
+	c.games = []
+	
+	for key:int in slot_info:
+		var slot: APWSClasses.NetworkSlot = slot_info[key]
+		if slot.game not in c.games:
+			c.games.append(slot.game)
+	
+	var err: Error = _socket.send_text(JSON.stringify([c.to_json()]))
+	if err != OK:
+		ModLoaderLog.error("Failed to send GetDataPackage packet (errno %d)" % err, ArchipelagoMod.LOG_NAME)
+
+
+func send_goal() -> void:
+	ModLoaderLog.info("Sending Goal packet", ArchipelagoMod.LOG_NAME)
+	var c: APWSClasses.StatusUpdate = APWSClasses.StatusUpdate.new()
+	c.status = APWSClasses.ClientStatus.GOAL
+	var err: Error = _socket.send_text(JSON.stringify([c.to_json()]))
+	if err != OK:
+		ModLoaderLog.error("Failed to send goal packet (errno %d)" % err, ArchipelagoMod.LOG_NAME)
 
 func _process(_delta: float) -> void:
 	if not _connecting: return
@@ -219,6 +236,9 @@ func _process_packet(packet: String) -> void:
 			"ReceivedItems":
 				var r: APWSClasses.ReceivedItems = APWSClasses.ReceivedItems.new(pack)
 				packet_received_items.emit(r)
+			"DataPackage":
+				var r: APWSClasses.DataPackage = APWSClasses.DataPackage.new(pack)
+				packet_data_package.emit(r)
 
 func _on_packet_connection_refused(packet: APWSClasses.ConnectionRefused) -> void:
 	var reason: String = "\n".join(packet.errors)
@@ -234,5 +254,8 @@ func _on_packet_connected(packet: APWSClasses.Connected) -> void:
 	# NOTICE: 'packet.checked_locations' contains a list of location ids that we already collected
 	# We can use this to skip over locations, or we can use a custom save file
 	# Either one works
+	
+	#GetDataPackage
+	_send_get_datapackage(packet.slot_info)
 	
 	ArchipelagoMod.instance.ap_ws_connected.emit()

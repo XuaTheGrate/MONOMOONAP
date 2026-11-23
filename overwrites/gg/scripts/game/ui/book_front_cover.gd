@@ -27,44 +27,29 @@ func _reset_marker(marker:BookMarker, ap_item_name: String) -> void:
 
 
 func try_unlock_markers() -> bool:
-	if not water_book_marker.is_unlocked and GameGlobals.Element.WATER in GameState.helped_dragons:
-		check_ap_location(MarkersStack.Type.WATER)
-		return false
-	if not earth_book_marker.is_unlocked and GameGlobals.Element.EARTH in GameState.helped_dragons:
-		check_ap_location(MarkersStack.Type.EARTH)
-		return false
-	if not sky_book_marker.is_unlocked and GameGlobals.Element.SKY in GameState.helped_dragons:
-		check_ap_location(MarkersStack.Type.SKY)
-		return false
-	if not moon_book_marker.is_unlocked\
-	and GameState.DoorType.SKY_MOON in GameState.open_doors\
-	and GameGlobals.room_index == GameGlobals.sky_moon_room:
-		check_ap_location(MarkersStack.Type.KING)
-		GG.append_if_unique(GameState.open_doors, GameState.DoorType.KING_MARKER)
-		return false
+	if not water_book_marker.is_unlocked and ArchipelagoMod.instance.manager.have_item("Sea Emblem"):
+		unlock_marker(MarkersStack.Type.WATER)
+		return true
+	if not earth_book_marker.is_unlocked and ArchipelagoMod.instance.manager.have_item("Earth Emblem"):
+		unlock_marker(MarkersStack.Type.EARTH)
+		return true
+	if not sky_book_marker.is_unlocked and ArchipelagoMod.instance.manager.have_item("Sky Emblem"):
+		unlock_marker(MarkersStack.Type.SKY)
+		return true
+	if not moon_book_marker.is_unlocked and ArchipelagoMod.instance.manager.have_item("Crown Emblem"):
+		unlock_marker(MarkersStack.Type.KING)
+		return true
 	return false
-	
-func check_ap_location(type:MarkersStack.Type) -> void:
-	match type:
-		MarkersStack.Type.EARTH:
-			ArchipelagoMod.instance.ap_location_collected.emit(7000)
-		MarkersStack.Type.WATER:
-			ArchipelagoMod.instance.ap_location_collected.emit(7001)
-		MarkersStack.Type.SKY:
-			ArchipelagoMod.instance.ap_location_collected.emit(7002)
-		MarkersStack.Type.KING:
-			ArchipelagoMod.instance.ap_location_collected.emit(7003)
+
 		
 func _on_ap_item_received(item:int) -> void:
-	match item:
-		7000:
-			unlock_marker(MarkersStack.Type.EARTH)
-		7001:
-			unlock_marker(MarkersStack.Type.WATER)
-		7002:
-			unlock_marker(MarkersStack.Type.SKY)
-		7003:
-			unlock_marker(MarkersStack.Type.KING)
+	if item / 1000 == 7:
+		if GameGlobals.inventory.allow_to_open:
+			GameGlobals.inventory.book.mesh_book._current_index = -1
+			GameGlobals.inventory.last_item = Collectable.Type.BOOK
+			GameGlobals.inventory.show_inventory()
+			# Opening the book will lead to calling try_unlock_markers
+		
 
 func unlock_marker(type_id: MarkersStack.Type) -> void :
 	match type_id:

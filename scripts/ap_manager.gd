@@ -416,7 +416,7 @@ func _on_helped_dragon(element: GameGlobals.Element)->void:
 		GameGlobals.Element.SKY:
 				location_id = 7002
 	ArchipelagoMod.instance.ap_location_collected.emit(location_id)
-	CollectableAP.show_ap_popup_for(location_id)
+	CollectableAP.show_popup_for_event_location(location_id)
 
 class ItemDisplayInfo:
 	var player_name:String

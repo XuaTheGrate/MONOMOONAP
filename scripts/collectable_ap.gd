@@ -7,7 +7,7 @@ const FONT_MOONSCRIPT: Font = preload("res://gg/fonts/moonscript.ttf")
 const COLOUR_PROGRESSION:Color = Color('AF99EF')
 const COLOUR_USEFUL:Color = Color('6D8BE8')
 const COLOUR_TRAP:Color = Color('FA8072')
-const FILLER:Color = Color('00EEEE')
+const COLOUR_FILLER:Color = Color('00EEEE')
 
 
 var location_id: int
@@ -39,7 +39,7 @@ func spawn_collected_effect() -> Node2D:
 	effect.get_node("CollectableOrb").texture = sprite_override
 	return effect
 
-static func show_popup_for(collectable_ap: CollectableAP) -> void:
+static func _show_popup_for(collectable_ap: CollectableAP, scout: APWSClasses.NetworkItem) -> void:
 	var popup: ItemCollectedPopup = load(GameGlobals.inventory.new_item_popup).instantiate()
 	GameGlobals.inventory.get_parent().add_child(popup)
 	var info: ArchipelagoManager.ItemDisplayInfo = ArchipelagoMod.instance.manager.get_item_info_at(collectable_ap.location_id)
@@ -48,12 +48,36 @@ static func show_popup_for(collectable_ap: CollectableAP) -> void:
 	var font: Font = FONT_MOONSCRIPT if use_moonscript else FONT_MONOGRAM
 	var font_size:int = 8 if use_moonscript else 16
 	
-	var text :String = "%s's %s " % [info.player_name, info.item_name]
-	text = text.replace("[", "[lb]") # escape "[" in player/item names
+	var item_colour: Color
+	if scout.flags & 0b0001 == 0b0001:
+		item_colour = COLOUR_PROGRESSION
+	elif scout.flags & 0b0010 == 0b010:
+		item_colour = COLOUR_USEFUL
+	elif scout.flags & 0b0100 == 0b100:
+		item_colour = COLOUR_TRAP
+	else:
+		item_colour = COLOUR_FILLER
+	
+	var name_text: String = "%s's" % info.player_name
+	var item_text: String = info.item_name
+	
 	if use_moonscript:
-		text = text.to_upper()
+		name_text = name_text.to_upper().replace("[", "[lb]")  # escapes "["
+		item_text = item_text.to_upper().replace("[", "[lb]")
+		
 		var re :RegEx = RegEx.create_from_string("[^A-Z ]+")
-		text = re.sub(text, "[font_size=16]$0[/font_size]", true)
+		name_text = re.sub(name_text, "[font_size=16]$0[/font_size]", true)
+		item_text = re.sub(item_text, "[font_size=16]$0[/font_size]", true)
+	else:
+		name_text = name_text.replace("[", "[lb]")
+		item_text = item_text.replace("[", "[lb]")
+		
+		
+	var text :String = "%s [color=#%s]%s[/color]" % [
+		name_text,
+		item_colour.to_html(false), 
+		item_text
+	]
 	
 	var ap_label: RichTextLabel = RichTextLabel.new()
 	ap_label.bbcode_enabled = true
@@ -80,16 +104,16 @@ static func show_popup_for(collectable_ap: CollectableAP) -> void:
 	popup.show_popup(collectable_ap)
 	SoundBus.item_collect.play()
 	
-static func show_ap_popup_for(location_id: int) -> void:
+static func show_popup_for_event_location(location_id: int) -> void:
 	var scout: APWSClasses.NetworkItem = ArchipelagoMod.instance.manager.scouts[location_id]
-	var item_id: int = -1
 	if scout.player == ArchipelagoMod.instance.player_id:
-		item_id = scout.item
-	var temp: CollectableAP = create_new(location_id, item_id)
+		# If it's a local item, a popup will be created when receiving that item from the server
+		return
+	
+	var temp: CollectableAP = create_new(location_id, -1)
 	temp.type = ArchipelagoMod.AP_COLLECTABLE_TYPE
 	temp.icon = temp.sprite_override
-	
-	show_popup_for(temp)
+	_show_popup_for(temp, scout)
 	temp.queue_free()
 
 
@@ -98,6 +122,6 @@ func on_collected()->void:
 	var scout: APWSClasses.NetworkItem = ArchipelagoMod.instance.manager.scouts[location_id]
 	# If it's a local item, a popup will be created when receiving that item from the server
 	if scout.player != ArchipelagoMod.instance.player_id:
-		show_popup_for(self)
+		_show_popup_for(self, scout)
 
 	

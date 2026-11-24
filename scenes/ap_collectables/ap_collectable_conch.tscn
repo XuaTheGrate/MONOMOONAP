@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bhifbuxer58ds" path="res://gg/scenes/game/collectables/orb/collectable_item.tscn" id="1_1xean"]
 [ext_resource type="Texture2D" uid="uid://q3hifp4k8qhg" path="res://gg/textures/game/collectables/items/conch-unlit.tres" id="2_4p6mk"]
+[ext_resource type="Script" uid="uid://bsrqh3fkpaatd" path="res://mods-unpacked/MayaXTG-Archipelago/scripts/collectable_ap.gd" id="2_tp3i4"]
 [ext_resource type="Shader" uid="uid://yhlqd262cvkd" path="res://gg/shaders/dither.gdshader" id="3_i3v8j"]
 [ext_resource type="Texture2D" uid="uid://dnqkndc7mbmot" path="res://gg/textures/game/collectables/items/conch-normals.tres" id="4_fk0q3"]
 [ext_resource type="Texture2D" uid="uid://de61i78iw46pe" path="res://gg/textures/game/collectables/items/conch.tres" id="5_5fnwu"]
@@ -35,7 +36,9 @@ shader_parameter/hidden_player_alpha = 0.9
 shader_parameter/show_lit_when_eyes_lit = false
 
 [node name="CollectableConch" unique_id=1776369775 instance=ExtResource("1_1xean")]
-icon = ExtResource("2_4p6mk")
+script = ExtResource("2_tp3i4")
+icon = ExtResource("5_5fnwu")
+type = 2
 
 [node name="Sprite" parent="Squasher" parent_id_path=PackedInt32Array(881018182) index="0" unique_id=1857260621]
 material = SubResource("ShaderMaterial_rs4ju")

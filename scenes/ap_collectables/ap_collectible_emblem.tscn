@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://n1re6s2q0pio"]
+
+[ext_resource type="PackedScene" uid="uid://bhifbuxer58ds" path="res://gg/scenes/game/collectables/orb/collectable_item.tscn" id="1_opu3w"]
+[ext_resource type="Script" uid="uid://bsrqh3fkpaatd" path="res://mods-unpacked/MayaXTG-Archipelago/scripts/collectable_ap.gd" id="2_cltd7"]
+[ext_resource type="Shader" uid="uid://yhlqd262cvkd" path="res://gg/shaders/dither.gdshader" id="4_a3j0v"]
+[ext_resource type="Texture2D" uid="uid://culgov2wrrdrv" path="res://mods-unpacked/MayaXTG-Archipelago/assets/star_emblem_normals.tres" id="5_opu3w"]
+[ext_resource type="Texture2D" uid="uid://do2bgco26p7bw" path="res://mods-unpacked/MayaXTG-Archipelago/assets/star_emblem.tres" id="5_t4dpj"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ebpeo"]
+load_path = "res://.godot/imported/bayer8.png-014a09faf332a1db6f7966496a827394.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yscfs"]
+resource_local_to_scene = true
+shader = ExtResource("4_a3j0v")
+shader_parameter/unlit_texture = ExtResource("5_t4dpj")
+shader_parameter/u_dither_tex = SubResource("CompressedTexture2D_ebpeo")
+shader_parameter/normalmap = ExtResource("5_opu3w")
+shader_parameter/flip_normal_x = false
+shader_parameter/flip_normal_y = false
+shader_parameter/invert = false
+shader_parameter/u_bit_depth = 32
+shader_parameter/u_contrast = 1.0
+shader_parameter/u_offset = 0.0
+shader_parameter/light_color_amount = 0.2
+shader_parameter/light_value_amount = 1.0
+shader_parameter/ignore_modulate_color = false
+shader_parameter/override_modulate_color = Color(1, 1, 1, 1)
+shader_parameter/modulate_alpha_is_unlit_color = true
+shader_parameter/dither_with_texture_alpha = false
+shader_parameter/hide_around_moon = false
+shader_parameter/only_show_around_moon = false
+shader_parameter/hidden_alpha = 0.3
+shader_parameter/weak_hidden_alpha = 0.95
+shader_parameter/hide_around_player = false
+shader_parameter/hidden_player_alpha = 0.9
+shader_parameter/show_lit_when_eyes_lit = false
+
+[node name="CollectibleEmblem" unique_id=1678456492 instance=ExtResource("1_opu3w")]
+script = ExtResource("2_cltd7")
+icon = ExtResource("5_t4dpj")
+
+[node name="Sprite" parent="Squasher" parent_id_path=PackedInt32Array(881018182) index="0" unique_id=1857260621]
+light_mask = 4
+material = SubResource("ShaderMaterial_yscfs")
+texture = ExtResource("5_t4dpj")
+
+[node name="SelectedOutline" parent="Squasher/Sprite" index="0" unique_id=79338765]
+texture = ExtResource("5_t4dpj")
+
+[node name="Light" parent="Squasher" parent_id_path=PackedInt32Array(881018182) index="3" unique_id=2122678392]
+height = 2.0

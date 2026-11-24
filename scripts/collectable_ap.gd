@@ -11,6 +11,7 @@ const ITEM_ORB: PackedScene = preload("res://mods-unpacked/MayaXTG-Archipelago/s
 const ITEM_RELIC: PackedScene = preload("res://mods-unpacked/MayaXTG-Archipelago/scenes/ap_collectables/ap_collectable_trophy.tscn")
 const ITEM_GOLDEN_QUILL: PackedScene = preload("res://mods-unpacked/MayaXTG-Archipelago/scenes/ap_collectables/ap_collectable_golden_quill.tscn")
 const ITEM_FRAGMENT: PackedScene = preload("res://mods-unpacked/MayaXTG-Archipelago/scenes/ap_collectables/ap_collectible_moon_fragment.tscn")
+const ITEM_EMBLEM: PackedScene = preload("res://mods-unpacked/MayaXTG-Archipelago/scenes/ap_collectables/ap_collectible_emblem.tscn")
 
 const FONT_MONOGRAM: Font = preload("res://gg/fonts/monogram-extended.ttf")
 const FONT_MOONSCRIPT: Font = preload("res://gg/fonts/moonscript.ttf")
@@ -42,10 +43,12 @@ static func create_new(location: int, item_id: int) -> CollectableAP:
 					s = ITEM_RELIC.instantiate()
 					s.setup_relic(item_id)
 				6:
-					# TODO: support fragment progression
 					s = ITEM_FRAGMENT.instantiate()
+					s.setup_fragment()
+				7:
+					s = ITEM_EMBLEM.instantiate()
+					s.setup_emblem(item_id)
 				_:
-					# TODO: support Emblems
 					s = ITEM_AP.instantiate()
 					ModLoaderLog.warning("Unsupported item ID %d" % item_id, ArchipelagoMod.LOG_NAME)
 	
@@ -86,6 +89,35 @@ func setup_relic(item_id: int) -> void:
 		5007:
 			$Squasher/Sprite.frame = 0
 			$Squasher/Sprite/SelectedOutline.frame = 0
+
+func _on_ap_item_received(item_id: int) -> void:
+	if item_id / 1000 != 6: return
+	var t: Collectable.Type = ArchipelagoManager.get_next_fragment()
+	var texture: Texture2D = CollectableMoonFragment.sprites[t]
+	icon = texture
+	$Squasher/Sprite.texture = texture
+	$Squasher/Sprite/SelectedOutline.texture = texture
+
+func setup_fragment() -> void:
+	ArchipelagoMod.instance.ap_item_received.connect(_on_ap_item_received)
+	var t: Collectable.Type = ArchipelagoManager.get_next_fragment()
+	var texture: Texture2D = CollectableMoonFragment.sprites[t]
+	icon = texture
+	$Squasher/Sprite.texture = texture
+	$Squasher/Sprite/SelectedOutline.texture = texture
+
+func setup_emblem(item_id: int) -> void:
+	var sprites: Array[Texture2D]
+	match item_id:
+		7000: sprites = CollectableEmblem.get_sprites(CollectableEmblem.EmblemType.Earth)
+		7001: sprites = CollectableEmblem.get_sprites(CollectableEmblem.EmblemType.Water)
+		7002: sprites = CollectableEmblem.get_sprites(CollectableEmblem.EmblemType.Star)
+		7003: sprites = CollectableEmblem.get_sprites(CollectableEmblem.EmblemType.Crown)
+	icon = sprites[0]
+	$Squasher/Sprite.texture = icon
+	$Squasher/Sprite/SelectedOutline.texture = icon
+	$Squasher/Sprite.material.set_shader_parameter("unlit_texture", sprites[1])
+	$Squasher/Sprite.material.set_shader_parameter("normalmap", sprites[2])
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

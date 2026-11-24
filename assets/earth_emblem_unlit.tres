@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" format=3 uid="uid://dfkhg3o83a6b3"]
+
+[ext_resource type="Texture2D" uid="uid://bf74fjepyov1m" path="res://gg/textures/ui/items/map-markers/earth-marker-big-unlit.png" id="1_m1t1p"]
+
+[resource]
+atlas = ExtResource("1_m1t1p")
+region = Rect2(0, 0, 64, 64)

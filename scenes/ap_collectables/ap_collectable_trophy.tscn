@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://d2luvl6xmhmut"]
 
 [ext_resource type="Script" uid="uid://bsrqh3fkpaatd" path="res://mods-unpacked/MayaXTG-Archipelago/scripts/collectable_ap.gd" id="1_i3at7"]
+[ext_resource type="Texture2D" uid="uid://bcqf0lughr3wq" path="res://gg/textures/game/collectables/secret-collectables/relic_crown.tres" id="2_173yb"]
 [ext_resource type="Resource" uid="uid://mb8wwx20d8rs" path="res://gg/input/game_mode/interact_action.tres" id="2_aq8vy"]
 [ext_resource type="Shader" uid="uid://yhlqd262cvkd" path="res://gg/shaders/dither.gdshader" id="3_173yb"]
 [ext_resource type="Texture2D" uid="uid://bpmrh1er3mn08" path="res://gg/textures/game/collectables/secret-collectables/secret-collectables-normals.png" id="4_cs4c5"]
@@ -554,6 +555,7 @@ _data = {
 z_index = 1
 collision_layer = 0
 script = ExtResource("1_i3at7")
+icon = ExtResource("2_173yb")
 interact_action = ExtResource("2_aq8vy")
 
 [node name="Squasher" type="Node2D" parent="." unique_id=111222334]

@@ -4,18 +4,21 @@
 [ext_resource type="Script" uid="uid://bsrqh3fkpaatd" path="res://mods-unpacked/MayaXTG-Archipelago/scripts/collectable_ap.gd" id="2_olirh"]
 [ext_resource type="PackedScene" uid="uid://dilh6fkayq6h8" path="res://mods-unpacked/MayaXTG-Archipelago/scenes/ap_collected_effect.tscn" id="4_6yv8k"]
 [ext_resource type="Shader" uid="uid://yhlqd262cvkd" path="res://gg/shaders/dither.gdshader" id="5_6qy8e"]
-[ext_resource type="Texture2D" uid="uid://dert2nx78k4qq" path="res://mods-unpacked/MayaXTG-Archipelago/assets/monomoon-archipelago-normals.png" id="6_6yv8k"]
-[ext_resource type="Texture2D" uid="uid://bs24tdcugs1fm" path="res://mods-unpacked/MayaXTG-Archipelago/assets/monomoon-archipelago-unlit.png" id="7_odtpc"]
-[ext_resource type="Texture2D" uid="uid://btdgiygv7y2gh" path="res://mods-unpacked/MayaXTG-Archipelago/assets/monomoon-archipelago.png" id="8_ndhwf"]
+[ext_resource type="Texture2D" uid="uid://cod0jn6kkbx51" path="res://mods-unpacked/MayaXTG-Archipelago/assets/collectible_ap_normals.png" id="5_6yv8k"]
+[ext_resource type="Texture2D" uid="uid://c0lsqswsy46im" path="res://mods-unpacked/MayaXTG-Archipelago/assets/collectible_ap_unlit.png" id="6_odtpc"]
+[ext_resource type="Texture2D" uid="uid://xrrkitc0pa74" path="res://mods-unpacked/MayaXTG-Archipelago/assets/collectible_ap.png" id="7_ndhwf"]
+
+[sub_resource type="Resource" id="Resource_m40hq"]
+metadata/__load_path__ = "res://mods-unpacked/MayaXTG-Archipelago/assets/monomoon-archipelago-unlit.png"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ebpeo"]
 load_path = "res://.godot/imported/bayer8.png-014a09faf332a1db6f7966496a827394.ctex"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_odtpc"]
 shader = ExtResource("5_6qy8e")
-shader_parameter/unlit_texture = ExtResource("7_odtpc")
+shader_parameter/unlit_texture = ExtResource("6_odtpc")
 shader_parameter/u_dither_tex = SubResource("CompressedTexture2D_ebpeo")
-shader_parameter/normalmap = ExtResource("6_6yv8k")
+shader_parameter/normalmap = ExtResource("5_6yv8k")
 shader_parameter/flip_normal_x = false
 shader_parameter/flip_normal_y = false
 shader_parameter/invert = false
@@ -38,16 +41,16 @@ shader_parameter/show_lit_when_eyes_lit = false
 
 [node name="CollectibleAP" unique_id=1678456492 instance=ExtResource("1_2hcds")]
 script = ExtResource("2_olirh")
-icon = ExtResource("7_odtpc")
+icon = SubResource("Resource_m40hq")
 collected_effect = ExtResource("4_6yv8k")
 
 [node name="Sprite" parent="Squasher" parent_id_path=PackedInt32Array(881018182) index="0" unique_id=1857260621]
 light_mask = 4
 material = SubResource("ShaderMaterial_odtpc")
-texture = ExtResource("8_ndhwf")
+texture = ExtResource("7_ndhwf")
 
 [node name="SelectedOutline" parent="Squasher/Sprite" index="0" unique_id=79338765]
-texture = ExtResource("8_ndhwf")
+texture = ExtResource("7_ndhwf")
 
 [node name="Light" parent="Squasher" parent_id_path=PackedInt32Array(881018182) index="3" unique_id=2122678392]
 visible = false

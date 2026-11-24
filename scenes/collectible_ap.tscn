@@ -8,9 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://c0lsqswsy46im" path="res://mods-unpacked/MayaXTG-Archipelago/assets/collectible_ap_unlit.png" id="6_odtpc"]
 [ext_resource type="Texture2D" uid="uid://xrrkitc0pa74" path="res://mods-unpacked/MayaXTG-Archipelago/assets/collectible_ap.png" id="7_ndhwf"]
 
-[sub_resource type="Resource" id="Resource_m40hq"]
-metadata/__load_path__ = "res://mods-unpacked/MayaXTG-Archipelago/assets/monomoon-archipelago-unlit.png"
-
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ebpeo"]
 load_path = "res://.godot/imported/bayer8.png-014a09faf332a1db6f7966496a827394.ctex"
 
@@ -41,7 +38,7 @@ shader_parameter/show_lit_when_eyes_lit = false
 
 [node name="CollectibleAP" unique_id=1678456492 instance=ExtResource("1_2hcds")]
 script = ExtResource("2_olirh")
-icon = SubResource("Resource_m40hq")
+icon = ExtResource("7_ndhwf")
 collected_effect = ExtResource("4_6yv8k")
 
 [node name="Sprite" parent="Squasher" parent_id_path=PackedInt32Array(881018182) index="0" unique_id=1857260621]

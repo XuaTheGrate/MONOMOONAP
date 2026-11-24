@@ -1,7 +1,17 @@
 class_name CollectableAP
 extends Collectable
 
-const SCENE: PackedScene = preload("res://mods-unpacked/MayaXTG-Archipelago/scenes/collectible_ap.tscn")
+const ITEM_AP: PackedScene = preload("res://mods-unpacked/MayaXTG-Archipelago/scenes/collectible_ap.tscn")
+const ITEM_MAP: PackedScene = preload("res://mods-unpacked/MayaXTG-Archipelago/scenes/ap_collectables/ap_collectable_map.tscn")
+const ITEM_CONCH: PackedScene = preload("res://mods-unpacked/MayaXTG-Archipelago/scenes/ap_collectables/ap_collectable_conch.tscn")
+const ITEM_LYRE: PackedScene = preload("res://mods-unpacked/MayaXTG-Archipelago/scenes/ap_collectables/ap_collectable_instrument.tscn")
+const ITEM_MARKERS: PackedScene = preload("res://mods-unpacked/MayaXTG-Archipelago/scenes/ap_collectables/ap_collectable_markers.tscn")
+const ITEM_PAGE: PackedScene = preload("res://mods-unpacked/MayaXTG-Archipelago/scenes/ap_collectables/ap_collectable_page.tscn")
+const ITEM_ORB: PackedScene = preload("res://mods-unpacked/MayaXTG-Archipelago/scenes/ap_collectables/ap_collectable_orb.tscn")
+const ITEM_RELIC: PackedScene = preload("res://mods-unpacked/MayaXTG-Archipelago/scenes/ap_collectables/ap_collectable_trophy.tscn")
+const ITEM_GOLDEN_QUILL: PackedScene = preload("res://mods-unpacked/MayaXTG-Archipelago/scenes/ap_collectables/ap_collectable_golden_quill.tscn")
+const ITEM_FRAGMENT: PackedScene = preload("res://mods-unpacked/MayaXTG-Archipelago/scenes/ap_collectables/ap_collectible_moon_fragment.tscn")
+
 const FONT_MONOGRAM: Font = preload("res://gg/fonts/monogram-extended.ttf")
 const FONT_MOONSCRIPT: Font = preload("res://gg/fonts/moonscript.ttf")
 
@@ -12,11 +22,70 @@ const COLOUR_FILLER:Color = Color('00EEEE')
 
 var location_id: int
 
-
 static func create_new(location: int, item_id: int) -> CollectableAP:
-	var s: CollectableAP = SCENE.instantiate()
+	var s: CollectableAP
+	
+	match item_id:
+		-1: s = ITEM_AP.instantiate()
+		1000: s = ITEM_MAP.instantiate()
+		1001: s = ITEM_CONCH.instantiate()
+		1002: s = ITEM_LYRE.instantiate()
+		1003: s = ITEM_MARKERS.instantiate()
+		_:
+			match item_id / 1000:
+				2: s = ITEM_PAGE.instantiate()
+				3:
+					s = ITEM_ORB.instantiate()
+					s.setup_orb(item_id)
+				4: s = ITEM_GOLDEN_QUILL.instantiate()
+				5:
+					s = ITEM_RELIC.instantiate()
+					s.setup_relic(item_id)
+				6:
+					# TODO: support fragment progression
+					s = ITEM_FRAGMENT.instantiate()
+				_:
+					# TODO: support Emblems
+					s = ITEM_AP.instantiate()
+					ModLoaderLog.warning("Unsupported item ID %d" % item_id, ArchipelagoMod.LOG_NAME)
+	
 	s.location_id = location
 	return s
+
+func setup_orb(item_id: int) -> void:
+	match item_id / 100:
+		30: $Squasher/Sprite.frame = 0
+		31: $Squasher/Sprite.frame = 2
+		32: $Squasher/Sprite.frame = 3
+		33: $Squasher/Sprite.frame = 1
+		_: ModLoaderLog.error("Failed to handle orb item id %d" % item_id, ArchipelagoMod.LOG_NAME)
+
+func setup_relic(item_id: int) -> void:
+	match item_id:
+		5000:
+			$Squasher/Sprite.frame = 1
+			$Squasher/Sprite/SelectedOutline.frame = 1
+		5001:
+			$Squasher/Sprite.frame = 5
+			$Squasher/Sprite/SelectedOutline.frame = 5
+		5002:
+			$Squasher/Sprite.frame = 4
+			$Squasher/Sprite/SelectedOutline.frame = 4
+		5003:
+			$Squasher/Sprite.frame = 3
+			$Squasher/Sprite/SelectedOutline.frame = 3
+		5004:
+			$Squasher/Sprite.frame = 6
+			$Squasher/Sprite/SelectedOutline.frame = 6
+		5005:
+			$Squasher/Sprite.frame = 7
+			$Squasher/Sprite/SelectedOutline.frame = 7
+		5006:
+			$Squasher/Sprite.frame = 2
+			$Squasher/Sprite/SelectedOutline.frame = 2
+		5007:
+			$Squasher/Sprite.frame = 0
+			$Squasher/Sprite/SelectedOutline.frame = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

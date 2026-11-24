@@ -27,17 +27,19 @@ func _reset_marker(marker:BookMarker, ap_item_name: String) -> void:
 
 
 func try_unlock_markers() -> bool:
+	var to_unlock: Array[MarkersStack.Type] = []
 	if not water_book_marker.is_unlocked and ArchipelagoMod.instance.manager.have_item("Sea Emblem"):
-		unlock_marker(MarkersStack.Type.WATER)
-		return true
+		to_unlock.append(MarkersStack.Type.WATER)
 	if not earth_book_marker.is_unlocked and ArchipelagoMod.instance.manager.have_item("Earth Emblem"):
-		unlock_marker(MarkersStack.Type.EARTH)
-		return true
+		to_unlock.append(MarkersStack.Type.EARTH)
 	if not sky_book_marker.is_unlocked and ArchipelagoMod.instance.manager.have_item("Sky Emblem"):
-		unlock_marker(MarkersStack.Type.SKY)
-		return true
+		to_unlock.append(MarkersStack.Type.SKY)
 	if not moon_book_marker.is_unlocked and ArchipelagoMod.instance.manager.have_item("Crown Emblem"):
-		unlock_marker(MarkersStack.Type.KING)
+		to_unlock.append(MarkersStack.Type.KING)
+	
+	for marker: MarkersStack.Type in to_unlock:
+		unlock_marker(marker)
+	if to_unlock:
 		return true
 	return false
 

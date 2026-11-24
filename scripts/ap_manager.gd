@@ -407,14 +407,16 @@ func _on_ap_goal_reached(goal: Goal) -> void:
 		ArchipelagoMod.instance.ws.send_goal()
 
 func _on_helped_dragon(element: GameGlobals.Element)->void:
+	var location_id: int = -1
 	match element:
 		GameGlobals.Element.EARTH:
-			ArchipelagoMod.instance.ap_location_collected.emit(7000)
+			location_id = 7000
 		GameGlobals.Element.WATER:
-			ArchipelagoMod.instance.ap_location_collected.emit(7001)
+				location_id = 7001
 		GameGlobals.Element.SKY:
-			ArchipelagoMod.instance.ap_location_collected.emit(7002)
-	
+				location_id = 7002
+	ArchipelagoMod.instance.ap_location_collected.emit(location_id)
+	CollectableAP.show_popup_for_event_location(location_id)
 
 class ItemDisplayInfo:
 	var player_name:String

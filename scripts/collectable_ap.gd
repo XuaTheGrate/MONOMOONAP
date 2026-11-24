@@ -23,6 +23,9 @@ const COLOUR_FILLER:Color = Color('00EEEE')
 
 var location_id: int
 
+var room_index:Vector2i = Vector2i(-1, -1)
+var is_in_darkness:bool = false
+
 static func create_new(location: int, item_id: int) -> CollectableAP:
 	var s: CollectableAP
 	
@@ -122,7 +125,12 @@ func setup_emblem(item_id: int) -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	type = ArchipelagoMod.AP_COLLECTABLE_TYPE
-	super()
+	await super()
+	room_index = GameGlobals.get_room_index(global_position)
+	if GameGlobals.map:
+		if not GameGlobals.map.is_ready_to_paint:
+			await GameGlobals.map.ready_to_paint
+		GameGlobals.map.paint_ap(self)
 
 func set_collected() -> void:
 	super()

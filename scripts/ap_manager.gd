@@ -315,6 +315,8 @@ func _on_node_added(node: Node) -> void:
 		ap.visible = node.visible # Used by the collectable in the Cabin Library
 		ap.process_mode = node.process_mode # Used by the collectable in the Cabin Library
 		ap.z_index = node.z_index
+		if "is_in_darkness" in node:
+			ap.is_in_darkness = node.is_in_darkness
 		node.name = "BEINGDELETED"
 		node.get_parent().add_child.call_deferred(ap)
 		node.queue_free()

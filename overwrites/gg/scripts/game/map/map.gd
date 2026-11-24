@@ -20,7 +20,11 @@ func paint_ap(collectable: CollectableAP) -> void :
 	new_marker.position = round(collectable.position_for_map / 16.0)
 	ap_markers.append(new_marker)
 	new_marker.collectable = collectable
-	new_marker.visible = _is_marker_room_discovered(collectable.room_index, collectable.is_in_darkness)
+	
+	var is_in_darkness: bool = false
+	if "is_in_darkness" in collectable:
+		is_in_darkness = collectable.is_in_darkness
+	new_marker.visible = _is_marker_room_discovered(collectable.room_index, is_in_darkness)
 
 
 func _reveal_markers_for_room(room_index: Vector2i) -> void:

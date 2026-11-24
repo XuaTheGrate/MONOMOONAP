@@ -393,7 +393,7 @@ func _on_ap_item_received(item: int) -> void:
 					c.frame = RELICS[item]
 					# I think I can skip assigning the achievement? Probably
 				6: 
-					c = preload("res://mods-unpacked/MayaXTG-Archipelago/scenes/collectible_moon_fragment.tscn").instantiate()
+					c = CollectableMoonFragment.new()
 					c.update_progressive_type()
 				7: 
 					# Handled in [BookFrontCoverOverwrite]

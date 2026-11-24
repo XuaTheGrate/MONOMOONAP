@@ -4,40 +4,28 @@ extends Collectable
 const SCENE: PackedScene = preload("res://mods-unpacked/MayaXTG-Archipelago/scenes/collectible_ap.tscn")
 const FONT_MONOGRAM: Font = preload("res://gg/fonts/monogram-extended.ttf")
 const FONT_MOONSCRIPT: Font = preload("res://gg/fonts/moonscript.ttf")
+
 const COLOUR_PROGRESSION:Color = Color('AF99EF')
 const COLOUR_USEFUL:Color = Color('6D8BE8')
 const COLOUR_TRAP:Color = Color('FA8072')
 const COLOUR_FILLER:Color = Color('00EEEE')
 
-
 var location_id: int
 
-var sprite_override: Texture2D
-var sprite_unlit_override: Texture2D
-var sprite_normal_override: Texture2D
 
 static func create_new(location: int, item_id: int) -> CollectableAP:
 	var s: CollectableAP = SCENE.instantiate()
 	s.location_id = location
-	s.sprite_override = ArchipelagoMod.instance.manager.get_sprite_override(item_id)
 	return s
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	type = ArchipelagoMod.AP_COLLECTABLE_TYPE
-	icon = sprite_override
-	sprite.texture = sprite_override
-	selected_outline.texture = sprite_override
 	super()
 
 func set_collected() -> void:
 	super()
 	ModLoaderLog.info("set_collected AP item %d" % location_id, ArchipelagoMod.LOG_NAME)
-
-func spawn_collected_effect() -> Node2D:
-	var effect: Node2D =  super()
-	effect.get_node("CollectableOrb").texture = sprite_override
-	return effect
 
 static func _show_popup_for(collectable_ap: CollectableAP, scout: APWSClasses.NetworkItem) -> void:
 	var popup: ItemCollectedPopup = load(GameGlobals.inventory.new_item_popup).instantiate()

@@ -33,3 +33,6 @@ func _init() -> void:
 	
 	r = preload("res://mods-unpacked/MayaXTG-Archipelago/overwrites/gg/scripts/game/objects/trophies_statue.gd")
 	r.take_over_path("res://gg/scripts/game/objects/trophies_statue.gd")
+
+	r = preload("res://mods-unpacked/MayaXTG-Archipelago/overwrites/gg/scripts/game/camera/remote_camera.gd")
+	r.take_over_path("res://gg/scripts/game/camera/remote_camera.gd")

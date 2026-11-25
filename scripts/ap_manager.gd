@@ -134,6 +134,7 @@ var _cached_orb_count: Dictionary[int, int] = {
 	3300: 0,
 }
 var _cached_moon_fragment_count: int = 0
+var _cached_golden_quill_count: int = 0
 
 ## Pass -1 to get the AP sprite without a warning
 func get_sprite_override(item_id: int) -> Texture2D:
@@ -350,12 +351,19 @@ func _on_ap_item_received(item: int) -> void:
 			ModLoaderLog.debug("Skipping receiving orb %d as cached count <= acquired count" % item, ArchipelagoMod.LOG_NAME)
 			return
 		_save.orbs[item] += 1
+	# moon fragments share an id right? Should be `elif item == 6000`
 	elif item / 1000 == 6:
 		_cached_moon_fragment_count += 1
 		if _cached_moon_fragment_count <= _save.moon_fragments:
 			ModLoaderLog.debug("Skipping receiving moon fragment %d as cached count <= acquired count" % item, ArchipelagoMod.LOG_NAME)
 			return
 		_save.moon_fragments += 1
+	elif item == 4000:
+		_cached_golden_quill_count += 1
+		if _cached_golden_quill_count <= _save.golden_quills:
+			ModLoaderLog.debug("Skipping receiving Golden Quill as cached count <= acquired count", ArchipelagoMod.LOG_NAME)
+			return
+		_save.golden_quills += 1
 	elif item in _save.items:
 		ModLoaderLog.debug("Skipping receiving item %d as it's already been acquired" % item, ArchipelagoMod.LOG_NAME)
 		return
@@ -387,6 +395,7 @@ func _on_ap_item_received(item: int) -> void:
 							c.orb_color = CollectableOrb.OrbColor.YELLOW
 				4:
 					c = preload("res://gg/scenes/game/collectables/orb/collectable_golden_quill.tscn").instantiate()
+					c.id = _save.golden_quills - 1
 				5:
 					c = preload("res://gg/scenes/game/collectables/trophy/collectable_trophy.tscn").instantiate()
 					c.id = RELICS[item]

@@ -139,6 +139,7 @@ func set_collected() -> void:
 static func _show_popup_for(collectable_ap: CollectableAP, scout: APWSClasses.NetworkItem) -> void:
 	var popup: ItemCollectedPopup = load(GameGlobals.inventory.new_item_popup).instantiate()
 	GameGlobals.inventory.get_parent().add_child(popup)
+	popup.get_node('Instruction').visible = false
 	var info: ArchipelagoManager.ItemDisplayInfo = ArchipelagoMod.instance.manager.get_item_info_at(collectable_ap.location_id)
 	
 	var use_moonscript: bool = ArchipelagoMod.instance.manager.slot_data.get("moon_script_only", false)

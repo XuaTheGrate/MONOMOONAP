@@ -551,12 +551,14 @@ _data = {
 &"idle": SubResource("Animation_trphy2")
 }
 
-[node name="CollectableTrophy" type="Area2D" unique_id=111222333]
+[node name="CollectableTrophy" type="Area2D" unique_id=111222333 node_paths=PackedStringArray("animation_player")]
 z_index = 1
 collision_layer = 0
 script = ExtResource("1_i3at7")
 icon = ExtResource("2_173yb")
 interact_action = ExtResource("2_aq8vy")
+play_collected_animation = true
+animation_player = NodePath("AnimationPlayer")
 
 [node name="Squasher" type="Node2D" parent="." unique_id=111222334]
 

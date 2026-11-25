@@ -422,6 +422,7 @@ func _on_ap_item_received(network_item: APWSClasses.NetworkItem) -> void:
 					c.id = RELICS[item]
 					c.frame = RELICS[item]
 					# I think I can skip assigning the achievement? Probably
+					CollectableAP.show_popup_for_item(get_item_info_for_incoming(network_item))
 				6: 
 					c = CollectableMoonFragment.new()
 					c.update_progressive_type()

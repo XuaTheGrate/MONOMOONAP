@@ -33,14 +33,13 @@ func start(ancient: GameGlobals.AncientType) -> void:
 	ModLoaderLog.debug("Playing show animation", ArchipelagoMod.LOG_NAME)
 	await animation_player.animation_finished
 	GameSignals.conversation_started.emit()
-	if fragment_type not in GameState.items:
-		GameState.items.append(fragment_type)
+
 	animation_player.play(&"hide")
 	ModLoaderLog.debug("Play hide animation, await beam_created", ArchipelagoMod.LOG_NAME)
 	await GameSignals.beam_created
 	ModLoaderLog.debug("Beam created, queueing free", ArchipelagoMod.LOG_NAME)
 	queue_free()
-	GameState.items.erase(fragment_type)
+
 	var temp_collectable: Collectable = Collectable.new()
 	temp_collectable.type = fragment_type
 	temp_collectable.icon = moon_fragment_sprite.texture

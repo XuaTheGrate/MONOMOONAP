@@ -118,6 +118,7 @@ var ancient_collectibles: Dictionary[int, APWSClasses.NetworkItem] = {}
 
 var scouts: Dictionary[int, APWSClasses.NetworkItem] = {}
 var item_id_to_name_by_game: Dictionary[String, Dictionary] = {}
+var item_name_to_id_by_game: Dictionary[String, Dictionary] = {}
 var slot_info: Dictionary[int,APWSClasses.NetworkSlot] = {}
 
 var all_location_ids: Array[int] = []
@@ -252,10 +253,15 @@ func _on_packet_data_package(packet: APWSClasses.DataPackage) -> void:
 	var games: Dictionary = packet.data["games"]
 	for game: String in games:
 		var item_id_to_name: Dictionary = {}
-		var item_name_to_id:Dictionary = games[game]["item_name_to_id"]
-		for item_name:String in item_name_to_id:
-			item_id_to_name[int(item_name_to_id[item_name])] = item_name
+		var item_name_to_id: Dictionary = {}
+		var item_name_to_float:Dictionary = games[game]["item_name_to_id"]
+		for item_name:String in item_name_to_float:
+			var item_id: int = int(item_name_to_float[item_name])
+			item_name_to_id[item_name] = item_id
+			item_id_to_name[item_id] = item_name
+			
 		item_id_to_name_by_game[game] = item_id_to_name
+		item_name_to_id_by_game[game] = item_name_to_id
 
 enum Goal {
 	## Receive the 4 moon pieces and reunite the moon
@@ -490,9 +496,11 @@ func get_item_info_at(location:int) -> ItemDisplayInfo:
 	var scout: APWSClasses.NetworkItem = scouts[location]
 	return get_item_info_for_outgoing(scout)
 
+func have_moon_pieces(at_least: int) -> bool:
+	return _save.moon_fragments >= at_least
 
+## Works for unique items that aren't stored outside of _save.items
 func have_item(ap_item_name:String) -> bool:
-	# TODO: do not rely on collectible_by_item_name for this!
-	# Instead, get item_name_to_id from AP server using GetDataPackage
-	return collectible_by_item_name[ap_item_name].item_id in _save.items
+	var item_id: int = item_name_to_id_by_game["MONOMOON"][ap_item_name]
+	return item_id in _save.items
 	

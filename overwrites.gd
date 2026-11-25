@@ -42,3 +42,9 @@ func _init() -> void:
 	
 	r = preload("res://mods-unpacked/MayaXTG-Archipelago/overwrites/gg/scripts/game/compass/compass.gd")
 	r.take_over_path("res://gg/scripts/game/compass/compass.gd")
+
+	r = preload("res://mods-unpacked/MayaXTG-Archipelago/overwrites/gg/scripts/game/objects/telescope.gd")
+	r.take_over_path("res://gg/scripts/game/objects/telescope.gd")
+
+	r = preload("res://mods-unpacked/MayaXTG-Archipelago/overwrites/gg/scripts/game/dragons/end_room.gd")
+	r.take_over_path("res://gg/scripts/game/dragons/end_room.gd")

@@ -43,9 +43,9 @@ func try_unlock_markers() -> bool:
 		return true
 	return false
 
-		
-func _on_ap_item_received(item:int) -> void:
-	if item / 1000 == 7:
+
+func _on_ap_item_received(item: APWSClasses.NetworkItem) -> void:
+	if item.item / 1000 == 7:
 		if GameGlobals.inventory.allow_to_open:
 			GameGlobals.inventory.book.mesh_book._current_index = -1
 			GameGlobals.inventory.last_item = Collectable.Type.BOOK

@@ -33,6 +33,10 @@ const AP_SPRITE: Texture2D = preload("res://mods-unpacked/MayaXTG-Archipelago/as
 #endregion
 
 const MAX_ORB_COUNT:int = 7
+const COLOUR_PROGRESSION:Color = Color('AF99EF')
+const COLOUR_USEFUL:Color = Color('6D8BE8')
+const COLOUR_TRAP:Color = Color('FA8072')
+const COLOUR_FILLER:Color = Color('00EEEE')
 
 const PAGE_TYPE: Dictionary[int, BookPage.Type] = {
 	2000: BookPage.Type.RUINS_EMBLEMS,
@@ -135,6 +139,8 @@ var _cached_orb_count: Dictionary[int, int] = {
 }
 var _cached_moon_fragment_count: int = 0
 var _cached_golden_quill_count: int = 0
+# Currently used for junk
+var _cached_generic_count: Dictionary[int,int] = {}
 
 ## Pass -1 to get the AP sprite without a warning
 func get_sprite_override(item_id: int) -> Texture2D:
@@ -337,12 +343,21 @@ func _on_ap_location_collected(location: int) -> void:
 		return
 	_save.locations.append(location)
 
-func _on_ap_item_received(item: int) -> void:
+func _on_ap_item_received(network_item: APWSClasses.NetworkItem) -> void:
+	var item: int = network_item.item
 	while not _setup_complete:
 		ModLoaderLog.debug("Received items before setup, sleeping", ArchipelagoMod.LOG_NAME)
 		await get_tree().create_timer(5.0).timeout
 	
-	if item / 1000 == 3:
+	if item / 1000 == 0:
+		# Junk item
+		ModLoaderLog.debug("Received junk item %d" % item, ArchipelagoMod.LOG_NAME)
+		_cached_generic_count[item] = _cached_generic_count.get(item, 0) + 1
+		if _cached_generic_count[item] <= _save.generic.get(item, 0):
+			ModLoaderLog.debug("Skipping receiving junk %d as cached count <= acquired count" % item, ArchipelagoMod.LOG_NAME)
+			return
+		_save.generic[item] = _save.generic.get(item, 0) + 1
+	elif item / 1000 == 3:
 		if _cached_orb_count[item] >= MAX_ORB_COUNT:
 			ModLoaderLog.debug("Skipping receiving orb %d as cached count >= max count" % item, ArchipelagoMod.LOG_NAME)
 			return
@@ -408,8 +423,12 @@ func _on_ap_item_received(item: int) -> void:
 					# Handled in [BookFrontCoverOverwrite]
 					return
 	if c == null:
-		ModLoaderLog.warning("Skipped receiving item id %d" % item, ArchipelagoMod.LOG_NAME)
+		ModLoaderLog.warning("Handling non-pickup item id %d" % item, ArchipelagoMod.LOG_NAME)
+		# No collectible exists for this, let's show a generic popup
+		CollectableAP.show_popup_for_item(get_item_info_for_incoming(network_item))
 		return
+
+	# Calls the collectable's (not CollectableAP's) code to actually receive the item.
 	GameSignals.collectable_collected.emit(c)
 	c.queue_free()
 
@@ -427,23 +446,49 @@ func _on_helped_dragon(element: GameGlobals.Element)->void:
 		GameGlobals.Element.SKY:
 				location_id = 7002
 	ArchipelagoMod.instance.ap_location_collected.emit(location_id)
-	CollectableAP.show_popup_for_event_location(location_id)
+	CollectableAP.show_popup_for_location(location_id)
+
+static func item_colour_from_scout(scout: APWSClasses.NetworkItem) -> Color:
+	if scout.flags & 0b0001 == 0b0001:
+		return COLOUR_PROGRESSION
+	elif scout.flags & 0b0010 == 0b010:
+		return  COLOUR_USEFUL
+	elif scout.flags & 0b0100 == 0b100:
+		return COLOUR_TRAP
+	else:
+		return  COLOUR_FILLER
 
 class ItemDisplayInfo:
-	var player_name:String
-	var item_name:String
+	var player_name: String
+	var item_name: String
+	var colour: Color
+	var icon: Texture2D
+
+func _get_item_info_for(item:APWSClasses.NetworkItem, outgoing:bool) -> ItemDisplayInfo:
+	var item_owner: int = item.player if outgoing else ArchipelagoMod.instance.player_id
+	var my_item: bool = item_owner == ArchipelagoMod.instance.player_id
+	
+	var slot: APWSClasses.NetworkSlot = slot_info[item_owner]	
+	var player_name: String = slot.name
+	var game: String = slot.game
+	var item_name: String = item_id_to_name_by_game[game][item.item]
+	var item_display_info:ItemDisplayInfo = ItemDisplayInfo.new()
+	if outgoing:
+		# The player shouldn't see their own name in the popup
+		item_display_info.player_name = player_name
+	item_display_info.item_name = item_name
+	item_display_info.colour = item_colour_from_scout(item)
+	item_display_info.icon = get_sprite_override(item.item if my_item else -1)
+	return item_display_info
+
+func get_item_info_for_incoming(item:APWSClasses.NetworkItem) -> ItemDisplayInfo:
+	return _get_item_info_for(item, false)
+func get_item_info_for_outgoing(item:APWSClasses.NetworkItem) -> ItemDisplayInfo:
+	return _get_item_info_for(item, true)
 
 func get_item_info_at(location:int) -> ItemDisplayInfo:
 	var scout: APWSClasses.NetworkItem = scouts[location]
-	var slot: APWSClasses.NetworkSlot = slot_info[scout.player]
-	var player_name: String = slot.name
-	var game: String = slot.game
-	var item_name: String = item_id_to_name_by_game[game][scout.item]
-	var item_display_info:ItemDisplayInfo = ItemDisplayInfo.new()
-	item_display_info.item_name = item_name
-	item_display_info.player_name = player_name
-	return item_display_info
-	
+	return get_item_info_for_outgoing(scout)
 
 
 func have_item(ap_item_name:String) -> bool:

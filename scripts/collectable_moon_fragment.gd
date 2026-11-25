@@ -30,6 +30,6 @@ func update_progressive_type() -> void:
 		sprite.texture = sprites[type]
 		selected_outline.texture = sprites[type]
 
-func _on_item_received(item: int) -> void:
-	if item / 1000 == 6:
+func _on_item_received(item: APWSClasses.NetworkItem) -> void:
+	if item.item / 1000 == 6:
 		update_progressive_type()

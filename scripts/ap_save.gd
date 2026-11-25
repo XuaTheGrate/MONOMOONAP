@@ -14,6 +14,8 @@ extends Resource
 }
 @export var moon_fragments: int = 0
 @export var golden_quills: int = 0
+# Currently stores junk items
+@export var generic: Dictionary[int, int] = {}
 
 func save_to_disk(seed_: String) -> void:
 	ResourceSaver.save(self, "user://apsave_%s.tres" % seed_)

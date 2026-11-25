@@ -40,7 +40,7 @@ var player_id: int:
 ## Emit this signal from the game to tell the websocket to dispatch the location.
 signal ap_location_collected(location_id: int)
 ## Emit this signal from the websocket to give the item to the player.
-signal ap_item_received(item: int) # TODO
+signal ap_item_received(item: APWSClasses.NetworkItem)
 
 signal ap_ws_connected
 signal ap_ws_connection_failure(reason: String)
@@ -102,6 +102,5 @@ func _on_ws_packet_received_items(packet: APWSClasses.ReceivedItems) -> void:
 	ModLoaderLog.info("Received items: %s" % [packet.items], LOG_NAME)
 	for item: APWSClasses.NetworkItem in packet.items:
 		# in this case, item.location is the remote location, and item.player is the sending player
-		# ie, not you
-		# local items do not get emitted from this function
-		ap_item_received.emit(item.item)
+		# local items also get emitted from this function
+		ap_item_received.emit(item)

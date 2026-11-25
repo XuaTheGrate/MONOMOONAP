@@ -23,7 +23,6 @@ func _on_entered_new_room(index: Vector2i) -> void :
 			slot_material.set_shader_parameter(&"has_line" + str(i + 1), false)
 		slot_material.set_shader_parameter(&"circle_scale", circle_scales[completed - 1])
 	slot_material.set_shader_parameter(&"slot_frame", completed - 1)
-	# @@ TEMP:
 	if completed >= 4 and not GameSignals.locked_moon_fragments.is_connected(_on_locked_moon_fragments):
 		GameSignals.locked_moon_fragments.connect(_on_locked_moon_fragments)
 		GameSignals.moon_fragment_locked.connect(_on_moon_fragment_locked)

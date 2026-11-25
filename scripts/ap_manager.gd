@@ -331,7 +331,7 @@ func _on_node_added(node: Node) -> void:
 		if "is_in_darkness" in node:
 			ap.is_in_darkness = node.is_in_darkness
 		node.name = "BEINGDELETED"
-		node.get_parent().add_child.call_deferred(ap)
+		node.add_sibling.call_deferred(ap)
 		node.queue_free()
 
 func _on_outside_level_ready() -> void:

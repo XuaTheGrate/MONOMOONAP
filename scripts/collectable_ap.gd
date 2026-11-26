@@ -192,7 +192,6 @@ static func show_popup_for_item(info: ArchipelagoManager.ItemDisplayInfo) -> voi
 	popup.show_popup(temp)
 	SoundBus.item_collect.play()
 
-
 static func show_popup_for_location(location_id: int) -> void:
 	var scout: APWSClasses.NetworkItem = ArchipelagoMod.instance.manager.scouts[location_id]
 	if scout.player == ArchipelagoMod.instance.player_id:
@@ -201,7 +200,6 @@ static func show_popup_for_location(location_id: int) -> void:
 	
 	var info: ArchipelagoManager.ItemDisplayInfo = ArchipelagoMod.instance.manager.get_item_info_at(location_id)
 	show_popup_for_item(info)
-
 
 func on_collected()->void:
 	await super()

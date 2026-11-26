@@ -55,3 +55,6 @@ func _init() -> void:
 	r = preload("res://mods-unpacked/MayaXTG-Archipelago/overwrites/gg/scripts/game/objects/relic_slot_machine.gd")
 	r.take_over_path("res://gg/scripts/game/objects/relic_slot_machine.gd")
 	
+	r = preload("res://mods-unpacked/MayaXTG-Archipelago/overwrites/gg/scripts/game/dragons/sky_shrine.gd")
+	r.take_over_path("res://gg/scripts/game/dragons/sky_shrine.gd")
+	

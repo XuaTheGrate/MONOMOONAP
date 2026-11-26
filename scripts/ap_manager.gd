@@ -293,7 +293,6 @@ func _on_node_added(node: Node) -> void:
 	if node.name == "OutsideLevel":
 		node.ready.connect(_on_outside_level_ready, CONNECT_ONE_SHOT)
 	
-	
 	if node is Collectable and node is not CollectableAP:
 		var location: int
 		if node is CollectableTrophy:
@@ -336,6 +335,10 @@ func _on_node_added(node: Node) -> void:
 		ap.z_index = node.z_index
 		if "is_in_darkness" in node:
 			ap.is_in_darkness = node.is_in_darkness
+		
+		if node.get_parent() is SkyShrine:
+			node.get_parent().trophy_override = ap
+		
 		node.name = "BEINGDELETED"
 		node.add_sibling.call_deferred(ap)
 		node.queue_free()

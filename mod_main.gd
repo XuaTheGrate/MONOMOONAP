@@ -3,7 +3,7 @@ extends Node
 
 const MOD_DIR: String = "MayaXTG-Archipelago"
 const LOG_NAME: String = "MayaXTG-Archipelago:Main"
-const VERSION: String = "0.0.1"
+const VERSION: String = "0.1.0"
 
 const AP_COLLECTABLE_TYPE: Collectable.Type = (1 << 16) as Collectable.Type
 

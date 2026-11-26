@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bsrqh3fkpaatd" path="res://mods-unpacked/MayaXTG-Archipelago/scripts/collectable_ap.gd" id="1_7q1y6"]
 [ext_resource type="Texture2D" uid="uid://bw6nohu6f85mv" path="res://mods-unpacked/MayaXTG-Archipelago/assets/blue_orb.tres" id="2_6hr52"]
+[ext_resource type="PackedScene" uid="uid://c5n137siil1e6" path="res://gg/scenes/game/effects/orb_collected_effect.tscn" id="3_6hr52"]
 [ext_resource type="Resource" uid="uid://mb8wwx20d8rs" path="res://gg/input/game_mode/interact_action.tres" id="3_pdyxf"]
 [ext_resource type="Shader" uid="uid://yhlqd262cvkd" path="res://gg/shaders/dither.gdshader" id="4_ajbph"]
 [ext_resource type="Texture2D" uid="uid://8v6mdwtmrk73" path="res://gg/textures/game/collectables/orb/collectable-orb-normals.png" id="5_xgr3v"]
@@ -99,6 +100,7 @@ _data = {
 collision_layer = 0
 script = ExtResource("1_7q1y6")
 icon = ExtResource("2_6hr52")
+collected_effect = ExtResource("3_6hr52")
 interact_action = ExtResource("3_pdyxf")
 
 [node name="Squasher" type="Node2D" parent="." unique_id=1062541]

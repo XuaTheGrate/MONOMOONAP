@@ -434,6 +434,7 @@ func _on_ap_item_received(network_item: APWSClasses.NetworkItem) -> void:
 					CollectableAP.show_popup_for_item(get_item_info_for_incoming(network_item))
 				6: 
 					c = CollectableMoonFragment.new()
+					c.display_name = 'MOONFRAGMENT'
 					c.update_progressive_type()
 				7: 
 					# Handled in [BookFrontCoverOverwrite]

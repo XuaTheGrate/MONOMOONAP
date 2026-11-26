@@ -284,14 +284,15 @@ func _on_packet_connected(packet: APWSClasses.Connected) -> void:
 	
 	for item: APWSClasses.NetworkItem in await ArchipelagoMod.instance.get_location_scouts(all_location_ids):
 		scouts[item.location] = item
+	
+	for i in _save.locations:
+		# in case we disconnect during play
+		ArchipelagoMod.instance.ws.queue_send_location(i)
 
 func _on_node_added(node: Node) -> void:
 	if node.name == "OutsideLevel":
 		node.ready.connect(_on_outside_level_ready, CONNECT_ONE_SHOT)
 	
-	for i in _save.locations:
-		# in case we disconnect during play
-		ArchipelagoMod.instance.ws.queue_send_location(i)
 	
 	if node is Collectable and node is not CollectableAP:
 		var location: int

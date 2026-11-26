@@ -52,3 +52,6 @@ func _init() -> void:
 	r = preload("res://mods-unpacked/MayaXTG-Archipelago/overwrites/gg/scripts/game/objects/replace_skull_with_trophy.gd")
 	r.take_over_path("res://gg/scripts/game/objects/replace_skull_with_trophy.gd")
 	
+	r = preload("res://mods-unpacked/MayaXTG-Archipelago/overwrites/gg/scripts/game/objects/relic_slot_machine.gd")
+	r.take_over_path("res://gg/scripts/game/objects/relic_slot_machine.gd")
+	

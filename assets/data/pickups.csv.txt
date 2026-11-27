@@ -71,10 +71,10 @@
 5005	Wand Relic	Wand Relic	Temple	16,4	Relic	CollectableTrophyWand
 5006	Scales Relic	Scales Relic	City	22,6	Relic	CollectableTrophy
 5007	Crown Relic	Crown Relic	Sky Ruins	19,17	Relic	CollectableTrophy
-6000	Moon Piece	Owl Telescope	Forest	22,16	Moon Piece	
-6001	Moon Piece	Rabbit Telescope	City	27,11	Moon Piece	
-6002	Moon Piece	Fish Telescope	Coast	3,8	Moon Piece	
-6003	Moon Piece	Wolf Telescope	Cliffs	3,16	Moon Piece	
+6000	Moon Fragment	Owl Telescope	Forest	22,16	Moon Piece	
+6001	Moon Fragment	Rabbit Telescope	City	27,11	Moon Piece	
+6002	Moon Fragment	Fish Telescope	Coast	3,8	Moon Piece	
+6003	Moon Fragment	Wolf Telescope	Cliffs	3,16	Moon Piece	
 7000	Earth Emblem	Earth Dragon	Forest	24,18	Emblem	EarthDragon
 7001	Sea Emblem	Sea Dragon	Coast	1,4	Emblem	SeaDragon
 7002	Sky Emblem	Sky Dragon	Glade	10,17	Emblem	SkyDragon

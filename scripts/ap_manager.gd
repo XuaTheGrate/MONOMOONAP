@@ -411,6 +411,7 @@ func _on_ap_item_received(network_item: APWSClasses.NetworkItem) -> void:
 				2:
 					c = preload("res://gg/scenes/game/collectables/orb/collectable_page.tscn").instantiate()
 					c.page_type = PAGE_TYPE[item]
+					SoundBus.page_collect.play()
 				3:
 					c = preload("res://gg/scenes/game/collectables/orb/collectable_orb.tscn").instantiate()
 					c.id = COMPASS_IDS[item][_save.orbs[item] - 1]
@@ -426,6 +427,7 @@ func _on_ap_item_received(network_item: APWSClasses.NetworkItem) -> void:
 				4:
 					c = preload("res://gg/scenes/game/collectables/orb/collectable_golden_quill.tscn").instantiate()
 					c.id = _save.golden_quills - 1
+					SoundBus.golden_page_collect.play()
 				5:
 					c = preload("res://gg/scenes/game/collectables/trophy/collectable_trophy.tscn").instantiate()
 					c.id = RELICS[item]

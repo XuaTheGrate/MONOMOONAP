@@ -204,3 +204,11 @@ static func show_popup_for_location(location_id: int) -> void:
 func on_collected()->void:
 	await super()
 	show_popup_for_location(location_id)
+
+func spawn_collected_effect() -> Node2D:
+	var effect: Node2D = super ()
+	if effect is APCollectedEffect:
+		(effect as APCollectedEffect).set_icon(sprite.texture, sprite.frame, sprite.hframes, sprite.vframes)
+	if effect is OrbCollectedEffect:
+		(effect as OrbCollectedEffect).set_orb_color(sprite.frame)
+	return effect

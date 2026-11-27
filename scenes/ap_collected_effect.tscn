@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://dilh6fkayq6h8"]
 
+[ext_resource type="Script" uid="uid://o872dovmkq2h" path="res://mods-unpacked/MayaXTG-Archipelago/scripts/ap_collected_effect.gd" id="1_7rfox"]
 [ext_resource type="Material" uid="uid://cheg2xnh1f1xb" path="res://gg/materials/particles/scale_collected_effect_mat1.tres" id="2_2kgoq"]
 [ext_resource type="Texture2D" uid="uid://xrrkitc0pa74" path="res://mods-unpacked/MayaXTG-Archipelago/assets/collectible_ap.png" id="3_syj7t"]
 [ext_resource type="Shader" uid="uid://8s5finialr2v" path="res://gg/shaders/tint.tres" id="3_ubcgn"]
@@ -127,6 +128,7 @@ _data = {
 [node name="APCollectedEffect" type="Node2D" unique_id=416817297]
 z_index = 12
 material = SubResource("CanvasItemMaterial_vkhuc")
+script = ExtResource("1_7rfox")
 
 [node name="SmallParticles" type="GPUParticles2D" parent="." unique_id=2069792555]
 material = SubResource("CanvasItemMaterial_vkhuc")

@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bcqf0lughr3wq" path="res://gg/textures/game/collectables/secret-collectables/relic_crown.tres" id="2_173yb"]
 [ext_resource type="Resource" uid="uid://mb8wwx20d8rs" path="res://gg/input/game_mode/interact_action.tres" id="2_aq8vy"]
 [ext_resource type="Shader" uid="uid://yhlqd262cvkd" path="res://gg/shaders/dither.gdshader" id="3_173yb"]
+[ext_resource type="PackedScene" uid="uid://dilh6fkayq6h8" path="res://mods-unpacked/MayaXTG-Archipelago/scenes/ap_collected_effect.tscn" id="3_cs4c5"]
 [ext_resource type="Texture2D" uid="uid://bpmrh1er3mn08" path="res://gg/textures/game/collectables/secret-collectables/secret-collectables-normals.png" id="4_cs4c5"]
 [ext_resource type="Texture2D" uid="uid://x3wx4mdxv0mh" path="res://gg/textures/game/light/ditter/bayer8.png" id="5_otapm"]
 [ext_resource type="Texture2D" uid="uid://dosg3cfobsmph" path="res://gg/textures/game/collectables/secret-collectables/secret-collectables-unlit.png" id="6_thid2"]
@@ -297,7 +298,7 @@ tracks/18/keys = {
 
 [sub_resource type="Animation" id="Animation_twflx"]
 resource_name = "collected"
-length = 4.0
+length = 3.0
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -556,8 +557,8 @@ z_index = 1
 collision_layer = 0
 script = ExtResource("1_i3at7")
 icon = ExtResource("2_173yb")
+collected_effect = ExtResource("3_cs4c5")
 interact_action = ExtResource("2_aq8vy")
-play_collected_animation = true
 animation_player = NodePath("AnimationPlayer")
 
 [node name="Squasher" type="Node2D" parent="." unique_id=111222334]
